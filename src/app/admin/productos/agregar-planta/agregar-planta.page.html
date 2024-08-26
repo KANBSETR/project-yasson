@@ -1,0 +1,59 @@
+<app-menu-admin></app-menu-admin>
+
+<!--Página Principal-->
+<div class="ion-page" id="main-content">
+  <ion-header>
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-menu-button></ion-menu-button>
+      </ion-buttons>
+      <ion-title>Agregar Planta</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content class="ion-padding">
+    <ion-item>
+      <ion-input label="Nombre de Planta" labelPlacement="floating"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-input label="Nombre Científico" labelPlacement="floating"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Categoria</ion-label>
+      <ion-select aria-label="category" placeholder="Seleccionar categoria">
+        <ion-select-option value="plantIn">Interior</ion-select-option>
+        <ion-select-option value="plantOut">Exterior</ion-select-option>
+        <ion-select-option value="succ">Suculentas</ion-select-option>
+        <ion-select-option value="tree">Arboles</ion-select-option>
+        <ion-select-option value="vegPath">Huerto</ion-select-option>
+        <ion-select-option value="cact">Cactus</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-input label="Precio" labelPlacement="floating"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-input label="Stock" labelPlacement="floating"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Imagen</ion-label>
+      <ion-button>Subir Imagen</ion-button>
+    </ion-item>
+    <ion-item>
+      <ion-input label="Descripción" labelPlacement="floating"></ion-input>
+    </ion-item>
+    
+    <ion-button id="addPlantButton" expand="block" (click)="presentToast()">Agregar planta</ion-button>
+    
+    <ion-card id="imgCard">
+      <ion-card-header>
+        <ion-card-title>Imagen de la planta</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-img
+        src="https://theplantstore.cl/wp-content/uploads/2024/04/SCHFL_SMALL_01-500x500.png"
+        alt="Imagen genérica">
+      </ion-img>
+    </ion-card-content>
+  </ion-card>
+  </ion-content>
+</div>

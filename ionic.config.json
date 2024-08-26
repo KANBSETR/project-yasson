@@ -1,0 +1,7 @@
+{
+  "name": "yasson-market",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

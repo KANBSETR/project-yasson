@@ -1,0 +1,55 @@
+<ion-menu contentId="main-content">
+    <ion-header>
+        <ion-toolbar>
+            <ion-title>Yasson Market Admin</ion-title>
+        </ion-toolbar>
+    </ion-header>
+    <ion-content>
+        <ion-accordion-group>
+            <!--Plantas-->
+            <ion-accordion value="plants">
+                <ion-item slot="header">
+                    <ion-icon name="leaf-sharp" style="color: greenyellow;"></ion-icon>
+                    <ion-label id="margin">Plantas</ion-label>
+                </ion-item>
+                <div slot="content">
+                    <ion-item href="/admin/productos">
+                        <ion-label id="margin">Plantas</ion-label>
+                    </ion-item>
+                    <ion-item href="/admin/productos/categoria">
+                        <ion-label id="margin">Categoria</ion-label>
+                    </ion-item>
+                </div>
+            <!--Usuarios-->
+            </ion-accordion>
+            <ion-accordion value="users">
+                <ion-item slot="header">
+                    <ion-icon name="person-sharp"></ion-icon>
+                    <ion-label id="margin">Usuarios</ion-label>
+                </ion-item>
+                <div slot="content">
+                    <ion-item href="/admin/usuarios">
+                        <ion-label id="margin">Usuarios</ion-label>
+                    </ion-item>
+                    <ion-item href="/admin/usuarios/roles">
+                        <ion-label id="margin">Roles</ion-label>
+                    </ion-item>
+                </div>
+            </ion-accordion>
+            <!--Pedidos-->
+            <ion-accordion value="orders">
+                <ion-item slot="header">
+                    <ion-icon name="bag-check-sharp"></ion-icon>
+                    <ion-label id="margin">Pedidos</ion-label>
+                </ion-item>
+                <div slot="content">
+                    <ion-item href="/admin/pedidos">
+                        <ion-icon name="arrow-forward-sharp"></ion-icon>
+                        <ion-label id="margin">Listar Pedidos</ion-label>
+                    </ion-item>
+                </div>
+            </ion-accordion>
+        </ion-accordion-group>
+    </ion-content>
+</ion-menu>
+<ion-router-outlet id="main-content"></ion-router-outlet>
