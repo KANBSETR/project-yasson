@@ -4,13 +4,14 @@ import { IonicModule } from '@ionic/angular';
 import {MenuAdminComponent} from '../components/menu-admin/menu-admin.component';
 import { RouterModule } from '@angular/router';
 import { ProductsComponent } from '../components/products/products.component';
+import { MenuHomeComponent } from '../components/menu-home/menu-home.component';
 @NgModule({
-  declarations: [MenuAdminComponent, ProductsComponent], //Declarar el componente que se quiere compartir
+  declarations: [MenuAdminComponent, ProductsComponent, MenuHomeComponent], //Declarar el componente que se quiere compartir (Necesario)
   imports: [
     CommonModule,
     IonicModule,
     RouterModule,
   ],
-  exports: [MenuAdminComponent, ProductsComponent] //Exportar el componente que se quiere compartir
+  exports: [MenuAdminComponent, ProductsComponent, MenuHomeComponent] //Exportar el componente que se quiere compartir (Necesario)
 })
 export class SharedModule {}

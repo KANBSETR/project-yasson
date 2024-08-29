@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
-
+import { RouterModule, Routes } from '@angular/router';
 import { ProductosPage } from './productos.page';
 
 const routes: Routes = [
@@ -10,16 +9,16 @@ const routes: Routes = [
   },
   {
     path: 'categoria',
-    loadChildren: () => import('./categoria/categoria.module').then( m => m.CategoriaPageModule)
-  },  {
+    loadChildren: () => import('./categoria/categoria.module').then(m => m.CategoriaPageModule)
+  },
+  {
     path: 'agregar-planta',
-    loadChildren: () => import('./agregar-planta/agregar-planta.module').then( m => m.AgregarPlantaPageModule)
-  }
-
+    loadChildren: () => import('./agregar-planta/agregar-planta.module').then(m => m.AgregarPlantaPageModule)
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule],
+  exports: [RouterModule]
 })
-export class ProductosPageRoutingModule {}
+export class ProductosRoutingModule {}

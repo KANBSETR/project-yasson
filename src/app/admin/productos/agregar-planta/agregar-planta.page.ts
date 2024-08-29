@@ -1,5 +1,7 @@
-import { Component} from '@angular/core';
-import { ToastController } from '@ionic/angular';
+import { Component } from '@angular/core';
+import { ToastController, ModalController } from '@ionic/angular';
+import Swal from 'sweetalert2';
+
 @Component({
   selector: 'app-agregar-planta',
   templateUrl: './agregar-planta.page.html',
@@ -7,7 +9,10 @@ import { ToastController } from '@ionic/angular';
 })
 export class AgregarPlantaPage {
 
-  constructor(private toastController: ToastController) { }
+  constructor(
+    private toastController: ToastController,
+    private modalController: ModalController
+  ) { }
 
   async presentToast() {
     const toast = await this.toastController.create({
@@ -16,6 +21,17 @@ export class AgregarPlantaPage {
       position: 'top',
     });
     await toast.present();
+  }
+
+  async presentAlert() {
+    Swal.fire({
+      title: 'Planta agregada correctamente',
+      icon: 'success',
+      timer: 2000,
+      position: 'top',
+      showConfirmButton: false,
+      toast: true
+    });
   }
 
 }

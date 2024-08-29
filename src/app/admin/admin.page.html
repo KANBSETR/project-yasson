@@ -1,7 +1,7 @@
 <app-menu-admin></app-menu-admin>
 
 <!--Página Principal-->
-<div class="ion-page" id="main-content">
+<div class="ion-page admin-background" id="main-content">
   <ion-header>
     <ion-toolbar>
       <ion-buttons slot="start">
@@ -10,5 +10,77 @@
       <ion-title>Administrador</ion-title>
     </ion-toolbar>
   </ion-header>
-  <ion-content class="ion-padding"> Bienvenido, {{username}} </ion-content>
+  <ion-header>
+    <ion-toolbar>
+      <ion-title>
+        <div style="display: flex; align-items: center;">
+          Bienvenido, {{username}}
+          <img src="src\assets\icon\admin.png" alt="Imagen de usuario" class="user-image">
+        </div>
+      </ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content class="ion-padding admin-background">
+    <ion-grid>
+      <ion-row>
+        <ion-col size="12" size-md="6">
+          <ion-card>
+            <ion-card-header>
+              <ion-card-title>Usuarios</ion-card-title>
+            </ion-card-header>
+            <ion-card-content>
+              <ion-button expand="block" routerLink="/admin/usuarios">Ver Usuarios</ion-button>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+        <ion-col size="12" size-md="6">
+          <ion-card>
+            <ion-card-header>
+              <ion-card-title>Productos</ion-card-title>
+            </ion-card-header>
+            <ion-card-content>
+              <ion-button expand="block" routerLink="/admin/productos">Ver Productos</ion-button>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+    <!-- Nueva sección de estadísticas -->
+    <ion-grid>
+      <ion-row>
+        <ion-col size="12">
+          <ion-card>
+            <ion-card-header>
+              <ion-card-title>Estadísticas</ion-card-title>
+            </ion-card-header>
+            <ion-card-content>
+              <!-- Segmentos para cambiar entre las estadísticas de usuarios, ventas y productos similar a un radio button -->
+              <ion-segment [(ngModel)]="selectedSegment" (ionChange)="updateChart()">
+                <!-- ngModel sirve para enlazar datos entre un componente(admin.page.ts)
+                y la vista, y selectedSegment almacena el valor del segmento seleccionado. En selectedSegment se almacena el valor
+                que este ahi para que despues se utilice ese valor almacenado con updateChart -->
+                <ion-segment-button value="usuarios">
+                  <ion-label>Usuarios</ion-label>
+                </ion-segment-button>
+                <ion-segment-button value="ventas">
+                  <ion-label>Ventas</ion-label>
+                </ion-segment-button>
+                <ion-segment-button value="productos">
+                  <ion-label>Productos</ion-label>
+                </ion-segment-button>
+              </ion-segment>
+              <div class="statistics">
+                <!-- Los gráficos se muestran dependiendo del valor que tome selectedSegment.
+                Se renderiza un segmento específico dependiendo de si selectedSegment toma el valor de 'usuarios', 'ventas' o 'productos'. -->
+                <canvas *ngIf="selectedSegment === 'usuarios'" id="userStats" class="chart-canvas"></canvas>
+                <canvas *ngIf="selectedSegment === 'ventas'" id="salesStats" class="chart-canvas"></canvas>
+                <canvas *ngIf="selectedSegment === 'productos'" id="productStats" class="chart-canvas"></canvas>
+              </div>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-content>
 </div>

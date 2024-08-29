@@ -10,6 +10,10 @@ const routes: Routes = [
   },  {
     path: 'roles',
     loadChildren: () => import('./roles/roles.module').then( m => m.RolesPageModule)
+  },
+  {
+    path: 'agregar-usuario',
+    loadChildren: () => import('./agregar-usuario/agregar-usuario.module').then( m => m.AgregarUsuarioPageModule)
   }
 
 ];

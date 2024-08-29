@@ -7,7 +7,11 @@ const routes: Routes = [
   {
     path: '',
     component: RolesPage
+  },  {
+    path: 'agregar-rol',
+    loadChildren: () => import('./agregar-rol/agregar-rol.module').then( m => m.AgregarRolPageModule)
   }
+
 ];
 
 @NgModule({

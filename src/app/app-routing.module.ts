@@ -8,9 +8,21 @@ const routes: Routes = [
   },
   {
     path: '', //Si el path es vacio, redirige a admin
-    redirectTo: 'admin', //Redirige a admin
+    redirectTo: 'home', //Redirige a home
     pathMatch: 'full'
   },
+  {
+    path: 'home',
+    loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)
+  },
+  {
+    path: 'login',
+    loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule)
+  },
+  {
+    path: 'registro',
+    loadChildren: () => import('./registro/registro.module').then( m => m.RegistroPageModule)
+  }
 ];
 
 @NgModule({

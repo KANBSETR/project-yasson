@@ -1,0 +1,340 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Productos</ion-title>
+    
+    <ion-buttons slot="end">
+      <ion-button>
+          <img src="assets/icon/icon.png" alt="Icono Personalizado" style="width: 40px; height: 40px;" />
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content>
+  <ion-list>
+    <!-- Submenú Plantas de Interior -->
+    <ion-item (click)="toggleSubmenu('lacteos')">
+      <ion-label>
+        <h2>Plantas de Interior</h2>
+      </ion-label>
+      <ion-icon slot="end" [name]="submenuOpen['lacteos'] ? 'chevron-up-outline' : 'chevron-down-outline'"></ion-icon>
+    </ion-item>
+    <div *ngIf="submenuOpen['lacteos']">
+      <ion-item>
+        <ion-thumbnail slot="start">
+          <img alt="Anturio Rosado" src="assets/productos/Antonella.png" />
+        </ion-thumbnail>
+        <ion-label>
+          <h2>Anturio Rosado</h2>
+          <ion-button fill="outline" size="small" (click)="toggleDetails(1)">Detalles</ion-button>
+          <div *ngIf="selectedDetail === 1" class="detalles-texto">
+            <p>Es una planta de interior que se caracteriza por una linda flor, hojas verdes y alargadas, y por su gran característica purificadora de aire. 
+            </p>
+            <ul>
+              <li>Le gustan los lugares iluminados</li>
+              <li>sin sol directo</li>
+              <li>no le gusta el frío</li>
+            </ul>
+          </div>
+        </ion-label>
+        <ion-note slot="end">Precio: $29.990</ion-note>
+      </ion-item>
+      <ion-item>
+        <ion-thumbnail slot="start">
+          <img alt="Fidel" src="assets/productos/Fidel.png" />
+        </ion-thumbnail>
+        <ion-label>
+          <h2>Ficus Lyrata</h2>
+          <ion-button fill="outline" size="small" (click)="toggleDetails(2)">Detalles</ion-button>
+          <div *ngIf="selectedDetail === 2" class="detalles-texto">
+            <p>Esta maravillosa planta de interior tiene un verde único y el gran tamaño de sus hojas impresiona.  
+              Tiene una presencia imponente y llenará de vida cualquier espacio de tu hogar. </p>
+            <ul>
+              <li>El Ficus Lyrata tiene múltiples características</li>
+              <li>Aire limpio circulando</li>
+              
+            </ul>
+          </div>
+        </ion-label>
+        <ion-note slot="end">Precio: $19.990</ion-note>
+      </ion-item>
+      <ion-item>
+        <ion-thumbnail slot="start">
+          <img alt="Lengua de Suegra Variegada" src="assets/productos/Susan XL.png" />
+        </ion-thumbnail>
+        <ion-label>
+          <h2>Lengua de Suegra Variegada</h2>
+          <ion-button fill="outline" size="small" (click)="toggleDetails(3)">Detalles</ion-button>
+          <div *ngIf="selectedDetail === 3" class="detalles-texto">
+            <p>Esta famosa planta de interior es conocida por ser fácil de cuidar; y por fin, perfecta para principiantes de las selvas urbanas. </p>
+            <ul>
+              <li>Mide entre 40 y 50 centímetros de alto aproximadamente</li>
+              <li>Es verde con los bordes amarillos</li>
+              
+            </ul>
+          </div>
+        </ion-label>
+        <ion-note slot="end">Precio: $42.990</ion-note>
+      </ion-item>
+      
+    </div>
+
+    <!-- Submenú Plantas de Exterior -->
+    <ion-item (click)="toggleSubmenu('carnes')">
+      <ion-label>
+        <h2>Plantas de Exterior</h2>
+      </ion-label>
+      <ion-icon slot="end" [name]="submenuOpen['carnes'] ? 'chevron-up-outline' : 'chevron-down-outline'"></ion-icon>
+    </ion-item>
+    <div *ngIf="submenuOpen['carnes']">
+      <ion-item>
+        <ion-thumbnail slot="start">
+          <img alt="Budy" src="assets/productos/Budy.png" />
+        </ion-thumbnail>
+        <ion-label>
+          <h2>Pino Budy</h2>
+          <ion-button fill="outline" size="small" (click)="toggleDetails(4)">Detalles</ion-button>
+          <div *ngIf="selectedDetail === 4" class="detalles-texto">
+            <p>El pino Buddy o Pino azul, es un árbol de densa ramificación y crecimiento lento, 
+              que bien cuidado puede llegar a medir 3 metros de altura.</p>
+            <ul>
+              <li>La planta, mide 1,50 centímetros de alto aproximadamente</li>
+              <li>Foto referencial, plantas varían en tamaño y cantidad de hojas</li>
+              
+            </ul>
+          </div>
+        </ion-label>
+        <ion-note slot="end">Precio: $29.990</ion-note>
+      </ion-item>
+      <ion-item>
+        <ion-thumbnail slot="start">
+          <img alt="Magnolio Grandiflora" src="assets/productos/Magnolio Grandiflora.png" />
+        </ion-thumbnail>
+        <ion-label>
+          <h2>Magnolio Grandiflora</h2>
+          <ion-button fill="outline" size="small" (click)="toggleDetails(5)">Detalles</ion-button>
+          <div *ngIf="selectedDetail === 5" class="detalles-texto">
+            <p>Es un árbol robusto y de gran porte, de lento crecimiento pero puede llegar a una 
+              altura considerable (30 metros) si se planta en tierra directamente.</p>
+            <ul>
+              <li>Mide entre 1,6 y 1,8 metros de alto aproximadamente</li>
+              <li>Foto referencial, las plantas varían en tamaño y cantidad de hojas.</li>
+              
+            </ul>
+          </div>
+        </ion-label>
+        <ion-note slot="end">Precio: $149.990</ion-note>
+      </ion-item>
+      <ion-item>
+        <ion-thumbnail slot="start">
+          <img alt="Kumquat" src="assets/productos/Kumquat.png" />
+        </ion-thumbnail>
+        <ion-label>
+          <h2>Kumquat </h2>
+          <ion-button fill="outline" size="small" (click)="toggleDetails(6)">Detalles</ion-button>
+          <div *ngIf="selectedDetail === 6" class="detalles-texto">
+            <p>El Kumquat, también conocido como naranjo chino o naranjo enano, es conocido por sus frutos comestibles y llenos de propiedades..</p>
+            <ul>
+              <li>La planta, mide 70-90 centímetros de alto aproximadamente</li>
+              <li>Foto referencial, las plantas varían en tamaño y cantidad de hojas.</li>
+            </ul>
+          </div>
+        </ion-label>
+        <ion-note slot="end">Precio: $19.990</ion-note>
+      </ion-item>
+    </div>
+
+    <!-- Submenú Suculentas y Cactus -->
+    <ion-item (click)="toggleSubmenu('bebidas')">
+      <ion-label>
+        <h2>Suculentas y Cactus</h2>
+      </ion-label>
+      <ion-icon slot="end" [name]="submenuOpen['bebidas'] ? 'chevron-up-outline' : 'chevron-down-outline'"></ion-icon>
+    </ion-item>
+    <div *ngIf="submenuOpen['bebidas']">
+      <ion-item>
+        <ion-thumbnail slot="start">
+          <img alt="Echeveria Subrigida" src="assets/productos/Echeveria Subrigida.png" />
+        </ion-thumbnail>
+        <ion-label>
+          <h2>Echeveria Subrigida</h2>
+          <ion-button fill="outline" size="small" (click)="toggleDetails(7)">Detalles</ion-button>
+          <div *ngIf="selectedDetail === 7" class="detalles-texto">
+            <p>Es una planta suculenta perteneciente a la familia Crassulaceae, originaria de México.. </p>
+            <ul>
+              <li>La planta mide entre 30 centímetros de alto aproximadamente.</li>
+              <li>Foto referencial, las plantas varían en tamaño y cantidad de hojas.</li>
+            </ul>
+          </div>
+        </ion-label>
+        <ion-note slot="end">Precio: $29.990</ion-note>
+      </ion-item>
+      <ion-item>
+        <ion-thumbnail slot="start">
+          <img alt="Cola de Burro" src="assets/productos/Cola de Burro.png" />
+        </ion-thumbnail>
+        <ion-label>
+          <h2>Cola de Burro</h2>
+          <ion-button fill="outline" size="small" (click)="toggleDetails(8)">Detalles</ion-button>
+          <div *ngIf="selectedDetail === 8" class="detalles-texto">
+            <p>Planta suculenta originaria de México. Como característica, tiene tallos colgantes con hojas carnosas y cilíndricas. </p>
+            <ul>
+              <li>La planta, mide 15 - 20 centímetros de largo aproximadamente.</li>
+              <li>Foto referencial, las plantas varían en tamaño y cantidad de hojas.</li>
+            </ul>
+          </div>
+        </ion-label>
+        <ion-note slot="end">Precio: $19.990</ion-note>
+      </ion-item>
+      <ion-item>
+        <ion-thumbnail slot="start">
+          <img alt="Cerámica" src="assets/productos/Cerámica.png" />
+        </ion-thumbnail>
+        <ion-label>
+          <h2>Cerámica</h2>
+          <ion-button fill="outline" size="small" (click)="toggleDetails(9)">Detalles</ion-button>
+          <div *ngIf="selectedDetail === 9" class="detalles-texto">
+            <p>Las suculentas son plantas hermosas y únicas . Gracias a sus texturas y 
+              colores son una forma segura para decorar cualquier rincón de tu jardín o espacios un poco más cerrados, como la oficina. </p>
+            <ul>
+              <li>La planta, mide 15 - 20 centímetros de largo aproximadamente.</li>
+              <li>Foto referencial, las plantas varían en tamaño y cantidad de hojas.</li>
+            </ul>
+          </div>
+        </ion-label>
+        <ion-note slot="end">Precio: $49.990</ion-note>
+      </ion-item>
+      
+    </div>
+
+    <!-- Submenú Arboles -->
+    <ion-item (click)="toggleSubmenu('panaderia')">
+      <ion-label>
+        <h2>Arboles</h2>
+      </ion-label>
+      <ion-icon slot="end" [name]="submenuOpen['panaderia'] ? 'chevron-up-outline' : 'chevron-down-outline'"></ion-icon>
+    </ion-item>
+    <div *ngIf="submenuOpen['panaderia']">
+      <ion-item>
+        <ion-thumbnail slot="start">
+          <img alt="Mandarino" src="assets/productos/Mandarino.png" />
+        </ion-thumbnail>
+        <ion-label>
+          <h2>Mandarino</h2>
+          <ion-button fill="outline" size="small" (click)="toggleDetails(10)">Detalles</ion-button>
+          <div *ngIf="selectedDetail === 10" class="detalles-texto">
+            <p>Es un árbol muy decorativo y fácil de cuidar, ideal para terrazas o jardines bien iluminados. Este árbol lindo esta criado y formado de manera ornamental</p>
+            <ul>
+              <li>La planta, mide 1,20-1,30 centímetros de alto aproximadamente,</li>
+              <li>Foto referencial, las plantas varían en tamaño y cantidad de hojas.</li>
+              
+            </ul>
+          </div>
+        </ion-label>
+        <ion-note slot="end">Precio: $79.990</ion-note>
+      </ion-item>
+      <ion-item>
+        <ion-thumbnail slot="start">
+          <img alt="Palto Hass" src="assets/productos/Palto Hass.png" />
+        </ion-thumbnail>
+        <ion-label>
+          <h2>Palto Hass</h2>
+          <ion-button fill="outline" size="small" (click)="toggleDetails(11)">Detalles</ion-button>
+          <div *ngIf="selectedDetail === 11" class="detalles-texto">
+            <p>Palto, variedad Hass, originario de la América Central subtropical</p>
+            <ul>
+              <li>La planta, mide 0,80 yo 90 centímetros de alto aproximadamente</li>
+              <li>Foto referencial, las plantas varían en tamaño y cantidad de hojas.</li>
+            </ul>
+          </div>
+        </ion-label>
+        <ion-note slot="end">Precio: $29.990</ion-note>
+      </ion-item>
+      <ion-item>
+        <ion-thumbnail slot="start">
+          <img alt="Olivo" src="assets/productos/Olivo.png" />
+        </ion-thumbnail>
+        <ion-label>
+          <h2>Olivo</h2>
+          <ion-button fill="outline" size="small" (click)="toggleDetails(12)">Detalles</ion-button>
+          <div *ngIf="selectedDetail === 12" class="detalles-texto">
+            <p>El olivo es un árbol de una increíble belleza ornamental y de fácil cuidado</p>
+            <ul>
+              <li>la planta, mide entre 160 centímetros de alto aproximadamente</li>
+              <li>Foto referencial, las plantas varían en tamaño y cantidad de hojas.</li>
+            </ul>
+          </div>
+        </ion-label>
+        <ion-note slot="end">Precio: $69.990</ion-note>
+      </ion-item>
+    </div>
+
+    <!-- Submenú Huerto -->
+    <ion-item (click)="toggleSubmenu('frutas')">
+      <ion-label>
+        <h2>Huerto</h2>
+      </ion-label>
+      <ion-icon slot="end" [name]="submenuOpen['frutas'] ? 'chevron-up-outline' : 'chevron-down-outline'"></ion-icon>
+    </ion-item>
+    <div *ngIf="submenuOpen['frutas']">
+      <ion-item>
+        <ion-thumbnail slot="start">
+          <img alt="Zanahoria Nantera" src="assets/productos/Zanahoria Nantera.png" />
+        </ion-thumbnail>
+        <ion-label>
+          <h2>Zanahoria Nantera</h2>
+          <ion-button fill="outline" size="small" (click)="toggleDetails(13)">Detalles</ion-button>
+          <div *ngIf="selectedDetail === 13" class="detalles-texto">
+            <p>Variedad tradicional de gran calidad, ideal para las cosechas de verano, que produce zanahorias un tanto alargadas (14-18 cm) cilíndricas, sabrosas y muy coloridas.</p>
+            <ul>
+              <li>Cuando le hayan salido 2-3 hojas verdaderas, aclarar para quedarse con una planta cada 5 cm.</li>
+              
+            </ul>
+          </div>
+        </ion-label>
+        <ion-note slot="end">Precio: $3.500</ion-note>
+      </ion-item>
+      <ion-item>
+        <ion-thumbnail slot="start">
+          <img alt="Rabano Nacional" src="assets/productos/Rabano Nacional.png" />
+        </ion-thumbnail>
+        <ion-label>
+          <h2>Rabano Nacional</h2>
+          <ion-button fill="outline" size="small" (click)="toggleDetails(14)">Detalles</ion-button>
+          <div *ngIf="selectedDetail === 14" class="detalles-texto">
+            <p>Variedad tradicional de raíz redonda, bastante gruesa, ligeramente aplastada, bermellón y blanco, cultivo fácil.</p>
+            <ul>
+              <li>8 gramos</li>
+              <li>Semillas de Verduras</li>
+              
+            </ul>
+          </div>
+        </ion-label>
+        <ion-note slot="end">Precio: $3.500</ion-note>
+      </ion-item>
+      <ion-item>
+        <ion-thumbnail slot="start">
+          <img alt="Lechuga Bionda" src="assets/productos/Lechuga Bionda.png" />
+        </ion-thumbnail>
+        <ion-label>
+          <h2>Lechuga Bionda</h2>
+          <ion-button fill="outline" size="small" (click)="toggleDetails(15)">Detalles</ion-button>
+          <div *ngIf="selectedDetail === 15" class="detalles-texto">
+            <p>La lechuga hidropónica Lollo Bionda es perfecta para acompañar tus comidas e ideal para tu cuerpo.</p>
+            <ul>
+              <li>Fuente de vitaminas y agua</li>
+              <li>Combate el insomnio, alteraciones nerviosas y la acidez estomacal</li>
+              
+            </ul>
+          </div>
+        </ion-label>
+        <ion-note slot="end">Precio: $3.500</ion-note>
+      </ion-item>
+    </div>
+    
+  </ion-list>
+</ion-content>

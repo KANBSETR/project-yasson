@@ -1,0 +1,109 @@
+/* General Styles */
+ion-content {
+  --background: #F5F5F5; /* Fondo claro y limpio */
+}
+
+ion-toolbar {
+  --background: #2E7D32; /* Verde oscuro profesional */
+  color: white;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1.2em;
+}
+
+ion-title {
+  text-align: center;
+  font-weight: bold;
+}
+
+/* Item Styles */
+ion-item {
+  --padding-start: 15px;
+  --inner-padding-end: 15px;
+  --min-height: 90px;
+  --background: #FFFFFF; /* Fondo blanco limpio */
+  --border-radius: 12px;
+  --box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra más sutil */
+  margin: 10px 0;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+ion-item:hover {
+  transform: scale(1.05);
+  --box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Sombra más pronunciada en hover */
+}
+
+ion-thumbnail img {
+  border-radius: 12px;
+  object-fit: cover;
+  width: 100px;
+  height: 100px;
+}
+
+/* Label Styles */
+ion-label h2 {
+  font-size: 1.4em;
+  font-weight: bold;
+  color: #388E3C; /* Verde más suave y elegante */
+  font-family: 'Poppins', sans-serif;
+}
+
+ion-label p {
+  color: #616161; /* Gris neutro */
+  font-size: 1em;
+  margin-top: 8px;
+  font-family: 'Roboto', sans-serif;
+}
+
+/* Note Styles */
+ion-note {
+  color: #D84315; /* Naranja más apagado */
+  font-weight: bold;
+  font-size: 1.1em;
+}
+
+/* Button Styles */
+ion-button {
+  --border-radius: 20px;
+  --background: #4CAF50; /* Verde estándar */
+  color: white;
+  --box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  font-family: 'Poppins', sans-serif;
+  transition: background 0.3s ease, box-shadow 0.3s ease;
+}
+
+ion-button:hover {
+  --background: #388E3C; /* Verde más oscuro en hover */
+}
+
+/* Submenu Icon */
+ion-icon {
+  font-size: 1.2em;
+  color: #2E7D32; /* Verde oscuro */
+}
+
+/* Detalles Texto */
+.detalles-texto p {
+  font-size: 1em;
+  color: #616161; /* Gris neutro */
+}
+
+.detalles-texto ul {
+  font-size: 0.9em;
+  color: #616161; /* Gris neutro */
+}
+
+/* Animations */
+ion-item {
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

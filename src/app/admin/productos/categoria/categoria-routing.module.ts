@@ -7,7 +7,11 @@ const routes: Routes = [
   {
     path: '',
     component: CategoriaPage
+  },  {
+    path: 'agregar-categoria',
+    loadChildren: () => import('./agregar-categoria/agregar-categoria.module').then( m => m.AgregarCategoriaPageModule)
   }
+
 ];
 
 @NgModule({

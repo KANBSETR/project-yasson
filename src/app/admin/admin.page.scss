@@ -70,3 +70,42 @@ ion-label ion-note {
 #margin{
   margin: 10px;
 }
+.statistics {
+  display: flex; /* Ccontenedor flexbox para los elementos hijos */
+  justify-content: space-around; /* Distribuye el espacio sobrante de manera uniforme entre los elementos hijos */
+  align-items: center; 
+  flex-wrap: wrap; 
+}
+
+canvas {
+  width: 100%; 
+  max-width: 300px; 
+  height: auto; 
+  max-height: 300px; 
+}
+
+.chart-canvas {
+  width: 100% !important; 
+  height: 400px !important;
+  max-width: 400px; 
+  max-height: 400px; 
+  margin: 0 auto;
+}
+
+/* admin.page.css */
+:host {
+  .ion-page {
+    .admin-background {
+      background-color: #f4f4f9 !important; 
+      color: #333 !important; 
+    }
+  }
+}
+
+.user-image {
+  width: 30px;
+  height: 30px;
+  margin-left: 10px;
+  border-radius: 50%; /* Hace que la imagen tenga un borde circular */
+  border: 2px solid #333; /* Añade un borde alrededor de la imagen */
+}

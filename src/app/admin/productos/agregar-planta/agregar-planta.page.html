@@ -8,6 +8,9 @@
         <ion-menu-button></ion-menu-button>
       </ion-buttons>
       <ion-title>Agregar Planta</ion-title>
+      <ion-buttons slot="end">
+        <ion-back-button defaultHref="admin/productos"></ion-back-button>
+      </ion-buttons>
     </ion-toolbar>
   </ion-header>
   <ion-content class="ion-padding">
@@ -41,19 +44,21 @@
     <ion-item>
       <ion-input label="Descripción" labelPlacement="floating"></ion-input>
     </ion-item>
-    
-    <ion-button id="addPlantButton" expand="block" (click)="presentToast()">Agregar planta</ion-button>
-    
+
+    <ion-button id="addPlantButton" expand="block" (click)="presentAlert()" color="success">
+      <ion-icon name="add" slot="start"></ion-icon>
+      Agregar planta
+    </ion-button>
+
     <ion-card id="imgCard">
       <ion-card-header>
         <ion-card-title>Imagen de la planta</ion-card-title>
       </ion-card-header>
       <ion-card-content>
-        <ion-img
-        src="https://theplantstore.cl/wp-content/uploads/2024/04/SCHFL_SMALL_01-500x500.png"
-        alt="Imagen genérica">
-      </ion-img>
-    </ion-card-content>
-  </ion-card>
+        <ion-img src="https://theplantstore.cl/wp-content/uploads/2024/04/SCHFL_SMALL_01-500x500.png"
+          alt="Imagen genérica">
+        </ion-img>
+      </ion-card-content>
+    </ion-card>
   </ion-content>
 </div>
