@@ -8,5 +8,102 @@
       <ion-title>Inicio</ion-title>
     </ion-toolbar>
   </ion-header>
-  <ion-content class="ion-padding"> Yapo rajense con un Inicio decente </ion-content>
+  <ion-content class="ion-padding">
+    <!-- Banner -->
+    <div class="banner">
+      <img src="assets/banner.jpg" alt="Banner" class="banner-img" />
+      <div class="banner-text">
+        <h1>Bienvenido a Green Blossom</h1>
+        <p>Encuentra las mejores plantas y accesorios</p>
+        <ion-button color="primary">Explorar</ion-button>
+      </div>
+    </div>
+
+    <!-- Seccion productos destacados -->
+    <div class="featured-products">
+      <h2>Productos Destacados</h2>
+      <ion-slides pager="true">
+        <ion-slide>
+          <ion-card>
+            <ion-button fill="clear" routerLink="/home/productos">
+              <img src="assets/productos/Antonella.png" alt="Planta 1" />
+            </ion-button>
+            <ion-card-header>
+              <ion-card-title>Planta 1</ion-card-title>
+            </ion-card-header>
+            <ion-card-content>
+              <p>Descripción de la Planta 1</p>
+            </ion-card-content>
+          </ion-card>
+        </ion-slide>
+        <ion-slide>
+          <ion-card>
+            <ion-button fill="clear" routerLink="/home/productos">
+              <img src="assets/productos/Budy.png" alt="Planta 2" />
+            </ion-button>
+            <ion-card-header>
+              <ion-card-title>Planta 2</ion-card-title>
+            </ion-card-header>
+            <ion-card-content>
+              <p>Descripción de la Planta 2</p>
+            </ion-card-content>
+          </ion-card>
+        </ion-slide>
+        <ion-slide>
+          <ion-card>
+            <ion-button fill="clear" routerLink="/home/productos">
+              <img src="assets/productos/Cerámica.png" alt="Planta 3" />
+            </ion-button>
+            <ion-card-header>
+              <ion-card-title>Planta 3</ion-card-title>
+            </ion-card-header>
+            <ion-card-content>
+              <p>Descripción de la Planta 3</p>
+            </ion-card-content>
+          </ion-card>
+        </ion-slide>
+      </ion-slides>
+    </div>
+
+    <!-- Seccion comentarios -->
+    <div class="comments-ratings">
+      <h2>Comentarios y Calificaciones</h2>
+      <ion-list>
+        <ion-item>
+          <ion-label>
+            <h3>Usuario 1</h3>
+            <p>Comentario del usuario 1</p>
+          </ion-label>
+          <ion-icon name="star" slot="end"></ion-icon>
+          <ion-icon name="star" slot="end"></ion-icon>
+          <ion-icon name="star" slot="end"></ion-icon>
+          <ion-icon name="star" slot="end"></ion-icon>
+          <ion-icon name="star-outline" slot="end"></ion-icon>
+        </ion-item>
+        <ion-item>
+          <ion-label>
+            <h3>Usuario 2</h3>
+            <p>Comentario del usuario 2</p>
+          </ion-label>
+          <ion-icon name="star" slot="end"></ion-icon>
+          <ion-icon name="star" slot="end"></ion-icon>
+          <ion-icon name="star" slot="end"></ion-icon>
+          <ion-icon name="star-half" slot="end"></ion-icon>
+          <ion-icon name="star-outline" slot="end"></ion-icon>
+        </ion-item>
+      </ion-list>
+    </div>
+
+    <!-- Footer  -->
+    <div class="footer">
+      <div class="footer-content">
+        <p>&copy; 2024 Green Blossom. Todos los derechos reservados.</p>
+        <div class="social-links">
+          <ion-icon name="logo-facebook"></ion-icon>
+          <ion-icon name="logo-twitter"></ion-icon>
+          <ion-icon name="logo-instagram"></ion-icon>
+        </div>
+      </div>
+    </div>
+  </ion-content>
 </div>
