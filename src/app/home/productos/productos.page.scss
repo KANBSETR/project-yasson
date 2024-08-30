@@ -1,6 +1,6 @@
 /* General Styles */
 ion-content {
-  --background: #F5F5F5; /* Fondo claro y limpio */
+  --background: #ffffff; /* Fondo claro y limpio */
 }
 
 ion-toolbar {
@@ -14,7 +14,9 @@ ion-title {
   text-align: center;
   font-weight: bold;
 }
-
+ion-list{
+  background-color: #ffffff;
+}
 /* Item Styles */
 ion-item {
   --padding-start: 15px;
@@ -23,7 +25,8 @@ ion-item {
   --background: #FFFFFF; /* Fondo blanco limpio */
   --border-radius: 12px;
   --box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra más sutil */
-  margin: 10px 0;
+  margin: 20px 0;
+  
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
@@ -48,7 +51,7 @@ ion-label h2 {
 }
 
 ion-label p {
-  color: #616161; /* Gris neutro */
+  
   font-size: 1em;
   margin-top: 8px;
   font-family: 'Roboto', sans-serif;
@@ -96,6 +99,41 @@ ion-icon {
 ion-item {
   animation: fadeIn 0.5s ease-in-out;
 }
+/* Estilo para el ion-segment */
+ion-segment {
+  --background: #ffffff; /* Fondo blanco */
+  --color: #6D4C41; /* Color café oscuro para el texto */
+  --color-checked: #ffffff; /* Color del texto cuando está seleccionado */
+  --background-checked: #6D4C41; /* Fondo café oscuro cuando está seleccionado */
+}
+
+/* Estilo para los segmentos individuales */
+ion-segment-button {
+  --color: #ffffff; /* Color del texto dentro del botón */
+  text-align: center;
+  --background: #6D4C41; /* Fondo café oscuro */
+  --color-checked: #ffffff; /* Color del texto cuando está seleccionado */
+  --background-checked: #6D4C41; /* Fondo café oscuro cuando está seleccionado */
+  margin-top: 5px;
+  margin-bottom: 5px;
+  margin-right: 5px;
+  padding: 2px 4px; /* Aumentar el padding para mayor visibilidad del texto */
+  font-size: 1em; /* Tamaño del texto ajustado para mayor legibilidad */
+  border-radius: 60px; /* Bordes redondeados para los botones */
+  display: flex;
+  justify-content: center; /* Centrar horizontalmente el contenido */
+  align-items: center; /* Centrar verticalmente el contenido */
+  min-width: 120px; /* Ancho mínimo para asegurar visibilidad del texto */
+}
+
+/* Para eliminar el efecto de cambio de color al pasar el cursor */
+ion-segment-button:hover,
+ion-segment-button:active {
+  --background: #6D4C41; /* Fondo café oscuro para el hover y click */
+  --color: #ffffff; /* Color del texto en hover y click */
+}
+
+
 
 @keyframes fadeIn {
   from {

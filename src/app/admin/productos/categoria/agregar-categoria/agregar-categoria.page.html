@@ -1,13 +1,26 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>agregar-categoria</ion-title>
-  </ion-toolbar>
-</ion-header>
-
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
+<!--Página Principal-->
+<div class="ion-page" id="main-content">
+  <ion-header>
     <ion-toolbar>
-      <ion-title size="large">agregar-categoria</ion-title>
+      <ion-buttons slot="start">
+        <ion-menu-button></ion-menu-button>
+      </ion-buttons>
+      <ion-title>Agregar Categoria</ion-title>
+      <ion-buttons slot="end">
+        <ion-back-button defaultHref="admin/productos/categoria"></ion-back-button>
+      </ion-buttons>
     </ion-toolbar>
   </ion-header>
-</ion-content>
+  <ion-content class="ion-padding">
+    <ion-item>
+      <ion-input label="Nombre de la categoria" labelPlacement="floating"></ion-input>
+    </ion-item>
+    <ion-item >
+      <ion-textarea label="Descripción" labelPlacement="floating" [counter]="true" maxlength="100" style="margin-bottom: 6px;"></ion-textarea>
+    </ion-item>
+    <ion-button id="addCategoryButton" expand="block" (click)="presentAlert()" color="success">
+      <ion-icon name="add" slot="start"></ion-icon>
+      Agregar Categoria
+    </ion-button>
+  </ion-content>
+</div>

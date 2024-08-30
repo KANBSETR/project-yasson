@@ -1,4 +1,5 @@
 <app-menu-admin></app-menu-admin>
+
 <!--Página Principal-->
 <div class="ion-page" id="main-content">
   <ion-header>
@@ -9,5 +10,44 @@
       <ion-title>Usuarios</ion-title>
     </ion-toolbar>
   </ion-header>
-  <ion-content class="ion-padding"> Tap the button in the toolbar to open the menu. </ion-content>
+  <ion-content>
+    <ion-button id="addPlantButton" expand="block" [routerLink]="['/admin/usuarios/agregar-usuario']">Agregar
+      Usuario</ion-button>
+    <ion-list>
+      <ion-item>
+        <ion-icon name="person-circle-outline" style="margin-right: 10px;"></ion-icon>
+        <ion-label>
+          <h2>Juan</h2>
+        </ion-label>
+        <ion-button shape="round" color="warning"><ion-icon name="create"></ion-icon></ion-button>
+        <ion-button shape="round" color="danger"><ion-icon name="trash"></ion-icon></ion-button>
+      </ion-item>
+      <ion-item>
+        <ion-icon name="person-circle-outline" style="margin-right: 10px;"></ion-icon>
+        <ion-label>
+          <h2>Pedro</h2>
+        </ion-label>
+        <ion-button shape="round" color="warning"><ion-icon name="create"></ion-icon></ion-button>
+        <ion-button shape="round" color="danger"><ion-icon name="trash"></ion-icon></ion-button>
+      </ion-item>
+      <ion-item>
+        <ion-icon name="person-circle-outline" style="margin-right: 10px;"></ion-icon>
+        <ion-label>
+          <h2>Giovanni</h2>
+        </ion-label>
+        <ion-icon name="checkmark-circle"></ion-icon>
+        <ion-button shape="round" color="warning"><ion-icon name="create"></ion-icon></ion-button>
+        <ion-button shape="round" color="danger"><ion-icon name="trash"></ion-icon></ion-button>
+      </ion-item>
+      <ion-item>
+        <ion-icon name="person-circle-outline" style="margin-right: 10px;"></ion-icon>
+        <ion-label>
+          <h2>Benjamin</h2>
+        </ion-label>
+        <ion-icon name="checkmark-circle"></ion-icon>
+        <ion-button shape="round" color="warning"><ion-icon name="create"></ion-icon></ion-button>
+        <ion-button shape="round" color="danger"><ion-icon name="trash"></ion-icon></ion-button>
+      </ion-item>
+    </ion-list>
+  </ion-content>
 </div>

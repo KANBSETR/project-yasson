@@ -1,13 +1,45 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>agregar-usuario</ion-title>
-  </ion-toolbar>
-</ion-header>
-
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
+<!--Página Principal-->
+<div class="ion-page" id="main-content">
+  <ion-header>
     <ion-toolbar>
-      <ion-title size="large">agregar-usuario</ion-title>
+      <ion-buttons slot="start">
+        <ion-menu-button></ion-menu-button>
+      </ion-buttons>
+      <ion-title>Agregar Usuario</ion-title>
+      <ion-buttons slot="end">
+        <ion-back-button defaultHref="admin/usuarios"></ion-back-button>
+      </ion-buttons>
     </ion-toolbar>
   </ion-header>
-</ion-content>
+  <ion-content class="ion-padding">
+    <ion-item>
+      <ion-input label="Nombre del usuario" labelPlacement="floating"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-input label="Correo" labelPlacement="floating" placeholder="example@example.cl"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-input type="password" label="Contraseña">
+        <ion-input-password-toggle slot="end"></ion-input-password-toggle>
+      </ion-input>  
+    </ion-item>
+    <ion-item>
+      <ion-input type="password" label="Repetir contraseña">
+        <ion-input-password-toggle slot="end"></ion-input-password-toggle>
+      </ion-input>  
+    </ion-item>
+    <ion-item>
+      <ion-label style="max-width: 2500px;">
+        <h2>¿Es administrador?</h2>
+      </ion-label>
+      <ion-radio-group>
+        <ion-radio value="yes">Si</ion-radio>
+        <ion-radio value="no">No</ion-radio>
+      </ion-radio-group>
+    </ion-item>
+    <ion-button id="addCategoryButton" expand="block" (click)="presentAlert()" color="success">
+      <ion-icon name="add" slot="start"></ion-icon>
+      Agregar Usuario
+    </ion-button>
+  </ion-content>
+</div>
