@@ -1,0 +1,57 @@
+<app-menu-home></app-menu-home>
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Carrito de Compras</ion-title>
+    <ion-buttons slot="end">
+      <ion-button href="/home">
+          <img src="assets/icon/icon.png" alt="Icono Personalizado" style="width: 40px; height: 40px;" />
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="cart-container">
+    <ion-list>
+      <ion-item>
+        <ion-thumbnail slot="start">
+          <img src="assets/productos/Antonella.png" />
+        </ion-thumbnail>
+        <ion-label>
+          <h2>Planta de Ejemplo</h2>
+          <p>Precio: $20.00</p>
+          <p>Cantidad: 2</p>
+        </ion-label>
+        <ion-button fill="outline" color="danger">
+          <ion-icon slot="icon-only" name="trash"></ion-icon>
+        </ion-button>
+      </ion-item>
+      <!-- Repite el <ion-item> para cada producto en el carrito -->
+    </ion-list>
+
+    <ion-card class="total-card">
+      <ion-card-header>
+        <ion-card-title>Total</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <h2>$40.00</h2>
+        <ion-button expand="full" color="success">
+          Finalizar Compra
+        </ion-button>
+      </ion-card-content>
+    </ion-card>
+  </div>
+   <!-- Footer -->
+   <div class="footer">
+    <div class="footer-content">
+      <p>&copy; 2024 <b>Green Blossom.</b> Todos los derechos reservados.</p>
+      <div class="social-links">
+        <ion-icon name="logo-facebook"></ion-icon>
+        <ion-icon name="logo-twitter"></ion-icon>
+        <ion-icon name="logo-instagram"></ion-icon>
+      </div>
+    </div>
+  </div>
+</ion-content>
+<app-menu-tab></app-menu-tab>
+

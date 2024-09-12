@@ -1,19 +1,24 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+
 import { IonicModule } from '@ionic/angular';
-import { ProductosPageRoutingModule } from './productos-routing.module';
-import { ProductosPage } from './productos.page';
+
+import { CarritoPageRoutingModule } from './carrito-routing.module';
+
+import { CarritoPage } from './carrito.page';
 import { SharedModule } from 'src/app/shared/shared.module';
+
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    ProductosPageRoutingModule,
+    CarritoPageRoutingModule,
     SharedModule
+    
   ],
-  declarations: [ProductosPage]
+  declarations: [CarritoPage]
 })
-export class ProductosPageModule {}
+export class CarritoPageModule {}

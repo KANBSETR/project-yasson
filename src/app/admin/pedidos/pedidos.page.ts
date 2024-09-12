@@ -8,28 +8,10 @@ import { Component, OnInit } from '@angular/core';
 export class PedidosPage implements OnInit {
 
   pedidos = [
-    {
-      id: 1,
-      fecha: '2020-08-01',
-      total: 100,
-      estado: 'pendiente',
-      usuario: {
-        id: 1,
-        nombre: 'Juan',
-        apellido: 'Perez'
-      }
-    },
-    {
-      id: 2,
-      fecha: '2020-08-02',
-      total: 200,
-      estado: 'entregado',
-      usuario: {
-        id: 2,
-        nombre: 'Maria',
-        apellido: 'Gomez'
-      }
-    },];
+    { fecha: '2024-09-01', cliente: 'Juan Pérez', estado: 'Enviado', total: 25.50 },
+    { fecha: '2024-09-02', cliente: 'María Gómez', estado: 'Pendiente', total: 15.75 },
+  ];
+
   constructor() { 
   }
 

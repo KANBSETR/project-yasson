@@ -1,0 +1,135 @@
+.container {
+  max-width: 100%; /* Ajustar al ancho completo de la pantalla */
+  margin: 0 auto;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+  background-color: #333; /* Fondo oscuro para contraste */
+  color: #fff; /* Texto blanco para visibilidad */
+  overflow-y: auto; /* Permitir desplazamiento vertical */
+  height: 100vh; /* Altura completa de la ventana */
+}
+
+h2 {
+  text-align: center;
+  color: #fff; /* Texto blanco */
+}
+
+.form-container {
+  background-color: #444; 
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+  color: #fff; /* Texto blanco */
+}
+
+input[type="number"] {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.btn {
+  display: inline-block;
+  padding: 10px 20px;
+  font-size: 16px;
+  color: #fff;
+  background-color: #007bff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  text-align: center;
+}
+
+.btn:hover {
+  background-color: #0056b3;
+}
+
+.response-container {
+  background-color: #555; 
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+}
+
+pre {
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  color: #fff; /* Texto blanco */
+}
+
+.image-container {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.image-container img {
+  max-width: 100%; /* Ajustar al ancho completo del contenedor */
+  height: auto; /* Mantener la proporción de la imagen */
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.species-list-container {
+  background-color: #555; 
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+}
+
+.species-list-container ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.species-list-container li {
+  margin-bottom: 15px;
+  display: flex;
+  align-items: center;
+}
+
+.species-list-container img {
+  margin-right: 10px;
+  border-radius: 4px;
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.pagination button {
+  padding: 10px 20px;
+  font-size: 16px;
+  color: #fff;
+  background-color: #007bff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin: 0 10px;
+}
+
+.pagination button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.pagination span {
+  font-size: 16px;
+  color: #fff;
+}

@@ -1,0 +1,44 @@
+.footer-buttons {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+    padding: 10px 0;
+  }
+  
+  .footer-buttons ion-button {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    font-size: 16px;
+  }
+  
+  .footer-buttons ion-icon {
+    font-size: 28px;
+    color: #4caf50; /* Color verde para los íconos */
+    margin-bottom: 4px; /* Espacio entre el ícono y el texto */
+  }
+  
+  .footer-buttons ion-button:hover ion-icon {
+    color: #388e3c; /* Color más oscuro al pasar el mouse */
+  }
+  
+  .ion-toolbar {
+    background-color: #ffffff; /* Fondo blanco */
+    border-top: 2px solid #4caf50; /* Línea superior verde */
+  }
+  
+  .ion-toolbar ion-button {
+    color: #4caf50; /* Color del texto debajo de los íconos */
+  }
+  
+  .footer-buttons ion-button {
+    transition: transform 0.2s ease-in-out;
+  }
+  
+  .footer-buttons ion-button:hover {
+    transform: scale(1.1); /* Efecto de agrandamiento en hover */
+  }
+  

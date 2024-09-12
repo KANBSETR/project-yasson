@@ -1,0 +1,64 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Favoritos</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="favorite-products">
+  <ion-grid>
+    <ion-row>
+      <!-- Producto 1 -->
+      <ion-col size="6" size-md="3">
+        <ion-card class="product-card">
+          <ion-card-header>
+            <ion-card-title>Magnolio Grandiflora</ion-card-title>
+            <img alt="Magnolio Grandiflora" src="assets/productos/Magnolio Grandiflora.png" />
+          </ion-card-header>
+          <ion-card-content>
+            <ion-button expand="block" fill="outline" color="danger">Eliminar</ion-button>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+
+      <!-- Producto 2 -->
+      <ion-col size="6" size-md="3">
+        <ion-card class="product-card">
+          <ion-card-header>
+            <ion-card-title>Antonella</ion-card-title>
+            <img alt="Antonella" src="assets/productos/Antonella.png" />
+          </ion-card-header>
+          <ion-card-content>
+            <ion-button expand="block" fill="outline" color="danger">Eliminar</ion-button>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+
+      <!-- Producto 3 -->
+      <ion-col size="6" size-md="3">
+        <ion-card class="product-card">
+          <ion-card-header>
+            <ion-card-title>Fidel</ion-card-title>
+            <img alt="Fidel" src="assets/productos/Fidel.png" />
+          </ion-card-header>
+          <ion-card-content>
+            <ion-button expand="block" fill="outline" color="danger">Eliminar</ion-button>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+
+      <!-- Producto 4 -->
+      <ion-col size="6" size-md="3">
+        <ion-card class="product-card">
+          <ion-card-header>
+            <ion-card-title>Susan XL</ion-card-title>
+            <img alt="Susan XL" src="assets/productos/Susan XL.png" />
+          </ion-card-header>
+          <ion-card-content>
+            <ion-button expand="block" fill="outline" color="danger">Eliminar</ion-button>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
+<app-menu-tab></app-menu-tab>

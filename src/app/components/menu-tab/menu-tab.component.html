@@ -1,0 +1,18 @@
+<ion-footer>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <!-- Espacio reservado al inicio si es necesario -->
+    </ion-buttons>
+    <ion-buttons slot="end" class="footer-buttons">
+      <ion-button fill="clear" [routerLink]="['/home']">
+        <ion-icon class="icons-color" name="home"></ion-icon>
+      </ion-button>
+      <ion-button fill="clear" [routerLink]="['/home/carrito']">
+        <ion-icon class="icons-color" name="cart"></ion-icon>
+      </ion-button>
+      <ion-button fill="clear" [routerLink]="['/home/favoritos']">
+        <ion-icon name="heart"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-footer>
