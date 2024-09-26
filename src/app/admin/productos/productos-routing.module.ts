@@ -15,6 +15,10 @@ const routes: Routes = [
     path: 'agregar-planta',
     loadChildren: () => import('./agregar-planta/agregar-planta.module').then(m => m.AgregarPlantaPageModule)
   },
+  {
+    path: 'editar-planta/:id',
+    loadChildren: () => import('./editar-planta/editar-planta.module').then( m => m.EditarPlantaPageModule)
+  },
 ];
 
 @NgModule({

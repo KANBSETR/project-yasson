@@ -1,0 +1,122 @@
+{
+  "plantas": [
+    {
+      "id": 1,
+      "nombrePlanta": "Anturio Rosado",
+      "nombreCientifico": "Anthurium andraenum",
+      "categoria": 1,
+      "precio": 1000,
+      "stock": 1000,
+      "imagen": "https://content.elmueble.com/medio/2019/03/25/monstera_f97f4746_800x800.jpg",
+      "descripcion": "Es una planta de interior que se caracteriza por una linda flor, hojas verdes y alargadas, y por su gran caracteristica purificadora de aire."
+    },
+    {
+      "id": 626,
+      "nombrePlanta": "Planta vegana",
+      "nombreCientifico": "Splasin",
+      "categoria": 0,
+      "precio": 1234124,
+      "stock": 12421,
+      "imagen": "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcTy9nfPx8TtatYUsBq0ERV-IZsXMAAlmEgO1WNGZSnqetrr9_eN",
+      "descripcion": "Una planta toda vegana, que más que decir."
+    },
+    {
+      "id": 719,
+      "nombrePlanta": "asdasd",
+      "nombreCientifico": "asdasdasd",
+      "categoria": 0,
+      "precio": 124214,
+      "stock": 12412412,
+      "imagen": "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcTy9nfPx8TtatYUsBq0ERV-IZsXMAAlmEgO1WNGZSnqetrr9_eN",
+      "descripcion": "Yo quiero comer pancito"
+    },
+    {
+      "id": 892,
+      "nombrePlanta": "2131212",
+      "nombreCientifico": "1231231",
+      "categoria": 1,
+      "precio": 1241241,
+      "stock": 14124124,
+      "imagen": "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcTy9nfPx8TtatYUsBq0ERV-IZsXMAAlmEgO1WNGZSnqetrr9_eN",
+      "descripcion": "oskhjgodifjngdfgdgdgdgdgd"
+    },
+    {
+      "id": 364,
+      "nombrePlanta": "asdasd",
+      "nombreCientifico": "asdasd",
+      "categoria": 0,
+      "precio": 123123,
+      "stock": 123123,
+      "imagen": "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcTy9nfPx8TtatYUsBq0ERV-IZsXMAAlmEgO1WNGZSnqetrr9_eN",
+      "descripcion": "1241241"
+    }
+  ],
+  "categorias": [
+    {
+      "id": 1,
+      "nombre": "Interior"
+    },
+    {
+      "id": 2,
+      "nombre": "Exterior"
+    },
+    {
+      "id": 3,
+      "nombre": "Suculentas"
+    },
+    {
+      "id": 4,
+      "nombre": "Cactus"
+    },
+    {
+      "id": 5,
+      "nombre": "Árboles"
+    },
+    {
+      "id": 6,
+      "nombre": "Huerto"
+    }
+  ],
+  "usuarios": [
+    {
+      "id": 1,
+      "username": "Pedro",
+      "password": "1234",
+      "correo": "pedro@gmail.com",
+      "rol": 2
+    },
+    {
+      "id": 2,
+      "username": "Juan",
+      "password": "12345",
+      "correo": "juan@gmail.com",
+      "rol": 2
+    },
+    {
+      "id": 3,
+      "username": "Giovanni",
+      "password": "123456",
+      "correo": "giova@gmail.com",
+      "rol": 1
+    },
+    {
+      "id": 4,
+      "username": "Benjamin",
+      "password": "admin",
+      "correo": "benja@gmail.com",
+      "rol": 1
+    }
+  ],
+  "roles": [
+    {
+      "id": 1,
+      "nombre": "Admin",
+      "permisos": "todos"
+    },
+    {
+      "id": 2,
+      "nombre": "Usuario",
+      "permisos": "ninguno"
+    }
+  ]
+}

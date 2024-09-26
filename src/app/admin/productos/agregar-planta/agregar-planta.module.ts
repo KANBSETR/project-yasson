@@ -6,6 +6,7 @@ import { IonicModule } from '@ionic/angular';
 import { AgregarPlantaPageRoutingModule } from './agregar-planta-routing.module';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { AgregarPlantaPage } from './agregar-planta.page';
+import { ReactiveFormsModule } from '@angular/forms'
 
 
 @NgModule({
@@ -14,10 +15,10 @@ import { AgregarPlantaPage } from './agregar-planta.page';
     FormsModule,
     IonicModule,
     AgregarPlantaPageRoutingModule,
-    SharedModule
+    SharedModule,
+    ReactiveFormsModule,
   ],
-  declarations: [AgregarPlantaPage,
-  ],
+  declarations: [AgregarPlantaPage],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 
 })
