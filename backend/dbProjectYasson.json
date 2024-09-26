@@ -2,23 +2,23 @@
   "plantas": [
     {
       "id": "1",
-      "nombrePlanta": "Anturio Rosado1 ",
+      "nombrePlanta": "Anturio Rosado",
       "nombreCientifico": "Anthurium andraenum",
       "categoria": 0,
       "precio": 10000,
-      "stock": 1000,
+      "stock": 435,
       "descripcion": "Es una planta de interior que se caracteriza por una linda flor, hojas verdes y alargadas, y por su gran caracteristica purificadora de aire.",
       "imagen": "https://content.elmueble.com/medio/2019/03/25/monstera_f97f4746_800x800.jpg"
     },
     {
-      "id": "626",
-      "nombrePlanta": "Planta vegana",
-      "nombreCientifico": "Splasin",
+      "id": 187,
+      "nombrePlanta": "12d12",
+      "nombreCientifico": "21312",
       "categoria": 0,
-      "precio": 1234124,
-      "stock": 12421,
-      "imagen": "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcTy9nfPx8TtatYUsBq0ERV-IZsXMAAlmEgO1WNGZSnqetrr9_eN",
-      "descripcion": "Una planta toda vegana, que más que decir."
+      "precio": 1241,
+      "stock": 1241,
+      "imagen": "q",
+      "descripcion": "1235213"
     }
   ],
   "categorias": [
@@ -43,7 +43,7 @@
       "descripcion": "Plantas que se pueden tener en el huerto."
     },
     {
-      "id": "405",
+      "id": 228,
       "nombre": "Interior",
       "descripcion": "Plantas de interior"
     }
