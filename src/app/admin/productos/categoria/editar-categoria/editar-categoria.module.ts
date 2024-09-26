@@ -4,18 +4,19 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { EditarPlantaPageRoutingModule } from './editar-planta-routing.module';
+import { EditarCategoriaPageRoutingModule } from './editar-categoria-routing.module';
 
-import { EditarPlantaPage } from './editar-planta.page';
+import { EditarCategoriaPage } from './editar-categoria.page';
 import { ReactiveFormsModule } from '@angular/forms';
+
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    EditarPlantaPageRoutingModule,
+    EditarCategoriaPageRoutingModule,
     ReactiveFormsModule,
   ],
-  declarations: [EditarPlantaPage]
+  declarations: [EditarCategoriaPage]
 })
-export class EditarPlantaPageModule {}
+export class EditarCategoriaPageModule {}

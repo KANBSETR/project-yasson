@@ -7,13 +7,14 @@ import { IonicModule } from '@ionic/angular';
 import { AgregarCategoriaPageRoutingModule } from './agregar-categoria-routing.module';
 
 import { AgregarCategoriaPage } from './agregar-categoria.page';
-
+import { ReactiveFormsModule } from '@angular/forms';
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    AgregarCategoriaPageRoutingModule
+    AgregarCategoriaPageRoutingModule,
+    ReactiveFormsModule,
   ],
   declarations: [AgregarCategoriaPage]
 })

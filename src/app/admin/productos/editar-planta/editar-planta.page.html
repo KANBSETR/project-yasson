@@ -1,13 +1,55 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>editar-planta</ion-title>
+    <ion-title>{{planta.nombrePlanta}}</ion-title>
+    <ion-buttons slot="end">
+      <ion-back-button defaultHref="/admin/productos"></ion-back-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">editar-planta</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <form [formGroup]="plantaForm" (ngSubmit)="onFormSubmit(plantaForm.value)">
+    <ion-item>
+      <ion-label position="floating">Nombre de la planta</ion-label>
+      <ion-input type="text"[(ngModel)]="planta.nombrePlanta" formControlName="plant_name"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Nombre Científico</ion-label>
+      <ion-input type="text" [(ngModel)]="planta.nombreCientifico" formControlName="plant_scientific_name"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Categoría</ion-label>
+      <ion-select aria-label="category" placeholder="Seleccionar categoría" formControlName="plant_category">
+        <ion-select-option *ngFor="let ca of categorias" [value]="ca.id">{{ ca.nombre }}</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Precio</ion-label>
+      <ion-input type="number" [(ngModel)]="planta.precio" formControlName="plant_price"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Stock</ion-label>
+      <ion-input type="number" [(ngModel)]="planta.stock" formControlName="plant_stock"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Imagen de la planta URL</ion-label>
+      <ion-input type="text"[(ngModel)]="planta.imagen" formControlName="plant_img"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Descripción</ion-label>
+      <ion-input type="text"[(ngModel)]="planta.descripcion" formControlName="plant_desc"></ion-input>
+    </ion-item>
+    <ion-button type="submit" shape="round" color="primary" expand="block"
+    [disabled]="!plantaForm.valid">Actualizar Planta</ion-button>
+  </form>
+  <ion-card id="imgCard">
+    <ion-card-header>
+      <ion-card-title>Imagen de la planta</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-img src="{{planta.imagen}}"
+        alt="Imagen genérica">
+      </ion-img>
+    </ion-card-content>
+  </ion-card>
 </ion-content>

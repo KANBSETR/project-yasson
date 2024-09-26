@@ -26,8 +26,8 @@
             <p>{{p.descripcion}}</p>
           </div>
         </ion-label>
-        <ion-button shape="round" color="warning"><ion-icon name="create"></ion-icon></ion-button>
-        <ion-button shape="round" color="danger"><ion-icon name="trash"></ion-icon></ion-button> 
+        <ion-button [routerLink]="['editar-planta/',p.id]" shape="round" color="warning"><ion-icon name="create"></ion-icon></ion-button>
+        <ion-button (click)="delete(p.id)" shape="round" color="danger"><ion-icon name="trash"></ion-icon></ion-button> 
         
       </ion-item>
     </ion-list>

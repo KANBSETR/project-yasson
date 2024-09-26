@@ -14,50 +14,13 @@
     <ion-button id="addPlantButton" expand="block" [routerLink]="['/admin/productos/categoria/agregar-categoria']">Agregar
       Categoria</ion-button>
     <ion-list>
-      <ion-item>
+      <ion-item *ngFor="let c of categorias">
         <ion-label>
-          <h2>Suculentas</h2>
+          <h2>{{c.nombre}}</h2>
         </ion-label>
-        <ion-button shape="round" color="warning"><ion-icon name="create"></ion-icon></ion-button>
-        <ion-button shape="round" color="danger"><ion-icon name="trash"></ion-icon></ion-button>
+        <ion-button [routerLink]="['editar-categoria/',c.id]" shape="round" color="warning"><ion-icon name="create"></ion-icon></ion-button>
+        <ion-button (click)="delete(c.id)" shape="round" color="danger"><ion-icon name="trash"></ion-icon></ion-button>
       </ion-item>
-      <ion-item>
-        <ion-label>
-          <h2>Plantas de Interior</h2>
-        </ion-label>
-        <ion-button shape="round" color="warning"><ion-icon name="create"></ion-icon></ion-button>
-        <ion-button shape="round" color="danger"><ion-icon name="trash"></ion-icon></ion-button>
-      </ion-item>
-      <ion-item>
-        <ion-label>
-          <h2>Plantas de Exterior</h2>
-        </ion-label>
-        <ion-button shape="round" color="warning"><ion-icon name="create"></ion-icon></ion-button>
-        <ion-button shape="round" color="danger"><ion-icon name="trash"></ion-icon></ion-button>
-      </ion-item>
-      <ion-item>
-        <ion-label>
-          <h2>Cactus</h2>
-        </ion-label>
-        <ion-button shape="round" color="warning"><ion-icon name="create"></ion-icon></ion-button>
-        <ion-button shape="round" color="danger"><ion-icon name="trash"></ion-icon></ion-button>
-      </ion-item>
-      <ion-item>
-        <ion-label>
-          <h2>Árboles</h2>
-        </ion-label>
-        <ion-button shape="round" color="warning"><ion-icon name="create"></ion-icon></ion-button>
-        <ion-button shape="round" color="danger"><ion-icon name="trash"></ion-icon></ion-button>
-      </ion-item>
-      <ion-item>
-        <ion-label>
-          <h2>Huerto</h2>
-        </ion-label>
-        <ion-button shape="round" color="warning"><ion-icon name="create"></ion-icon></ion-button>
-        <ion-button shape="round" color="danger"><ion-icon name="trash"></ion-icon></ion-button>
-      </ion-item>
-       
     </ion-list>
-
   </ion-content>
 </div>

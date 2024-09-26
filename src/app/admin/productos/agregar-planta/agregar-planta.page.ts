@@ -26,8 +26,7 @@ export class AgregarPlantaPage implements OnInit {
     descripcion: ''
   };
 
-  categorias: any = [];
-  // Injectamos FormBuilder, el cual nos permitirá realizar validaciones                         
+  categorias: any = [];         
   constructor(private formBuilder: FormBuilder,
     public loadingController: LoadingController,
     private restApi: PlantaService,
@@ -35,6 +34,7 @@ export class AgregarPlantaPage implements OnInit {
     private router: Router,
     ) { 
     }
+    
   ngOnInit() {
     this.getCategory();
     // Especificamos que todos los campos son obligatorios
@@ -55,7 +55,7 @@ export class AgregarPlantaPage implements OnInit {
     });
     
     // Ejecuta el método del servicio y los suscribe
-    await this.restApi.addProduct(this.planta)
+    await this.restApi.addPlanta(this.planta)
       .subscribe({
         next: (res) => {
           console.log("Next AddProduct Page",res)
@@ -87,7 +87,7 @@ export class AgregarPlantaPage implements OnInit {
     await loading.present();
     console.log("Entrando :");
     // Obtiene el Observable del servicio
-    await this.restApiC.getCategory()
+    await this.restApiC.getCategorias()
       .subscribe({
         next: (res) => { 
           console.log("Res:" + res);
