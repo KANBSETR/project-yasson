@@ -3,25 +3,185 @@
     {
       "id": "1",
       "nombrePlanta": "Anturio Rosado",
-      "nombreCientifico": "Anthurium andraenum",
-      "categoria": 0,
-      "precio": 10000,
+      "nombreCientifico": "Anturio Rosado",
+      "categoria": 1,
+      "precio": 29.990,
       "stock": 435,
-      "descripcion": "Es una planta de interior que se caracteriza por una linda flor, hojas verdes y alargadas, y por su gran caracteristica purificadora de aire.",
-      "imagen": "https://content.elmueble.com/medio/2019/03/25/monstera_f97f4746_800x800.jpg"
+      "descripcion": "Es una planta de interior que se caracteriza por una linda flor, hojas verdes y alargadas, y por su gran característica purificadora de aire.",
+      "imagen": "assets/productos/Antonella.png",
+      "detalles":"Le gustan los lugares iluminados"
     },
     {
-      "id": 187,
-      "nombrePlanta": "12d12",
-      "nombreCientifico": "21312",
-      "categoria": 0,
-      "precio": 1241,
+      "id": "2",
+      "nombrePlanta": "Ficus Lyrata",
+      "nombreCientifico": "Ficus Lyrata",
+      "categoria": 1,
+      "precio": 19.990,
       "stock": 1241,
-      "imagen": "q",
-      "descripcion": "1235213"
+      "imagen": "assets/productos/Fidel.png",
+      "descripcion": "Esta maravillosa planta de interior tiene un verde único y el gran tamaño de sus hojas impresiona.",
+      "detalles": "El Ficus Lyrata tiene múltiples características"
+    },
+    {
+      "id": "3",
+      "nombrePlanta": "Lengua de Suegra Variegada",
+      "nombreCientifico": "Lengua de Suegra Variegada",
+      "categoria": 1,
+      "precio": 42.990,
+      "stock": 435,
+      "descripcion": "Esta famosa planta de interior es conocida por ser fácil de cuidar; y por fin, perfecta para principiantes de las selvas urbanas.",
+      "imagen": "assets/productos/Susan XL.png",
+      "detalles":"Mide entre 40 y 50 centímetros de alto aproximadamente"
+    },
+    {
+      "id": "4",
+      "nombrePlanta": "Pino Budy",
+      "nombreCientifico": "Pino Budy",
+      "categoria": 2,
+      "precio": 29.990,
+      "stock": 435,
+      "descripcion": "El pino Buddy o Pino azul, es un árbol de densa ramificación y crecimiento lento, que bien cuidado puede llegar a medir 3 metros de altura.",
+      "imagen": "assets/productos/Budy.png",
+      "detalles":"La planta, mide 1,50 centímetros de alto aproximadamente"
+    }
+    ,
+    {
+      "id": "5",
+      "nombrePlanta": "Magnolio Grandiflora",
+      "nombreCientifico": "Magnolio Grandiflora",
+      "categoria": 2,
+      "precio": 149.990,
+      "stock": 435,
+      "descripcion": "Es un árbol robusto y de gran porte, de lento crecimiento pero puede llegar a una altura considerable (30 metros) si se planta en tierra directamente.",
+      "imagen": "assets/productos/Magnolio Grandiflora.png",
+      "detalles":"Mide entre 1,6 y 1,8 metros de alto aproximadamente"
+    }
+    ,
+    {
+      "id": "6",
+      "nombrePlanta": "Kumquat",
+      "nombreCientifico": "Kumquat",
+      "categoria": 2,
+      "precio": 19.990,
+      "stock": 435,
+      "descripcion": "El Kumquat, también conocido como naranjo chino o naranjo enano, es conocido por sus frutos comestibles y llenos de propiedades.",
+      "imagen": "assets/productos/Kumquat.png",
+      "detalles":"La planta, mide 70-90 centímetros de alto aproximadamente"
+    }
+    ,
+    {
+      "id": "7",
+      "nombrePlanta": "Echeveria Subrigida",
+      "nombreCientifico": "Echeveria Subrigida",
+      "categoria": 3,
+      "precio": 29.990,
+      "stock": 435,
+      "descripcion": "Es una planta suculenta perteneciente a la familia Crassulaceae, originaria de México.",
+      "imagen": "assets/productos/Echeveria Subrigida.png",
+      "detalles":"La planta mide entre 30 centímetros de alto aproximadamente."
+    }
+    ,
+    {
+      "id": "8",
+      "nombrePlanta": "Cola de Burro",
+      "nombreCientifico": "Cola de Burro",
+      "categoria": 3,
+      "precio": 19.990,
+      "stock": 435,
+      "descripcion": "Planta suculenta originaria de México. Como característica, tiene tallos colgantes con hojas carnosas y cilíndricas.",
+      "imagen": "assets/productos/Cola de Burro.png",
+      "detalles":"La planta, mide 15 - 20 centímetros de largo aproximadamente."
+    }
+    ,
+    {
+      "id": "9",
+      "nombrePlanta": "Cerámica",
+      "nombreCientifico": "Cerámica",
+      "categoria": 3,
+      "precio": 49.990,
+      "stock": 435,
+      "descripcion": "Las suculentas son plantas hermosas y únicas . Gracias a sus texturas y colores son una forma segura para decorar cualquier rincón de tu jardín o espacios un poco más cerrados, como la oficina.",
+      "imagen": "assets/productos/Cerámica.png",
+      "detalles":"La planta, mide 15 - 20 centímetros de largo aproximadamente."
+    }
+    ,
+    {
+      "id": "10",
+      "nombrePlanta": "Mandarino",
+      "nombreCientifico": "Mandarino",
+      "categoria": 4,
+      "precio": 99.990,
+      "stock": 435,
+      "descripcion": "Es un árbol muy decorativo y fácil de cuidar, ideal para terrazas o jardines bien iluminados. Este árbol lindo esta criado y formado de manera ornamental",
+      "imagen": "assets/productos/Mandarino.png",
+      "detalles":"La planta, mide 1,20-1,30 centímetros de alto aproximadamente"
+    }
+    ,
+    {
+      "id": "11",
+      "nombrePlanta": "Palto Hass",
+      "nombreCientifico": "Palto Hass",
+      "categoria": 4,
+      "precio": 29.990,
+      "stock": 435,
+      "descripcion": "Palto, variedad Hass, originario de la América Central subtropical",
+      "imagen": "assets/productos/Palto Hass.png",
+      "detalles":"La planta, mide 0,80 yo 90 centímetros de alto aproximadamente"
+    }
+    ,
+    {
+      "id": "12",
+      "nombrePlanta": "Olivo",
+      "nombreCientifico": "Olivo",
+      "categoria": 4,
+      "precio": 69.990,
+      "stock": 435,
+      "descripcion": "El olivo es un árbol de una increíble belleza ornamental y de fácil cuidado",
+      "imagen": "assets/productos/Olivo.png",
+      "detalles":"la planta, mide entre 160 centímetros de alto aproximadamente"
+    }
+    ,
+    {
+      "id": "13",
+      "nombrePlanta": "Zanahoria Nantera",
+      "nombreCientifico": "anahoria Nantera",
+      "categoria": 4,
+      "precio": 3.500,
+      "stock": 435,
+      "descripcion": "Variedad tradicional de gran calidad, ideal para las cosechas de verano, que produce zanahorias un tanto alargadas (14-18 cm) cilíndricas, sabrosas y muy coloridas.",
+      "imagen": "assets/productos/Zanahoria Nantera.png",
+      "detalles":"Cuando le hayan salido 2-3 hojas verdaderas, aclarar para quedarse con una planta cada 5 cm."
+    }  ,
+    {
+      "id": "14",
+      "nombrePlanta": "Rabano Nacional",
+      "nombreCientifico": "Rabano Nacional",
+      "categoria": 4,
+      "precio": 3.500,
+      "stock": 435,
+      "descripcion": "Variedad tradicional de raíz redonda, bastante gruesa, ligeramente aplastada, bermellón y blanco, cultivo fácil.",
+      "imagen": "assets/productos/Rabano Nacional.png",
+      "detalles":"8 gramos"
+    }
+    ,
+    {
+      "id": "15",
+      "nombrePlanta": "Lechuga Bionda",
+      "nombreCientifico": "Lechuga Bionda",
+      "categoria": 4,
+      "precio": 3.500,
+      "stock": 435,
+      "descripcion": "La lechuga hidropónica Lollo Bionda es perfecta para acompañar tus comidas e ideal para tu cuerpo.",
+      "imagen": "assets/productos/Lechuga Bionda.png",
+      "detalles":"Fuente de vitaminas y agua"
     }
   ],
   "categorias": [
+    {
+      "id": "1",
+      "nombre": "Interior",
+      "descripcion": "Plantas de interior"
+    },
     {
       "id": "2",
       "nombre": "Exterior",
@@ -34,19 +194,15 @@
     },
     {
       "id": "4",
-      "nombre": "Cactus",
+      "nombre": "arboles",
       "descripcion": "Plantas que almacenan agua en su tallo."
     },
     {
-      "id": "6",
+      "id": "5",
       "nombre": "Huerto",
       "descripcion": "Plantas que se pueden tener en el huerto."
-    },
-    {
-      "id": 228,
-      "nombre": "Interior",
-      "descripcion": "Plantas de interior"
     }
+    
   ],
   "usuarios": [
     {
