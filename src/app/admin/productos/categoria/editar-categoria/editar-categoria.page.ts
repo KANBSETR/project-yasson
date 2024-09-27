@@ -81,6 +81,7 @@ export class EditarCategoriaPage implements OnInit {
           next: (res) => {
             let id = res['id'];
             this.router.navigate(['admin/productos/categoria']);
+            //window.location.reload();
           }
           , complete: () => { }
           , error: (err) => { console.log(err); }

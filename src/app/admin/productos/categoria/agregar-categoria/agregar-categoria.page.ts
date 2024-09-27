@@ -51,6 +51,7 @@ export class AgregarCategoriaPage implements OnInit {
           // Si viene respuesta
           console.log("Next Agrego SIIIIII Router saltaré ;", this.router);
           this.router.navigate(['/admin/productos/categoria']);
+          //window.location.reload();
         }
         , complete: () => { }
         , error: (err) => {

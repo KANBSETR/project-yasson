@@ -12,15 +12,18 @@
     </ion-toolbar>
   </ion-header>
   <ion-content class="ion-padding">
-    <ion-item>
-      <ion-input label="Nombre del rol" labelPlacement="floating"></ion-input>
-    </ion-item>
-    <ion-item >
-      <ion-textarea label="Permisos" labelPlacement="floating" [counter]="true" maxlength="100" style="margin-bottom: 6px;"></ion-textarea>
-    </ion-item>
-    <ion-button id="addCategoryButton" expand="block" (click)="presentAlert()" color="success">
-      <ion-icon name="add" slot="start"></ion-icon>
-      Agregar Rol
-    </ion-button>
+    <form [formGroup]="rolForm" (ngSubmit)="onFormSubmit(rolForm.value)">
+      <ion-item>
+        <ion-label position="floating">Nombre del rol</ion-label>
+        <ion-input type="text" [(ngModel)]="rol.nombre" formControlName="nombre"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Permisos</ion-label>
+        <ion-input type="text" [(ngModel)]="rol.descripcion" formControlName="descripcion"></ion-input>
+      </ion-item>
+      <ion-button type="submit" shape="round" color="primary" expand="block" [disabled]="!rolForm.valid">
+        Agregar Rol
+      </ion-button>
+    </form> 
   </ion-content>
 </div>

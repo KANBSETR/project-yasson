@@ -86,6 +86,7 @@ export class CategoriaPage implements OnInit {
           console.log("Error DetailProduct Página", res);
           loading.dismiss();
           this.router.navigate(['admin/productos/categoria']);
+          //window.location.reload();
         }
         , complete: () => { }
         , error: (err) => {

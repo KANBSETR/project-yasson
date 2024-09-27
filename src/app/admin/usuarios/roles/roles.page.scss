@@ -1,0 +1,20 @@
+#addRolButton{
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    z-index: 1000;
+    --background: #6cd470;
+}
+
+#imgCard{
+    margin-top: 20px;
+    margin-bottom: 50px;
+}
+
+#imgCategCard{
+    max-width: 30%;
+}
+
+ion-note {
+    font-size: 1.1em;
+}

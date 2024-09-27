@@ -125,6 +125,7 @@ export class EditarPlantaPage implements OnInit {
         next: (res) => {
           let id = res['id'];
           this.router.navigate(['admin/productos']);
+          //window.location.reload();
         }
         , complete: () => { }
         , error: (err) => { console.log(err); }

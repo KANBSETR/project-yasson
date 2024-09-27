@@ -11,22 +11,15 @@
     </ion-toolbar>
   </ion-header>
   <ion-content>
-    <ion-button id="addPlantButton" expand="block" [routerLink]="['/admin/usuarios/roles/agregar-rol']">Agregar
+    <ion-button id="addRolButton" expand="block" [routerLink]="['/admin/usuarios/roles/agregar-rol']">Agregar
       Rol</ion-button>
     <ion-list>
-      <ion-item>
+      <ion-item *ngFor="let r of roles">
         <ion-label>
-          <h2>Admin</h2>
+          <h2>{{r.nombre}}</h2>
         </ion-label>
-        <ion-button shape="round" color="warning"><ion-icon name="create"></ion-icon></ion-button>
-        <ion-button shape="round" color="danger"><ion-icon name="trash"></ion-icon></ion-button>
-      </ion-item>
-      <ion-item>
-        <ion-label>
-          <h2>Usuario</h2>
-        </ion-label>
-        <ion-button shape="round" color="warning"><ion-icon name="create"></ion-icon></ion-button>
-        <ion-button shape="round" color="danger"><ion-icon name="trash"></ion-icon></ion-button>
+        <ion-button [routerLink]="['editar-rol/',r.id]" shape="round" color="warning"><ion-icon name="create"></ion-icon></ion-button>
+        <ion-button (click)="deleteRol(r.id)" shape="round" color="danger"><ion-icon name="trash"></ion-icon></ion-button>
       </ion-item>
     </ion-list>
 

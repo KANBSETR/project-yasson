@@ -86,6 +86,7 @@ export class ProductosPage implements OnInit {
             console.log("Error DetailProduct Página", res);
             loading.dismiss();
             this.router.navigate(['admin/productos']);
+            //window.location.reload();
           }
           , complete: () => { }
           , error: (err) => {

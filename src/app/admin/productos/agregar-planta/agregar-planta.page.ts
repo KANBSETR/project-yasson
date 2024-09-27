@@ -67,6 +67,7 @@ export class AgregarPlantaPage implements OnInit {
           // Si viene respuesta
           console.log("Next Agrego SIIIIII Router saltaré ;",this.router);
           this.router.navigate(['/admin/productos']);
+          //window.location.reload();
         }
         , complete: () => { }
         , error: (err) => {
@@ -94,6 +95,7 @@ export class AgregarPlantaPage implements OnInit {
           this.categorias = res;
           console.log("thisCategoria:",this.categorias);
           loading.dismiss();
+          
         }
         , complete: () => { }
         , error: (err) => {

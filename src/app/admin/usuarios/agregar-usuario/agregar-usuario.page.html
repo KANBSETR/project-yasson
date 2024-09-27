@@ -11,35 +11,34 @@
       </ion-buttons>
     </ion-toolbar>
   </ion-header>
+
   <ion-content class="ion-padding">
-    <ion-item>
-      <ion-input label="Nombre del usuario" labelPlacement="floating"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-input label="Correo" labelPlacement="floating" placeholder="example@example.cl"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-input type="password" label="Contraseña">
-        <ion-input-password-toggle slot="end"></ion-input-password-toggle>
-      </ion-input>  
-    </ion-item>
-    <ion-item>
-      <ion-input type="password" label="Repetir contraseña">
-        <ion-input-password-toggle slot="end"></ion-input-password-toggle>
-      </ion-input>  
-    </ion-item>
-    <ion-item>
-      <ion-label style="max-width: 2500px;">
-        <h2>¿Es administrador?</h2>
-      </ion-label>
-      <ion-radio-group>
-        <ion-radio value="yes">Si</ion-radio>
-        <ion-radio value="no">No</ion-radio>
-      </ion-radio-group>
-    </ion-item>
-    <ion-button id="addCategoryButton" expand="block" (click)="presentAlert()" color="success">
-      <ion-icon name="add" slot="start"></ion-icon>
-      Agregar Usuario
-    </ion-button>
+    <form [formGroup]="usuarioForm" (ngSubmit)="onFormSubmit(usuarioForm.value)">
+      <ion-item>
+        <ion-label position="floating">Nombres</ion-label>
+        <ion-input type="text" [(ngModel)]="usuario.nombres" formControlName="nombres"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Apellidos</ion-label>
+        <ion-input type="text" [(ngModel)]="usuario.apellidos" formControlName="apellidos"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Correo</ion-label>
+        <ion-input type="email" [(ngModel)]="usuario.correo" formControlName="correo"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Contraseña</ion-label>
+        <ion-input type="password" [(ngModel)]="usuario.contrasena" formControlName="contrasena"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Rol del usuario</ion-label>
+        <ion-select aria-label="category" placeholder="Seleccionar el rol" formControlName="rol">
+          <ion-select-option *ngFor="let ca of roles" [value]="ca.id">{{ ca.nombre }}</ion-select-option>
+        </ion-select>
+      </ion-item>
+      <ion-button type="submit" shape="round" color="primary" expand="block" [disabled]="!usuarioForm.valid">
+        Agregar Usuario
+      </ion-button>
+    </form>
   </ion-content>
 </div>

@@ -12,42 +12,19 @@
     </ion-toolbar>
   </ion-header>
   <ion-content>
-    <ion-button id="addPlantButton" expand="block" [routerLink]="['/admin/usuarios/agregar-usuario']">Agregar
+    <ion-button id="addUserButton" expand="block" [routerLink]="['/admin/usuarios/agregar-usuario']">Agregar
       Usuario</ion-button>
     <ion-list>
-      <ion-item>
+      <ion-item *ngFor="let u of usuarios">
         <ion-icon name="person-circle-outline" style="margin-right: 10px;"></ion-icon>
         <ion-label>
-          <h2>Juan</h2>
+          <h2>{{u.correo}}</h2>
+          <div class="roles">
+            <p>{{u.rol}}</p>
+          </div>
         </ion-label>
-        <ion-button shape="round" color="warning"><ion-icon name="create"></ion-icon></ion-button>
-        <ion-button shape="round" color="danger"><ion-icon name="trash"></ion-icon></ion-button>
-      </ion-item>
-      <ion-item>
-        <ion-icon name="person-circle-outline" style="margin-right: 10px;"></ion-icon>
-        <ion-label>
-          <h2>Pedro</h2>
-        </ion-label>
-        <ion-button shape="round" color="warning"><ion-icon name="create"></ion-icon></ion-button>
-        <ion-button shape="round" color="danger"><ion-icon name="trash"></ion-icon></ion-button>
-      </ion-item>
-      <ion-item>
-        <ion-icon name="person-circle-outline" style="margin-right: 10px;"></ion-icon>
-        <ion-label>
-          <h2>Giovanni</h2>
-        </ion-label>
-        <ion-icon name="checkmark-circle"></ion-icon>
-        <ion-button shape="round" color="warning"><ion-icon name="create"></ion-icon></ion-button>
-        <ion-button shape="round" color="danger"><ion-icon name="trash"></ion-icon></ion-button>
-      </ion-item>
-      <ion-item>
-        <ion-icon name="person-circle-outline" style="margin-right: 10px;"></ion-icon>
-        <ion-label>
-          <h2>Benjamin</h2>
-        </ion-label>
-        <ion-icon name="checkmark-circle"></ion-icon>
-        <ion-button shape="round" color="warning"><ion-icon name="create"></ion-icon></ion-button>
-        <ion-button shape="round" color="danger"><ion-icon name="trash"></ion-icon></ion-button>
+        <ion-button [routerLink]="['editar-usuario/',u.id]" shape="round" color="warning"><ion-icon name="create"></ion-icon></ion-button>
+        <ion-button (click)="deleteUsuario(u.id)" shape="round" color="danger"><ion-icon name="trash"></ion-icon></ion-button> 
       </ion-item>
     </ion-list>
   </ion-content>
