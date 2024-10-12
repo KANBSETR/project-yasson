@@ -1,6 +1,6 @@
 <app-menu-admin></app-menu-admin>
 
-<!--Página Principal-->
+<!-- Página Principal -->
 <div class="ion-page" id="main-content">
   <ion-header>
     <ion-toolbar>
@@ -11,17 +11,21 @@
     </ion-toolbar>
   </ion-header>
   <ion-content>
-    <ion-button id="addRolButton" expand="block" [routerLink]="['/admin/usuarios/roles/agregar-rol']">Agregar
-      Rol</ion-button>
+    <ion-button id="addRolButton" expand="block" [routerLink]="['/admin/usuarios/roles/agregar-rol']" class="add-rol-button">
+      Agregar Rol
+    </ion-button>
     <ion-list>
-      <ion-item *ngFor="let r of roles">
+      <ion-item *ngFor="let r of roles" class="role-item">
         <ion-label>
-          <h2>{{r.nombre}}</h2>
+          <h2>{{ r.nombre }}</h2>
         </ion-label>
-        <ion-button [routerLink]="['editar-rol/',r.id]" shape="round" color="warning"><ion-icon name="create"></ion-icon></ion-button>
-        <ion-button (click)="deleteRol(r.id)" shape="round" color="danger"><ion-icon name="trash"></ion-icon></ion-button>
+        <ion-button [routerLink]="['/admin/usuarios/roles/editar-rol', r.id]" shape="round" color="warning" class="edit-button"> 
+          <ion-icon name="create"></ion-icon>
+        </ion-button>
+        <ion-button (click)="deleteRol(r.id)" shape="round" color="danger" class="delete-button">
+          <ion-icon name="trash"></ion-icon>
+        </ion-button>
       </ion-item>
     </ion-list>
-
   </ion-content>
 </div>

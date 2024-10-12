@@ -3,13 +3,7 @@ import { FormControl, FormGroupDirective, FormBuilder, FormGroup, NgForm, Valida
 import { LoadingController, AlertController } from '@ionic/angular';
 import { ToastController, ModalController } from '@ionic/angular';
 import { ActivatedRoute, Router } from '@angular/router';
-import { IRol } from 'src/app/models/IRoles';
-import { RolService } from '../../../services/roles/rol.service';
-
-
-
-import Swal from 'sweetalert2';
-import { data } from 'jquery';
+import { FirestoreService } from '../../../services/roles/rol.service';
 
 @Component({
   selector: 'app-agregar-rol',
@@ -18,26 +12,23 @@ import { data } from 'jquery';
 })
 export class AgregarRolPage implements OnInit {
   rolForm!: FormGroup;
-  rol: IRol = {
-    id: Math.floor(Math.random() * 1000),
+  rol: any = {
     nombre: '',
     descripcion: ''
   };
 
   roles: any = [];
 
-  // Injectamos FormBuilder, el cual nos permitirá realizar validaciones
   constructor(
     private formBuilder: FormBuilder,
     public loadingController: LoadingController,
-    private restApi: RolService,
-    private restApir: RolService,
+    private restApi: FirestoreService,
     private router: Router,
+    public toastController: ToastController
   ) { }
 
   ngOnInit() {
     this.getRoles();
-    // Especificamos que todos los campos son obligatorios
     this.rolForm = this.formBuilder.group({
       'nombre': [null, Validators.required],
       'descripcion': [null, Validators.required]
@@ -48,31 +39,36 @@ export class AgregarRolPage implements OnInit {
     const loading = await this.loadingController.create({
       message: 'Loading...'
     });
+    await loading.present();
 
-    // Genra un nuevo ID antes de enviar el formulario
-    // const usuarioData = {
-    //   ...this.usuarioForm.value,
-    //   id: Math.floor(Math.random() * 1000)
-    // };
-
-    // Ejecuta el método del servicio y los suscribe
-    await this.restApi.addRol(this.rol)
+    this.restApi.addRol(this.rol)
       .subscribe({
-        next: (data) => {
-          console.log("Next addRol Page", data)
+        next: async (data: any) => {
+          console.log("Next addRol Page", data);
           loading.dismiss();
           if (data == null) {
-            console.log("Next no agrego, Data Null")
+            console.log("Next no agrego, Data Null");
+          } else {
+            console.log("Next agrego, Data Not Null, actualizando lista de roles");
+            await this.getRoles(); // Actualizar la lista de roles
+
+            // Mostrar mensaje de confirmación
+            const toast = await this.toastController.create({
+              message: 'Usuario agregado correctamente.',
+              duration: 3000,
+              position: 'top',
+              color: 'success'
+            });
+            toast.present();
+
+            // Navegar a la página de roles
+            this.router.navigate(['/admin/usuarios/roles']);
           }
-          // Si viene respuesta
-          console.log("Next agrego, Data Not Null, Router /admin/usuarios/roles;", this.router);
-          this.router.navigate(['/admin/usuarios/roles']);
-          //window.location.reload();
-        }
-        , complete: () => { }
-        , error: (error_msg) => {
-          console.log("Error addRol Page", error_msg)
-          loading.dismiss(); // Cierra el Loading
+        },
+        complete: () => { },
+        error: (error_msg: any) => {
+          //console.log("Error addRol Page", error_msg);
+          loading.dismiss();
         }
       });
     console.log("Fin de la ejecución del método onFormSubmit");
@@ -84,21 +80,19 @@ export class AgregarRolPage implements OnInit {
       message: 'Loading...'
     });
     await loading.present();
-    console.log("Prueba: await loading.present()");
-    // Ejecuta el método del servicio y los suscribe
-    await this.restApir.getRoles()
+    //console.log("Prueba: await loading.present()");
+    this.restApi.getRoles()
       .subscribe({
-        next: (data) => {
-          console.log("Next getRoles Page", data)
+        next: (data: any) => {
+          //console.log("Next getRoles Page", data);
           this.roles = data;
           console.log("Roles", this.roles);
-          loading.dismiss(); // Cierra el Loading
-          
-        }
-        , complete: () => { }
-        , error: (error_msg) => {
-          console.log("Error getRoles Page", error_msg)
-          loading.dismiss(); // Cierra el Loading
+          loading.dismiss();
+        },
+        complete: () => { },
+        error: (error_msg: any) => {
+          //console.log("Error getRoles Page", error_msg);
+          loading.dismiss();
         }
       });
   }

@@ -7,6 +7,7 @@ import { AgregarUsuarioPageRoutingModule } from './agregar-usuario-routing.modul
 import { SharedModule } from 'src/app/shared/shared.module';
 import { AgregarUsuarioPage } from './agregar-usuario.page';
 import { ReactiveFormsModule } from '@angular/forms'
+import { FirestoreService } from '../../services/roles/rol.service';
 
 @NgModule({
   imports: [
@@ -18,6 +19,8 @@ import { ReactiveFormsModule } from '@angular/forms'
     ReactiveFormsModule,
   ],
   declarations: [AgregarUsuarioPage],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA]
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
+  providers: [FirestoreService]
+
 })
 export class AgregarUsuarioPageModule {}

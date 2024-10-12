@@ -11,7 +11,11 @@ const routes: Routes = [
   {
     path: 'agregar-rol',
     loadChildren: () => import('./agregar-rol/agregar-rol.module').then( m => m.AgregarRolPageModule)
+  },  {
+    path: 'modificar-roles',
+    loadChildren: () => import('./modificar-roles/modificar-roles.module').then( m => m.ModificarRolesPageModule)
   }
+
 
 ];
 
