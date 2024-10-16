@@ -11,17 +11,83 @@
     </ion-toolbar>
   </ion-header>
   <ion-content>
-    <form [formGroup]="rolForm" (ngSubmit)="onFormSubmit(rolForm)">
+    <form [formGroup]="rolForm" (ngSubmit)="onFormSubmit()">
       <ion-item>
         <ion-label position="floating">Nombre</ion-label>
-        <ion-input formControlName="nombre"></ion-input>
+        <ion-input formControlName="nombre" maxlength="15"></ion-input>
       </ion-item>
       <ion-item>
         <ion-label position="floating">Descripción</ion-label>
-        <ion-input formControlName="descripcion"></ion-input>
+        <ion-input formControlName="descripcion" maxlength="50"></ion-input>
       </ion-item>
+
+      <ion-accordion-group>
+        <!-- Sección de Roles -->
+        <ion-accordion value="roles">
+          <ion-item slot="header">
+            <ion-label>Roles</ion-label>
+          </ion-item>
+          <div slot="content" formGroupName="permisosRoles">
+            <ion-item>
+              <ion-label>Puede Crear</ion-label>
+              <ion-toggle formControlName="puedeCrear"></ion-toggle>
+            </ion-item>
+            <ion-item>
+              <ion-label>Puede Editar</ion-label>
+              <ion-toggle formControlName="puedeEditar"></ion-toggle>
+            </ion-item>
+            <ion-item>
+              <ion-label>Puede Eliminar</ion-label>
+              <ion-toggle formControlName="puedeEliminar"></ion-toggle>
+            </ion-item>
+          </div>
+        </ion-accordion>
+
+        <!-- Sección de Usuarios -->
+        <ion-accordion value="usuarios">
+          <ion-item slot="header">
+            <ion-label>Usuarios</ion-label>
+          </ion-item>
+          <div slot="content" formGroupName="permisosUsuarios">
+            <ion-item>
+              <ion-label>Puede Agregar</ion-label>
+              <ion-toggle formControlName="puedeAgregar"></ion-toggle>
+            </ion-item>
+            <ion-item>
+              <ion-label>Puede Modificar</ion-label>
+              <ion-toggle formControlName="puedeModificar"></ion-toggle>
+            </ion-item>
+            <ion-item>
+              <ion-label>Puede Eliminar</ion-label>
+              <ion-toggle formControlName="puedeEliminar"></ion-toggle>
+            </ion-item>
+          </div>
+        </ion-accordion>
+
+        <!-- Sección de Plantas -->
+        <ion-accordion value="plantas">
+          <ion-item slot="header">
+            <ion-label>Plantas</ion-label>
+          </ion-item>
+          <div slot="content" formGroupName="permisosPlantas">
+            <ion-item>
+              <ion-label>Puede Agregar</ion-label>
+              <ion-toggle formControlName="puedeAgregar"></ion-toggle>
+            </ion-item>
+            <ion-item>
+              <ion-label>Puede Modificar</ion-label>
+              <ion-toggle formControlName="puedeModificar"></ion-toggle>
+            </ion-item>
+            <ion-item>
+              <ion-label>Puede Eliminar</ion-label>
+              <ion-toggle formControlName="puedeEliminar"></ion-toggle>
+            </ion-item>
+          </div>
+        </ion-accordion>
+      </ion-accordion-group>
+
       <ion-button expand="block" type="submit" [disabled]="!rolForm.valid">
-        Actualizar Rol
+        Guardar Cambios
       </ion-button>
     </form>
   </ion-content>

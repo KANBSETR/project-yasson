@@ -1,0 +1,14 @@
+/* Estilos personalizados para el acordeón */
+.accordion-header {
+  --background: #333; /* Fondo oscuro */
+  --border-color: #555; /* Borde oscuro */
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+ion-item {
+    margin-bottom: 1.5rem; /* Ajusta este valor según sea necesario */
+  }

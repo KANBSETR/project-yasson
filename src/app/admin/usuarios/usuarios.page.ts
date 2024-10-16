@@ -1,103 +1,232 @@
-import { Component, OnInit } from '@angular/core';
-import { ToastController } from '@ionic/angular';
-import { IUsuario } from 'src/app/models/IUsuarios';
-import { UsuarioService } from '../services/usuarios/usuario.service';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { ToastController, ModalController } from '@ionic/angular';
+import { FirestoreServiceUsuarios } from '../services/usuarios/usuario.service';
 import { LoadingController, AlertController } from '@ionic/angular';
 import { ActivatedRoute, Router } from '@angular/router';
+import { VisualizarUsuarioComponent } from './modal-usuarios/visualizar-usuario.component';
 
 @Component({
   selector: 'app-usuarios',
   templateUrl: './usuarios.page.html',
   styleUrls: ['./usuarios.page.scss'],
 })
-export class UsuariosPage implements OnInit {
+export class UsuariosPage implements OnInit, OnDestroy {
+
+  usuarios: any[] = [];
+  readonly defaultUsuarios = ['Admin', 'admin', 'Usuario', 'usuario']; // Usuarios predeterminados
+  filteredUsuarios: any[] = [];
+  searchTerm: string = '';
+
   constructor(
-    public restApi: UsuarioService,
+    public restApi: FirestoreServiceUsuarios,
     public loadingController: LoadingController,
     public alertController: AlertController,
-    public router: Router
+    public toastController: ToastController,
+    public router: Router,
+    private modalController: ModalController
   ) { }
-
-  usuarios: IUsuario[] = [];
 
   ngOnInit() {
     this.getUsuarios();
   }
 
+  ngOnDestroy() {
+    // Cerrar cualquier instancia abierta de SweetAlert al destruir el componente
+  }
+
   async getUsuarios() {
-    console.log("Prueba: getUsuario");
+    console.log("Prueba: getUsuarios");
     const loading = await this.loadingController.create({
       message: 'Cargando usuarios...'
     });
-    // Muestra el Wait
     await loading.present();
-    console.log("Prueba:");
-    // Obtiene el Observable del servicio
-    await this.restApi.getUsuarios()
-      .subscribe({
-        next: (data) => {
-          console.log("Respuesta: ", data);
-          // Si funciona asigno el resultado al arreglo usuarios
-          this.usuarios = data;
-          console.log("this.usuarios:", this.usuarios);
-          loading.dismiss();
-        }
-        , complete: () => { }
-        , error: (error_msg) => {
-          // Si da error, imprimo en consola.
-          console.log("Error:", error_msg);
-          loading.dismiss();
-        }
-      });
-  }
 
-  async presentAlertConfirm(id: number, msg: string) {
-    const alert = await this.alertController.create({
-      header: 'Warning!', // Título
-      message: msg,   // Mensaje
-      buttons: [   // Botones
-        {
-          text: 'Eliminar : ' + id + " OK",
-          handler: () => { // Si presiona ejecuta esto
-            this.deleteConfirmado(id);
+    this.restApi.getUsuarios().subscribe({
+      next: (data: any[]) => {
+        console.log("Respuesta: ", data);
+        this.usuarios = data.map((usuario: any) => {
+          if (this.defaultUsuarios.includes(usuario.usuario)) {
+            return { ...usuario, usuario: `${usuario.usuario} (Predeterminado)` };
           }
-        }
-      ]
+          return usuario;
+        });
+        this.filteredUsuarios = [...this.usuarios]; // Inicializa los usuarios filtrados
+        loading.dismiss();
+      },
+      error: (error_msg: any) => {
+        console.log("Error:", error_msg);
+        loading.dismiss();
+      }
     });
-    // Muestra el Alert
-    await alert.present();
-  }
-  async deleteUsuario(id: number) {
-    // Confirma primero
-    this.presentAlertConfirm(id, '¿Estás seguro de que deseas eliminar el usuario?');
   }
 
-  //Invocado desde el alert
-  async deleteConfirmado(id: number) {
-    alert("Eliminando usuario con id: " + id);
+  async deleteUsuario(id: string) {
+    const usuario = this.usuarios.find(u => u.id === id);
+    if (usuario) {
+      if (this.defaultUsuarios.includes(usuario.usuario.replace(' (Predeterminado)', ''))) {
+        // Si el usuario es predeterminado, mostrar advertencia y no permitir eliminación
+        const toast = await this.toastController.create({
+          message: `El usuario "${usuario.usuario}" no se puede eliminar porque es un usuario predeterminado.`,
+          duration: 3000,
+          position: 'top'
+        });
+        toast.present();
+      } else {
+        // Usar AlertController para confirmar la eliminación
+        const alert = await this.alertController.create({
+          header: '¿Estás seguro?',
+          message: `¿Deseas eliminar el usuario "${usuario.usuario}"?`,
+          buttons: [
+            {
+              text: 'Cancelar',
+              role: 'cancel'
+            },
+            {
+              text: 'Sí, eliminar',
+              handler: () => {
+                this.deleteConfirmado(id);
+              }
+            }
+          ]
+        });
+  
+        await alert.present();
+      }
+    } else {
+      console.error('Usuario no encontrado');
+      const toast = await this.toastController.create({
+        message: 'Usuario no encontrado.',
+        duration: 3000,
+        position: 'top'
+      });
+      toast.present();
+    }
+  }
+  
+  async deleteConfirmado(id: string) {
     const loading = await this.loadingController.create({
       message: 'Eliminando usuario...'
     });
     await loading.present();
-    //Llama al metodo del servicio para eliminar el usuario
-    await this.restApi.deleteUsuario(id)
+    // Llama al servicio para eliminar el usuario
+    this.restApi.deleteUsuario(id)
       .subscribe({
-        next: (data) => {
-          console.log("Error DetailUsuario Page: ", data);
-          // Si funciona asigno el resultado al arreglo usuarios
+        next: async (data) => {
+          console.log("Usuario eliminado: ", data);
           loading.dismiss();
-          this.router.navigate(['admin/usuarios']);
-          window.location.reload(); // Recarga la página
 
-        }
-        , complete: () => { }
-        , error: (error_msg) => {
-          // Si da error, imprimo en consola.
-          console.log("Error brutal:", error_msg);
+          // Toast de éxito
+          const toastSuccess = await this.toastController.create({
+            message: 'Usuario eliminado exitosamente.',
+            duration: 3000,
+            position: 'top',
+            color: 'success',
+            buttons: [
+              {
+                side: 'end',
+                icon: 'checkmark-circle-outline',
+                handler: () => {
+                  console.log('Toast de éxito cerrado');
+                }
+              }
+            ]
+          });
+          toastSuccess.present();
+
+          // Navegar a la página de usuarios
+          this.router.navigate(['/admin/usuarios']);
+        },
+        complete: () => { },
+        error: async (error_msg) => {
+          console.log("Error eliminando usuario:", error_msg);
           loading.dismiss();
-          alert("Error eliminando usuario: " + error_msg.message);
 
+          // Toast de error
+          const toastError = await this.toastController.create({
+            message: `Error eliminando usuario: ${error_msg.message}`,
+            duration: 3000,
+            position: 'top',
+            color: 'danger',
+            buttons: [
+              {
+                side: 'end',
+                icon: 'alert-circle-outline',
+                handler: () => {
+                  console.log('Toast de error cerrado');
+                }
+              }
+            ]
+          });
+          toastError.present();
         }
-      })
+      });
+  }
+
+  async editUsuario(id: string) {
+    const usuario = this.usuarios.find(u => u.id === id);
+    if (usuario) {
+      if (this.defaultUsuarios.includes(usuario.usuario.replace(' (Predeterminado)', ''))) {
+        // Si el usuario es predeterminado, mostrar advertencia y no permitir modificación
+        const toast = await this.toastController.create({
+          message: `El usuario "${usuario.usuario}" no se puede modificar porque es un usuario predeterminado.`,
+          duration: 3000,
+          position: 'top'
+        });
+        toast.present();
+      } else {
+        // Navegar a la página de edición del usuario
+        this.router.navigate(['/admin/usuarios/editar-usuario', id]);
+      }
+    } else {
+      console.error('Usuario no encontrado');
+      const toast = await this.toastController.create({
+        message: 'Usuario no encontrado.',
+        duration: 3000,
+        position: 'top'
+      });
+      toast.present();
+    }
+  }
+
+  async viewUsuario(id: any) {
+    const loading = await this.loadingController.create({
+      message: 'Cargando detalles del usuario...'
+    });
+    await loading.present();
+
+    // Convierte el ID a una cadena
+    const idStr = String(id);
+
+    this.restApi.getUsuario(idStr).subscribe({
+      next: async (usuario) => {
+        if (!usuario.permisosRoles) {
+          usuario.permisosRoles = { puedeCrear: false, puedeEditar: false, puedeEliminar: false };
+        }
+        if (!usuario.permisosUsuarios) {
+          usuario.permisosUsuarios = { puedeAgregar: false, puedeModificar: false, puedeEliminar: false };
+        }
+        if (!usuario.permisosPlantas) {
+          usuario.permisosPlantas = { puedeAgregar: false, puedeModificar: false, puedeEliminar: false };
+        }
+
+        const modal = await this.modalController.create({
+          component: VisualizarUsuarioComponent,
+          componentProps: { usuario }
+        });
+        await modal.present();
+        loading.dismiss();
+      },
+      error: (error) => {
+        console.error('Error al cargar detalles del usuario', error);
+        loading.dismiss();
+      }
+    });
+  }
+
+  filterUsuarios() {
+    const searchTermLower = this.searchTerm.toLowerCase();
+    this.filteredUsuarios = this.usuarios.filter(usuario =>
+      usuario.usuario.toLowerCase().includes(searchTermLower)
+    );
   }
 }

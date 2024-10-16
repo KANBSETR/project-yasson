@@ -1,0 +1,70 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Detalles del Rol</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="close()">
+        <ion-icon slot="icon-only" name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>{{ rol.nombre }}</ion-card-title>
+      <ion-card-subtitle>{{ rol.descripcion }}</ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-list>
+        <ion-item-divider color="light">
+          <ion-label>Permisos Roles</ion-label>
+        </ion-item-divider>
+        <ion-item>
+          <ion-label>Crear</ion-label>
+          <ion-text>{{ rol.permisosRoles?.puedeCrear ? 'Sí' : 'No' }}</ion-text>
+        </ion-item>
+        <ion-item>
+          <ion-label>Editar</ion-label>
+          <ion-text>{{ rol.permisosRoles?.puedeEditar ? 'Sí' : 'No' }}</ion-text>
+        </ion-item>
+        <ion-item>
+          <ion-label>Eliminar</ion-label>
+          <ion-text>{{ rol.permisosRoles?.puedeEliminar ? 'Sí' : 'No' }}</ion-text>
+        </ion-item>
+
+        <ion-item-divider color="light">
+          <ion-label>Permisos Usuarios</ion-label>
+        </ion-item-divider>
+        <ion-item>
+          <ion-label>Agregar</ion-label>
+          <ion-text>{{ rol.permisosUsuarios?.puedeAgregar ? 'Sí' : 'No' }}</ion-text>
+        </ion-item>
+        <ion-item>
+          <ion-label>Modificar</ion-label>
+          <ion-text>{{ rol.permisosUsuarios?.puedeModificar ? 'Sí' : 'No' }}</ion-text>
+        </ion-item>
+        <ion-item>
+          <ion-label>Eliminar</ion-label>
+          <ion-text>{{ rol.permisosUsuarios?.puedeEliminar ? 'Sí' : 'No' }}</ion-text>
+        </ion-item>
+
+        <ion-item-divider color="light">
+          <ion-label>Permisos Plantas</ion-label>
+        </ion-item-divider>
+        <ion-item>
+          <ion-label>Agregar</ion-label>
+          <ion-text>{{ rol.permisosPlantas?.puedeAgregar ? 'Sí' : 'No' }}</ion-text>
+        </ion-item>
+        <ion-item>
+          <ion-label>Modificar</ion-label>
+          <ion-text>{{ rol.permisosPlantas?.puedeModificar ? 'Sí' : 'No' }}</ion-text>
+        </ion-item>
+        <ion-item>
+          <ion-label>Eliminar</ion-label>
+          <ion-text>{{ rol.permisosPlantas?.puedeEliminar ? 'Sí' : 'No' }}</ion-text>
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

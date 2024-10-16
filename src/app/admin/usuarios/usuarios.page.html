@@ -1,31 +1,28 @@
-<app-menu-admin></app-menu-admin>
-
-<!--Página Principal-->
-<div class="ion-page" id="main-content">
-  <ion-header>
-    <ion-toolbar>
-      <ion-buttons slot="start">
-        <ion-back-button defaultHref="/admin"></ion-back-button>
-        <ion-menu-button></ion-menu-button>
-      </ion-buttons>
-      <ion-title>Usuarios</ion-title>
-    </ion-toolbar>
-  </ion-header>
-  <ion-content>
-    <ion-button id="addUserButton" expand="block" [routerLink]="['/admin/usuarios/agregar-usuario']">Agregar
-      Usuario</ion-button>
-    <ion-list>
-      <ion-item *ngFor="let u of usuarios">
-        <ion-icon name="person-circle-outline" style="margin-right: 10px;"></ion-icon>
-        <ion-label>
-          <h2>{{u.correo}}</h2>
-          <div class="roles">
-            <p>{{u.rol}}</p>
-          </div>
-        </ion-label>
-        <ion-button [routerLink]="['editar-usuario/',u.id]" shape="round" color="warning"><ion-icon name="create"></ion-icon></ion-button>
-        <ion-button (click)="deleteUsuario(u.id)" shape="round" color="danger"><ion-icon name="trash"></ion-icon></ion-button> 
-      </ion-item>
-    </ion-list>
-  </ion-content>
-</div>
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Usuarios</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-button id="addUserButton" expand="block" [routerLink]="['/admin/usuarios/agregar-usuario']">Agregar Usuario</ion-button>
+  <ion-list>
+    <ion-item *ngFor="let u of usuarios">
+      <ion-icon name="person-circle-outline" style="margin-right: 10px;"></ion-icon>
+      <ion-label>
+        <h2>{{u.correo}}</h2>
+        <div class="roles">
+          <p>{{u.rol}}</p>
+        </div>
+      </ion-label>
+      <ion-button [routerLink]="['/admin/usuarios/modificar-usuario', u.id]" shape="round" color="warning">
+        <ion-icon name="create"></ion-icon>
+      </ion-button>
+      <ion-button (click)="deleteUsuario(u.id)" shape="round" color="danger">
+        <ion-icon name="trash"></ion-icon>
+      </ion-button>
+    </ion-item>
+  </ion-list>
+</ion-content>

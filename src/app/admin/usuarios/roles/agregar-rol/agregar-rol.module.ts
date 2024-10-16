@@ -4,7 +4,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { AgregarRolPageRoutingModule } from './agregar-rol-routing.module';
 import { AgregarRolPage } from './agregar-rol.page';
-import { FirestoreService } from '../../../services/roles/rol.service';
+import { FirestoreServiceRoles } from '../../../services/roles/rol.service';
 
 @NgModule({
   imports: [
@@ -16,6 +16,6 @@ import { FirestoreService } from '../../../services/roles/rol.service';
   ],
   declarations: [AgregarRolPage],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  providers: [FirestoreService]
+  providers: [FirestoreServiceRoles]
 })
 export class AgregarRolPageModule {}

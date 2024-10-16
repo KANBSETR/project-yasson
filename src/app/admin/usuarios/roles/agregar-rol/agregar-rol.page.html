@@ -7,20 +7,86 @@
       </ion-buttons>
       <ion-title>Agregar Rol</ion-title>
       <ion-buttons slot="end">
-        <ion-back-button defaultHref="admin/productos/usuarios/roles"></ion-back-button>
+        <ion-back-button defaultHref="admin/usuarios/roles"></ion-back-button>
       </ion-buttons>
     </ion-toolbar>
   </ion-header>
   <ion-content class="ion-padding">
-    <form [formGroup]="rolForm" (ngSubmit)="onFormSubmit(rolForm.value)">
+    <form [formGroup]="rolForm" (ngSubmit)="onFormSubmit()">
       <ion-item>
         <ion-label position="floating">Nombre del rol</ion-label>
-        <ion-input type="text" [(ngModel)]="rol.nombre" formControlName="nombre"></ion-input>
+        <ion-input type="text" formControlName="nombre" maxlength="15" [(ngModel)]="rol.nombre"></ion-input>
       </ion-item>
       <ion-item>
-        <ion-label position="floating">Permisos</ion-label>
-        <ion-input type="text" [(ngModel)]="rol.descripcion" formControlName="descripcion"></ion-input>
+        <ion-label position="floating">Descripción</ion-label>
+        <ion-input type="text" formControlName="descripcion" maxlength="50" [(ngModel)]="rol.descripcion"></ion-input>
       </ion-item>
+
+      <ion-accordion-group>
+        <!-- Sección de Roles -->
+        <ion-accordion value="roles">
+          <ion-item slot="header">
+            <ion-label>Roles</ion-label>
+          </ion-item>
+          <div slot="content" formGroupName="permisosRoles">
+            <ion-item>
+              <ion-label>Puede Crear</ion-label>
+              <ion-toggle formControlName="puedeCrear" [(ngModel)]="rol.permisosRoles.puedeCrear"></ion-toggle>
+            </ion-item>
+            <ion-item>
+              <ion-label>Puede Editar</ion-label>
+              <ion-toggle formControlName="puedeEditar" [(ngModel)]="rol.permisosRoles.puedeEditar"></ion-toggle>
+            </ion-item>
+            <ion-item>
+              <ion-label>Puede Eliminar</ion-label>
+              <ion-toggle formControlName="puedeEliminar" [(ngModel)]="rol.permisosRoles.puedeEliminar"></ion-toggle>
+            </ion-item>
+          </div>
+        </ion-accordion>
+
+        <!-- Sección de Usuarios -->
+        <ion-accordion value="usuarios">
+          <ion-item slot="header">
+            <ion-label>Usuarios</ion-label>
+          </ion-item>
+          <div slot="content" formGroupName="permisosUsuarios">
+            <ion-item>
+              <ion-label>Puede Agregar</ion-label>
+              <ion-toggle formControlName="puedeAgregar" [(ngModel)]="rol.permisosUsuarios.puedeAgregar"></ion-toggle>
+            </ion-item>
+            <ion-item>
+              <ion-label>Puede Modificar</ion-label>
+              <ion-toggle formControlName="puedeModificar" [(ngModel)]="rol.permisosUsuarios.puedeModificar"></ion-toggle>
+            </ion-item>
+            <ion-item>
+              <ion-label>Puede Eliminar</ion-label>
+              <ion-toggle formControlName="puedeEliminar" [(ngModel)]="rol.permisosUsuarios.puedeEliminar"></ion-toggle>
+            </ion-item>
+          </div>
+        </ion-accordion>
+
+        <!-- Sección de Plantas -->
+        <ion-accordion value="plantas">
+          <ion-item slot="header">
+            <ion-label>Plantas</ion-label>
+          </ion-item>
+          <div slot="content" formGroupName="permisosPlantas">
+            <ion-item>
+              <ion-label>Puede Agregar</ion-label>
+              <ion-toggle formControlName="puedeAgregar" [(ngModel)]="rol.permisosPlantas.puedeAgregar"></ion-toggle>
+            </ion-item>
+            <ion-item>
+              <ion-label>Puede Modificar</ion-label>
+              <ion-toggle formControlName="puedeModificar" [(ngModel)]="rol.permisosPlantas.puedeModificar"></ion-toggle>
+            </ion-item>
+            <ion-item>
+              <ion-label>Puede Eliminar</ion-label>
+              <ion-toggle formControlName="puedeEliminar" [(ngModel)]="rol.permisosPlantas.puedeEliminar"></ion-toggle>
+            </ion-item>
+          </div>
+        </ion-accordion>
+      </ion-accordion-group>
+
       <ion-button type="submit" shape="round" color="primary" expand="block" [disabled]="!rolForm.valid">
         Agregar Rol
       </ion-button>

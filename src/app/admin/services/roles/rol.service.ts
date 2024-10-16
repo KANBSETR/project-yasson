@@ -6,7 +6,7 @@ import { catchError, tap, switchMap, map } from 'rxjs/operators';
 @Injectable({
   providedIn: 'root'
 })
-export class FirestoreService {
+export class FirestoreServiceRoles {
 
   constructor(private firestore: AngularFirestore) { }
 
@@ -19,6 +19,8 @@ export class FirestoreService {
     };
   }
 
+
+
   // Sirve para crear un documento en la colección especifica de la bd en roles
   createDoc(data: any, path: string, id: string) {
     const collection = this.firestore.collection('roles');
@@ -27,13 +29,14 @@ export class FirestoreService {
 
   // Agregar rol
   addRol(rol: any): Observable<void> {
-    const counterDoc = this.firestore.collection('counters').doc('rolCounter'); //Contador para el id del rol
+    const counterDoc = this.firestore.collection('counters').doc('rolCounter'); // Contador para el id del rol
     return from(counterDoc.get()).pipe(
       switchMap(doc => {
         if (!doc.exists) {
           // Si el documento no existe, inicializa el contador
-          counterDoc.set({ count: 0 });
-          return of({ count: 0 });
+          return from(counterDoc.set({ count: 0 })).pipe(
+            switchMap(() => of({ count: 0 }))
+          );
         } else {
           return of(doc.data() as { count: number });
         }
@@ -48,9 +51,12 @@ export class FirestoreService {
           tap(() => counterDoc.update({ count: newCounter })),
           catchError(this.handleError<void>('addRol'))
         );
-      })
+      }),
+      catchError(this.handleError<void>('addRol'))
     );
   }
+
+
 
   // Listar roles
   getRoles(): Observable<any[]> {
@@ -62,10 +68,14 @@ export class FirestoreService {
       );
   }
 
+
   // Obtener un solo rol
-  getRol(id: string): Observable<any> {
+  getRol(id: any): Observable<any> {
+    // Convierte el ID a una cadena
+    const idStr = String(id);
+
     // Obtiene el documento con el ID especificado de la colección roles
-    return this.firestore.collection('roles').doc(id).snapshotChanges()
+    return this.firestore.collection('roles').doc(idStr).snapshotChanges()
       .pipe(
         // Transforma los datos del documento en un objeto con el ID y los datos del documento con map
         map(action => { // Esto sirve para el manejo de inf en el front, id directo, data en un objeto, etc
@@ -77,20 +87,23 @@ export class FirestoreService {
             return null;
           }
         }),
-        tap(_ => console.log(`rol encontrado id=${id}`)),
-        catchError(this.handleError<any>(`getRol id=${id}`))//Devuelve null en caso de error
+        tap(_ => console.log(`rol encontrado id=${idStr}`)),
+        catchError(this.handleError<any>(`getRol id=${idStr}`)) // Devuelve null en caso de error
       );
   }
 
-  // Actualizar rol
-  updateRol(id: string, rol: any): Observable<void> {
-    // Actualiza el documento con el ID especificado en la colección roles
-    return from(this.firestore.collection('roles').doc(id).update(rol))
-      .pipe(
-        tap(_ => console.log(`rol actualizado id=${id}`)),
-        // Devuelve un Observable vacío en caso de error
-        catchError(this.handleError<void>('updateRol'))
-      );
+
+  // Actualizar un rol
+  updateRol(id: any, rol: any): Promise<void> {
+    // Convierte el ID a una cadena
+    const idStr = String(id);
+
+    return this.firestore.collection('roles').doc(idStr).update(rol)
+      .then(() => console.log(`Rol actualizado id=${idStr}`))
+      .catch(error => {
+        console.error(`Error al actualizar el rol id=${idStr}`, error);
+        throw error;
+      });
   }
 
   // Eliminar rol
@@ -98,7 +111,7 @@ export class FirestoreService {
     // Elimina el documento con el ID especificado de la colección roles
     return from(this.firestore.collection('roles').doc(id.toString()).delete())
       .pipe(
-        tap(_ => console.log(`rol eliminado id=${id}`)), 
+        tap(_ => console.log(`rol eliminado id=${id}`)),
         catchError(this.handleError<void>('deleteRol'))
       );
   }
