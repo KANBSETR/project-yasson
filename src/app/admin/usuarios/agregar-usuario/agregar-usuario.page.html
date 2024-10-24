@@ -27,8 +27,7 @@
       </ion-item>
       <ion-item lines="full" class="ion-item-custom">
         <ion-label position="floating" class="ion-label-custom">Rol</ion-label>
-        <ion-select formControlName="rol" interface="popover" class="ion-select-custom" placeholder="Escoja su rol"
-          required>
+        <ion-select formControlName="rol" interface="popover" class="ion-select-custom" placeholder="Escoja su rol" required>
           <ion-select-option disabled selected hidden>Escoja su rol</ion-select-option>
           <ion-select-option *ngFor="let rol of roles" [value]="rol.id">{{ rol.nombre }}</ion-select-option>
         </ion-select>
@@ -52,6 +51,10 @@
             <ion-item>
               <ion-label position="floating">Edad</ion-label>
               <ion-input formControlName="edad" type="number"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label position="floating">Número de Celular</ion-label>
+              <ion-input formControlName="numeroDeCelular" type="tel"></ion-input>
             </ion-item>
           </div>
         </ion-accordion>

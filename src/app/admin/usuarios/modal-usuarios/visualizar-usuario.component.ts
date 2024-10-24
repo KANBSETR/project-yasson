@@ -11,7 +11,7 @@ export class VisualizarUsuarioComponent {
 
   constructor(private modalController: ModalController) { }
 
-  dismissModal() {
+  close() {
     this.modalController.dismiss();
   }
 }

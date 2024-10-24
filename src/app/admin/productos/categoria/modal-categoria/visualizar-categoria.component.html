@@ -1,0 +1,38 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Detalles de la Categoría</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="close()">
+        <ion-icon slot="icon-only" name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content *ngIf="categoria">
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>{{ categoria.nombre }}</ion-card-title>
+      <ion-card-subtitle>{{ categoria.descripcion }}</ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-list>
+        <ion-item-divider color="light">
+          <ion-label>Detalles de la Categoría</ion-label>
+        </ion-item-divider>
+        <ion-item>
+          <ion-label>ID</ion-label>
+          <ion-text>{{ categoria.id }}</ion-text>
+        </ion-item>
+        <ion-item>
+          <ion-label>Nombre</ion-label>
+          <ion-text>{{ categoria.nombre }}</ion-text>
+        </ion-item>
+        <ion-item>
+          <ion-label>Descripción</ion-label>
+          <ion-text>{{ categoria.descripcion }}</ion-text>
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

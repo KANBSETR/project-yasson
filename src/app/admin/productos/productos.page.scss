@@ -1,21 +1,101 @@
-#addPlantButton{
+#addRolButton {
     position: fixed;
-    right: 10px;
     bottom: 10px;
-    margin: 0 auto;
-    z-index: 100;
-    --background: #4CAF50;
+    right: 10px;
+    z-index: 1000;
+    --background: #6cd470;
 }
 
-#imgCard{
+#imgCard {
     margin-top: 20px;
     margin-bottom: 50px;
 }
 
-#imgPlantCard{
+#imgCategCard {
     max-width: 30%;
 }
 
 ion-note {
     font-size: 1.1em;
-  }
+}
+
+/* roles.page.scss */
+
+/* Estilo para el contenedor principal */
+.page-content {
+    padding: 16px;
+    background-color: #f9f9f9;
+    /* Fondo claro */
+}
+
+/* Estilo para los botones */
+ion-button {
+    --background: #3880ff;
+    /* Color de fondo del botón */
+    --background-activated: #3171e0;
+    /* Color de fondo cuando se presiona */
+    --background-focused: #4c8dff;
+    /* Color de fondo cuando está enfocado */
+    --border-radius: 8px;
+    /* Bordes redondeados */
+    --padding-start: 12px;
+    /* Reducir padding horizontal */
+    --padding-end: 10px;
+    /* Reducir padding horizontal */
+    --padding-top: 6px;
+    /* Reducir padding vertical */
+    --padding-bottom: 6px;
+    /* Reducir padding vertical */
+    font-weight: bold;
+    /* Texto en negrita */
+    font-size: 12px;
+    /* Reducir tamaño de fuente */
+}
+
+/* Estilo para las alertas */
+ion-alert {
+    --background: #ffffff;
+    /* Fondo blanco */
+    --border-radius: 12px;
+    /* Bordes redondeados */
+    --box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    /* Sombra suave */
+    --header-color: #3880ff;
+    /* Color del encabezado */
+    --message-color: #333333;
+    /* Color del mensaje */
+}
+
+/* Estilo para los toasts */
+ion-toast {
+    --background: #333333;
+    /* Fondo oscuro */
+    --color: #ffffff;
+    /* Texto blanco */
+    --border-radius: 8px;
+    /* Bordes redondeados */
+    --box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    /* Sombra suave */
+    --button-color: #ffffff;
+    /* Color del botón */
+    --button-icon-color: #ffffff;
+    /* Color del icono del botón */
+}
+
+/* Estilo para los mensajes de éxito */
+ion-toast.success {
+    --background: #28a745;
+    /* Fondo verde */
+}
+
+/* Estilo para los mensajes de error */
+ion-toast.error {
+    --background: #dc3545;
+    /* Fondo rojo */
+}
+
+/* Estilo para los mensajes de advertencia */
+ion-toast.warning {
+    --background: #ffc107;
+    /* Fondo amarillo */
+}

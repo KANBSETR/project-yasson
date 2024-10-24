@@ -1,9 +1,11 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ToastController, ModalController } from '@ionic/angular';
 import { FirestoreServiceUsuarios } from '../services/usuarios/usuario.service';
+import { FirestoreServiceRoles } from '../services/roles/rol.service';
 import { LoadingController, AlertController } from '@ionic/angular';
 import { ActivatedRoute, Router } from '@angular/router';
 import { VisualizarUsuarioComponent } from './modal-usuarios/visualizar-usuario.component';
+import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-usuarios',
@@ -13,12 +15,17 @@ import { VisualizarUsuarioComponent } from './modal-usuarios/visualizar-usuario.
 export class UsuariosPage implements OnInit, OnDestroy {
 
   usuarios: any[] = [];
-  readonly defaultUsuarios = ['Admin', 'admin', 'Usuario', 'usuario']; // Usuarios predeterminados
+  readonly defaultUsuarios = ['Admin', 'admin', 'Usuario', 'usuario'];
   filteredUsuarios: any[] = [];
   searchTerm: string = '';
+  roles: any = [];
+  usuarioForm!: FormGroup;
+  showAccordion = false;
 
   constructor(
+    private formBuilder: FormBuilder,
     public restApi: FirestoreServiceUsuarios,
+    private rolService: FirestoreServiceRoles,
     public loadingController: LoadingController,
     public alertController: AlertController,
     public toastController: ToastController,
@@ -27,6 +34,17 @@ export class UsuariosPage implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit() {
+    this.usuarioForm = this.formBuilder.group({
+      usuario: [null, [Validators.required, this.noSpecialCharsValidator]],
+      correo: [null, [Validators.required, Validators.email, this.emailValidator]],
+      contrasena: [null, Validators.required],
+      nombres: [null, this.noSpecialCharsValidator],
+      apellidos: [null, this.noSpecialCharsValidator],
+      numeroDeCelular: [null],
+      edad: [null, this.noSpecialCharsValidator],
+      rol: [null, Validators.required]
+    });
+    this.loadRoles();
     this.getUsuarios();
   }
 
@@ -34,8 +52,51 @@ export class UsuariosPage implements OnInit, OnDestroy {
     // Cerrar cualquier instancia abierta de SweetAlert al destruir el componente
   }
 
+  toggleAccordion() {
+    this.showAccordion = !this.showAccordion;
+  }
+
+  async loadRoles() {
+    const loading = await this.loadingController.create({
+      message: 'Cargando roles...'
+    });
+    await loading.present();
+
+    this.rolService.getRoles().subscribe({
+      next: (data: any[]) => {
+        this.roles = data;
+        loading.dismiss();
+      },
+      error: (error_msg: any) => {
+        console.log("Error cargando roles", error_msg);
+        loading.dismiss();
+      }
+    });
+  }
+
+  noSpecialCharsValidator(control: FormControl) {
+    const forbiddenChars = /[#$%&!"°|/()='?¿¡´+{}¨*;,><]/;
+    const hasForbiddenChars = forbiddenChars.test(control.value);
+    return hasForbiddenChars ? { 'forbiddenChars': { value: control.value } } : null;
+  }
+
+  emailValidator(control: FormControl) {
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const isValidEmail = emailPattern.test(control.value);
+    return isValidEmail ? null : { 'invalidEmail': { value: control.value } };
+  }
+
+  async presentToast(message: string, color: string) {
+    const toast = await this.toastController.create({
+      message: message,
+      duration: 800,
+      position: 'top',
+      color: color
+    });
+    toast.present();
+  }
+
   async getUsuarios() {
-    console.log("Prueba: getUsuarios");
     const loading = await this.loadingController.create({
       message: 'Cargando usuarios...'
     });
@@ -43,14 +104,13 @@ export class UsuariosPage implements OnInit, OnDestroy {
 
     this.restApi.getUsuarios().subscribe({
       next: (data: any[]) => {
-        console.log("Respuesta: ", data);
         this.usuarios = data.map((usuario: any) => {
           if (this.defaultUsuarios.includes(usuario.usuario)) {
             return { ...usuario, usuario: `${usuario.usuario} (Predeterminado)` };
           }
           return usuario;
         });
-        this.filteredUsuarios = [...this.usuarios]; // Inicializa los usuarios filtrados
+        this.filteredUsuarios = [...this.usuarios];
         loading.dismiss();
       },
       error: (error_msg: any) => {
@@ -64,7 +124,6 @@ export class UsuariosPage implements OnInit, OnDestroy {
     const usuario = this.usuarios.find(u => u.id === id);
     if (usuario) {
       if (this.defaultUsuarios.includes(usuario.usuario.replace(' (Predeterminado)', ''))) {
-        // Si el usuario es predeterminado, mostrar advertencia y no permitir eliminación
         const toast = await this.toastController.create({
           message: `El usuario "${usuario.usuario}" no se puede eliminar porque es un usuario predeterminado.`,
           duration: 3000,
@@ -72,7 +131,6 @@ export class UsuariosPage implements OnInit, OnDestroy {
         });
         toast.present();
       } else {
-        // Usar AlertController para confirmar la eliminación
         const alert = await this.alertController.create({
           header: '¿Estás seguro?',
           message: `¿Deseas eliminar el usuario "${usuario.usuario}"?`,
@@ -89,7 +147,7 @@ export class UsuariosPage implements OnInit, OnDestroy {
             }
           ]
         });
-  
+
         await alert.present();
       }
     } else {
@@ -102,20 +160,18 @@ export class UsuariosPage implements OnInit, OnDestroy {
       toast.present();
     }
   }
-  
+
   async deleteConfirmado(id: string) {
     const loading = await this.loadingController.create({
       message: 'Eliminando usuario...'
     });
     await loading.present();
-    // Llama al servicio para eliminar el usuario
     this.restApi.deleteUsuario(id)
       .subscribe({
-        next: async (data) => {
-          console.log("Usuario eliminado: ", data);
+        next: async () => {
+          console.log("Usuario eliminado");
           loading.dismiss();
 
-          // Toast de éxito
           const toastSuccess = await this.toastController.create({
             message: 'Usuario eliminado exitosamente.',
             duration: 3000,
@@ -133,15 +189,14 @@ export class UsuariosPage implements OnInit, OnDestroy {
           });
           toastSuccess.present();
 
-          // Navegar a la página de usuarios
-          this.router.navigate(['/admin/usuarios']);
+          // Actualizar la lista de usuarios después de eliminar
+          this.getUsuarios();
         },
         complete: () => { },
         error: async (error_msg) => {
           console.log("Error eliminando usuario:", error_msg);
           loading.dismiss();
 
-          // Toast de error
           const toastError = await this.toastController.create({
             message: `Error eliminando usuario: ${error_msg.message}`,
             duration: 3000,
@@ -166,7 +221,6 @@ export class UsuariosPage implements OnInit, OnDestroy {
     const usuario = this.usuarios.find(u => u.id === id);
     if (usuario) {
       if (this.defaultUsuarios.includes(usuario.usuario.replace(' (Predeterminado)', ''))) {
-        // Si el usuario es predeterminado, mostrar advertencia y no permitir modificación
         const toast = await this.toastController.create({
           message: `El usuario "${usuario.usuario}" no se puede modificar porque es un usuario predeterminado.`,
           duration: 3000,
@@ -174,7 +228,6 @@ export class UsuariosPage implements OnInit, OnDestroy {
         });
         toast.present();
       } else {
-        // Navegar a la página de edición del usuario
         this.router.navigate(['/admin/usuarios/editar-usuario', id]);
       }
     } else {
@@ -194,7 +247,6 @@ export class UsuariosPage implements OnInit, OnDestroy {
     });
     await loading.present();
 
-    // Convierte el ID a una cadena
     const idStr = String(id);
 
     this.restApi.getUsuario(idStr).subscribe({

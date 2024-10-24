@@ -1,38 +1,56 @@
-<app-menu-admin></app-menu-admin>
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/admin/usuarios/"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Modificar Usuario</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <form [formGroup]="usuarioForm" (ngSubmit)="onFormSubmit()">
+    <ion-item>
+      <ion-label position="floating">Usuario</ion-label>
+      <ion-input formControlName="usuario"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Correo</ion-label>
+      <ion-input formControlName="correo" type="email"></ion-input>
+    </ion-item>
+    <ion-item lines="full" class="ion-item-custom">
+      <ion-label position="floating" class="ion-label-custom">Rol</ion-label>
+      <ion-select formControlName="rol" interface="popover" class="ion-select-custom" placeholder="Escoja su rol" required>
+        <ion-select-option disabled selected hidden>Escoja su rol</ion-select-option>
+        <ion-select-option *ngFor="let rol of roles" [value]="rol.id">{{ rol.nombre }}</ion-select-option>
+      </ion-select>
+    </ion-item>
 
-<!-- Página Modificar Usuario -->
-<div class="ion-page" id="main-content">
-  <ion-header>
-    <ion-toolbar>
-      <ion-buttons slot="start">
-        <ion-back-button defaultHref="/admin/usuarios/"></ion-back-button>
-      </ion-buttons>
-      <ion-title>Modificar Usuario</ion-title>
-    </ion-toolbar>
-  </ion-header>
-  <ion-content>
-    <form [formGroup]="usuarioForm" (ngSubmit)="onFormSubmit(usuarioForm)">
-      <ion-item>
-        <ion-label position="floating">Nombres</ion-label>
-        <ion-input formControlName="nombres"></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label position="floating">Apellidos</ion-label>
-        <ion-input formControlName="apellidos"></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label position="floating">Correo</ion-label>
-        <ion-input formControlName="correo"></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label position="floating">Contraseña</ion-label>
-        <ion-input formControlName="contrasena" type="password"></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label position="floating">Rol</ion-label>
-        <ion-input formControlName="rol"></ion-input>
-      </ion-item>
-      <ion-button expand="block" type="submit" [disabled]="!usuarioForm.valid">Actualizar Usuario</ion-button>
-    </form>
-  </ion-content>
-</div>
+    <ion-accordion-group>
+      <!-- Sección de Datos Opcionales -->
+      <ion-accordion value="datosOpcionales">
+        <ion-item slot="header" class="accordion-header">
+          <ion-label>Datos Opcionales</ion-label>
+        </ion-item>
+        <div slot="content">
+          <ion-item>
+            <ion-label position="floating">Nombres</ion-label>
+            <ion-input formControlName="nombres"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label position="floating">Apellidos</ion-label>
+            <ion-input formControlName="apellidos"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label position="floating">Edad</ion-label>
+            <ion-input formControlName="edad" type="number"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label position="floating">Número de Celular</ion-label>
+            <ion-input formControlName="numeroDeCelular" type="tel"></ion-input>
+          </ion-item>
+        </div>
+      </ion-accordion>
+    </ion-accordion-group>
+
+    <ion-button type="submit" expand="block">Guardar Cambios</ion-button>
+  </form>
+</ion-content>
