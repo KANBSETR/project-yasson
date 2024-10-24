@@ -11,32 +11,53 @@
       </ion-buttons>
     </ion-toolbar>
   </ion-header>
-
   <ion-content class="ion-padding">
-    <form [formGroup]="usuarioForm" (ngSubmit)="onFormSubmit(usuarioForm.value)">
+    <form [formGroup]="usuarioForm" (ngSubmit)="onFormSubmit()">
       <ion-item>
-        <ion-label position="floating">Nombres</ion-label>
-        <ion-input type="text" [(ngModel)]="usuario.nombres" formControlName="nombres"></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label position="floating">Apellidos</ion-label>
-        <ion-input type="text" [(ngModel)]="usuario.apellidos" formControlName="apellidos"></ion-input>
+        <ion-label position="floating">Nombre de Usuario</ion-label>
+        <ion-input type="text" formControlName="usuario" maxlength="20" required></ion-input>
       </ion-item>
       <ion-item>
         <ion-label position="floating">Correo</ion-label>
-        <ion-input type="email" [(ngModel)]="usuario.correo" formControlName="correo"></ion-input>
+        <ion-input formControlName="correo" type="email" required></ion-input>
       </ion-item>
       <ion-item>
         <ion-label position="floating">Contraseña</ion-label>
-        <ion-input type="password" [(ngModel)]="usuario.contrasena" formControlName="contrasena"></ion-input>
+        <ion-input formControlName="contrasena" type="password" required></ion-input>
       </ion-item>
-      <ion-item>
-        <ion-label>Rol del usuario</ion-label>
-        <ion-select aria-label="category" placeholder="Seleccionar el rol" formControlName="rol">
-          <ion-select-option *ngFor="let ca of roles" [value]="ca.id">{{ ca.nombre }}</ion-select-option>
+      <ion-item lines="full" class="ion-item-custom">
+        <ion-label position="floating" class="ion-label-custom">Rol</ion-label>
+        <ion-select formControlName="rol" interface="popover" class="ion-select-custom" placeholder="Escoja su rol"
+          required>
+          <ion-select-option disabled selected hidden>Escoja su rol</ion-select-option>
+          <ion-select-option *ngFor="let rol of roles" [value]="rol.id">{{ rol.nombre }}</ion-select-option>
         </ion-select>
       </ion-item>
-      <ion-button type="submit" shape="round" color="primary" expand="block" [disabled]="!usuarioForm.valid">
+
+      <ion-accordion-group>
+        <!-- Sección de Datos Opcionales -->
+        <ion-accordion value="datosOpcionales">
+          <ion-item slot="header" class="accordion-header">
+            <ion-label>Datos Opcionales</ion-label>
+          </ion-item>
+          <div slot="content">
+            <ion-item>
+              <ion-label position="floating">Nombres</ion-label>
+              <ion-input formControlName="nombres"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label position="floating">Apellidos</ion-label>
+              <ion-input formControlName="apellidos"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label position="floating">Edad</ion-label>
+              <ion-input formControlName="edad" type="number"></ion-input>
+            </ion-item>
+          </div>
+        </ion-accordion>
+      </ion-accordion-group>
+
+      <ion-button type="submit" shape="round" color="primary" expand="block" [disabled]="usuarioForm.invalid">
         Agregar Usuario
       </ion-button>
     </form>

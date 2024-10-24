@@ -1,107 +1,185 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroupDirective, FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
-import { LoadingController, AlertController } from '@ionic/angular';
-import { ToastController, ModalController } from '@ionic/angular';
-import Swal from 'sweetalert2';
-import { IUsuario } from 'src/app/models/IUsuarios';
-import { ActivatedRoute, Router } from '@angular/router';
-import { UsuarioService } from '../../services/usuarios/usuario.service';
-import { RolService } from '../../services/roles/rol.service';
+import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
+import { LoadingController, ToastController } from '@ionic/angular';
+import { Router } from '@angular/router';
+import { FirestoreServiceUsuarios } from '../../services/usuarios/usuario.service';
+import { FirestoreServiceRoles } from '../../services/roles/rol.service';
 
 @Component({
   selector: 'app-agregar-usuario',
   templateUrl: './agregar-usuario.page.html',
   styleUrls: ['./agregar-usuario.page.scss'],
 })
-
 export class AgregarUsuarioPage implements OnInit {
   usuarioForm!: FormGroup;
-  usuario: IUsuario = {
-    id: Math.floor(Math.random() * 1000),
-    nombres: '',
-    apellidos: '',
-    correo: '',
-    contrasena: '',
-    rol: 0
-  };
+  showAccordion = false;
+  usuarios: any = [];
+  roles: any = []; // Variable para almacenar los roles
 
-  roles: any = [];
-
-  // Injectamos FormBuilder, el cual nos permitirá realizar validaciones
   constructor(
     private formBuilder: FormBuilder,
     public loadingController: LoadingController,
-    private restApi: UsuarioService,
-    private restApiR: RolService,
+    private restApiUsuario: FirestoreServiceUsuarios, // Inyectar FirestoreServiceUsuario
+    private rolService: FirestoreServiceRoles, // Inyectar RolService
     private router: Router,
+    public toastController: ToastController
   ) { }
 
   ngOnInit() {
-    this.getRoles();
-    // Especificamos que todos los campos son obligatorios
     this.usuarioForm = this.formBuilder.group({
-      'nombres': [null, Validators.required],
-      'apellidos': [null, Validators.required],
-      'correo': [null, [Validators.required, Validators.email]],
-      'contrasena': [null, Validators.required],
-      'rol': [null, Validators.required],
+      usuario: [null, [Validators.required, this.noSpecialCharsValidator]],
+      correo: [null, [Validators.required, Validators.email, this.emailValidator]],
+      contrasena: [null, Validators.required],
+      nombres: [null, this.noSpecialCharsValidator],
+      apellidos: [null, this.noSpecialCharsValidator],
+      numeroDeCelular: [null],
+      edad: [null, this.noSpecialCharsValidator],
+      rol: [null, Validators.required] // Campo para el rol
+    });
+
+    this.usuarioForm.get('usuario')?.valueChanges.subscribe((value) => {
+      this.checkFieldErrors('usuario');
+    });
+
+    this.usuarioForm.get('correo')?.valueChanges.subscribe((value) => {
+      this.checkFieldErrors('correo');
+    });
+
+    this.usuarioForm.get('contrasena')?.valueChanges.subscribe((value) => {
+      this.checkFieldErrors('contrasena');
+    });
+
+    this.usuarioForm.get('nombres')?.valueChanges.subscribe((value) => {
+      this.checkFieldErrors('nombres');
+    });
+
+    this.usuarioForm.get('apellidos')?.valueChanges.subscribe((value) => {
+      this.checkFieldErrors('apellidos');
+    });
+
+    this.usuarioForm.get('edad')?.valueChanges.subscribe((value) => {
+      this.checkFieldErrors('edad');
+    });
+
+    this.loadRoles();
+  }
+
+  toggleAccordion() {
+    this.showAccordion = !this.showAccordion;
+  }
+
+  async loadRoles() {
+    const loading = await this.loadingController.create({
+      message: 'Cargando roles...'
+    });
+    await loading.present();
+
+    this.rolService.getRoles().subscribe({
+      next: (data: any[]) => {
+        this.roles = data;
+        loading.dismiss();
+      },
+      error: (error_msg: any) => {
+        console.log("Error cargando roles", error_msg);
+        loading.dismiss();
+      }
     });
   }
 
-  async onFormSubmit(form: NgForm) {
-    const loading = await this.loadingController.create({
-      message: 'Loading...'
+  noSpecialCharsValidator(control: FormControl) {
+    const forbiddenChars = /[#$%&!"°|/()='?¿¡´+{}¨*;,><]/;
+    const hasForbiddenChars = forbiddenChars.test(control.value);
+    return hasForbiddenChars ? { 'forbiddenChars': { value: control.value } } : null;
+  }
+
+  emailValidator(control: FormControl) {
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const isValidEmail = emailPattern.test(control.value);
+    return isValidEmail ? null : { 'invalidEmail': { value: control.value } };
+  }
+
+  async presentToast(message: string, color: string) {
+    const toast = await this.toastController.create({
+      message: message,
+      duration: 800,
+      position: 'top',
+      color: color
     });
+    toast.present();
+  }
 
-    // Genra un nuevo ID antes de enviar el formulario
-    // const usuarioData = {
-    //   ...this.usuarioForm.value,
-    //   id: Math.floor(Math.random() * 1000)
-    // };
+  checkFieldErrors(field: string) {
+    const control = this.usuarioForm.get(field);
+    if (control?.hasError('forbiddenChars')) {
+      this.presentToast(`El ${field} no debe contener caracteres especiales como #$%&!"°|/()='?¿¡´+{}¨*;,><.`, 'danger');
+    }
+    if (field === 'correo' && control?.hasError('invalidEmail')) {
+      this.presentToast('Por favor, introduce un correo válido.', 'danger');
+    }
+  }
 
-    // Ejecuta el método del servicio y los suscribe
-    await this.restApi.addUsuario(this.usuario)
+  async onFormSubmit() {
+    if (this.usuarioForm.invalid) {
+      this.checkFieldErrors('usuario');
+      this.checkFieldErrors('correo');
+      this.checkFieldErrors('contrasena');
+      this.checkFieldErrors('nombres');
+      this.checkFieldErrors('apellidos');
+      this.checkFieldErrors('edad');
+      this.checkFieldErrors('rol');
+      return;
+    }
+
+    const loading = await this.loadingController.create({
+      message: 'Agregando usuario...'
+    });
+    await loading.present();
+
+    this.usuarios = this.usuarioForm.value; // Actualiza el objeto usuario con los valores del formulario
+
+    this.restApiUsuario.addUsuario(this.usuarios)
       .subscribe({
-        next: (data) => {
-          console.log("Next addUsuario Page", data)
-          loading.dismiss(); // Cierra el Loading
-          if (data == null) {
-            console.log("Next no agrego, data Null");
-          }
-          // Si viene respuesta
-          console.log("Next Agrego, Ress Not Null, Router /admin/usuarios ;", this.router);
-          this.router.navigate(['/admin/usuarios']);
-          //window.location.reload();
-        }
-        , complete: () => { }
-        , error: (error_msg) => {
-          console.log("Error addUsuario Page", error_msg)
-          loading.dismiss(); // Cierra el Loading
+        next: async () => {
+          console.log("Next addUsuario Page");
+          loading.dismiss();
+          console.log("Next agrego, Data Not Null, actualizando lista de usuarios");
+          await this.getUsuarios();
+
+          // Navegar a la página de usuarios
+          this.router.navigateByUrl('/admin/usuarios');
+
+          // Mostrar mensaje de confirmación
+          this.presentToast('Usuario agregado correctamente.', 'success');
+        },
+        error: async (error_msg: any) => {
+          console.log("Error addUsuario Page", error_msg);
+          loading.dismiss();
+          // Mostrar mensaje de error
+          this.presentToast('Error al agregar el usuario.', 'danger');
+
+          // Redirigir a la página de usuarios incluso si hay un error
+          this.router.navigateByUrl('/admin/usuarios'); // Navegar a la página de usuarios
         }
       });
     console.log("Fin de la ejecución del método onFormSubmit");
   }
 
-  async getRoles() {
-    console.log("Prueba: getroles");
+  async getUsuarios() {
+    console.log("Prueba: getUsuarios");
     const loading = await this.loadingController.create({
-      message: 'Loading...'
+      message: 'Cargandooooo...'
     });
-    // Lo muestra
     await loading.present();
-    console.log("Prueba: await loading.present()");
-    // Ejecuta el método del servicio y los suscribe
-    await this.restApiR.getRoles()
+    this.restApiUsuario.getUsuarios()
       .subscribe({
-        next: (data) => {
-          console.log("Next getRoles Page", data)
-          this.roles = data;
-          console.log("Roles", this.roles);
-          loading.dismiss(); // Termia el Loading
-        }
-        , complete: () => { }
-        , error: (error_msg) => {
-          console.log("Error getRoles Page", error_msg)
+        next: (data: any) => {
+          this.usuarios = data;
+          console.log("Usuarios", this.usuarios);
+          loading.dismiss();
+        },
+        complete: () => { },
+        error: (error_msg: any) => {
+          console.log("Error getUsuarios Page", error_msg);
           loading.dismiss();
         }
       });

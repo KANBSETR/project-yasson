@@ -1,27 +1,31 @@
-<app-menu-admin></app-menu-admin>
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Roles</ion-title>
+  </ion-toolbar>
+</ion-header>
 
-<!--Página Principal-->
-<div class="ion-page" id="main-content">
-  <ion-header>
-    <ion-toolbar>
-      <ion-buttons slot="start">
-        <ion-back-button defaultHref="/admin"></ion-back-button>
-      </ion-buttons>
-      <ion-title>Roles</ion-title>
-    </ion-toolbar>
-  </ion-header>
-  <ion-content>
-    <ion-button id="addRolButton" expand="block" [routerLink]="['/admin/usuarios/roles/agregar-rol']">Agregar
-      Rol</ion-button>
-    <ion-list>
-      <ion-item *ngFor="let r of roles">
-        <ion-label>
-          <h2>{{r.nombre}}</h2>
-        </ion-label>
-        <ion-button [routerLink]="['editar-rol/',r.id]" shape="round" color="warning"><ion-icon name="create"></ion-icon></ion-button>
-        <ion-button (click)="deleteRol(r.id)" shape="round" color="danger"><ion-icon name="trash"></ion-icon></ion-button>
-      </ion-item>
-    </ion-list>
-
-  </ion-content>
-</div>
+<ion-content>
+  <ion-searchbar [(ngModel)]="searchTerm" (ionInput)="filterRoles()" placeholder="Buscador"></ion-searchbar>
+  <ion-list>
+    <ion-item *ngFor="let r of filteredRoles">
+      <ion-icon name="person-circle-outline" style="margin-right: 10px;"></ion-icon>
+      <ion-label>
+        <h2>{{r.nombre}}</h2>
+      </ion-label>
+      <ion-button (click)="editRol(r.id)" shape="round" color="warning" class="edit-button">
+        <ion-icon name="create"></ion-icon>
+      </ion-button>
+      <ion-button (click)="viewRol(r.id)" shape="round" color="primary">
+        <ion-icon name="eye"></ion-icon>
+      </ion-button>
+      <ion-button (click)="deleteRol(r.id)" shape="round" color="danger">
+        <ion-icon name="trash"></ion-icon>
+      </ion-button>
+    </ion-item>
+  </ion-list>
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button [routerLink]="['/admin/usuarios/roles/agregar-rol']">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>

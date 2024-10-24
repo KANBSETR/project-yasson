@@ -1,25 +1,24 @@
-<!--Página Principal-->
+<app-menu-admin></app-menu-admin>
+
+<!-- Página Modificar Rol -->
 <div class="ion-page" id="main-content">
   <ion-header>
     <ion-toolbar>
       <ion-buttons slot="start">
-        <ion-menu-button></ion-menu-button>
+        <ion-back-button defaultHref="/admin/usuarios/roles"></ion-back-button>
       </ion-buttons>
-      <ion-title>Agregar Rol</ion-title>
-      <ion-buttons slot="end">
-        <ion-back-button defaultHref="admin/usuarios/roles"></ion-back-button>
-      </ion-buttons>
+      <ion-title>Modificar Rol</ion-title>
     </ion-toolbar>
   </ion-header>
-  <ion-content class="ion-padding">
+  <ion-content>
     <form [formGroup]="rolForm" (ngSubmit)="onFormSubmit()">
       <ion-item>
-        <ion-label position="floating">Nombre del rol</ion-label>
-        <ion-input type="text" formControlName="nombre" maxlength="15" [(ngModel)]="rol.nombre"></ion-input>
+        <ion-label position="floating">Nombre</ion-label>
+        <ion-input formControlName="nombre" maxlength="15"></ion-input>
       </ion-item>
       <ion-item>
         <ion-label position="floating">Descripción</ion-label>
-        <ion-input type="text" formControlName="descripcion" maxlength="50" [(ngModel)]="rol.descripcion"></ion-input>
+        <ion-input formControlName="descripcion" maxlength="50"></ion-input>
       </ion-item>
 
       <ion-accordion-group>
@@ -31,15 +30,15 @@
           <div slot="content" formGroupName="permisosRoles">
             <ion-item>
               <ion-label>Puede Crear</ion-label>
-              <ion-toggle formControlName="puedeCrear" [(ngModel)]="rol.permisosRoles.puedeCrear"></ion-toggle>
+              <ion-toggle formControlName="puedeCrear"></ion-toggle>
             </ion-item>
             <ion-item>
               <ion-label>Puede Editar</ion-label>
-              <ion-toggle formControlName="puedeEditar" [(ngModel)]="rol.permisosRoles.puedeEditar"></ion-toggle>
+              <ion-toggle formControlName="puedeEditar"></ion-toggle>
             </ion-item>
             <ion-item>
               <ion-label>Puede Eliminar</ion-label>
-              <ion-toggle formControlName="puedeEliminar" [(ngModel)]="rol.permisosRoles.puedeEliminar"></ion-toggle>
+              <ion-toggle formControlName="puedeEliminar"></ion-toggle>
             </ion-item>
           </div>
         </ion-accordion>
@@ -52,15 +51,15 @@
           <div slot="content" formGroupName="permisosUsuarios">
             <ion-item>
               <ion-label>Puede Agregar</ion-label>
-              <ion-toggle formControlName="puedeAgregar" [(ngModel)]="rol.permisosUsuarios.puedeAgregar"></ion-toggle>
+              <ion-toggle formControlName="puedeAgregar"></ion-toggle>
             </ion-item>
             <ion-item>
               <ion-label>Puede Modificar</ion-label>
-              <ion-toggle formControlName="puedeModificar" [(ngModel)]="rol.permisosUsuarios.puedeModificar"></ion-toggle>
+              <ion-toggle formControlName="puedeModificar"></ion-toggle>
             </ion-item>
             <ion-item>
               <ion-label>Puede Eliminar</ion-label>
-              <ion-toggle formControlName="puedeEliminar" [(ngModel)]="rol.permisosUsuarios.puedeEliminar"></ion-toggle>
+              <ion-toggle formControlName="puedeEliminar"></ion-toggle>
             </ion-item>
           </div>
         </ion-accordion>
@@ -73,23 +72,23 @@
           <div slot="content" formGroupName="permisosPlantas">
             <ion-item>
               <ion-label>Puede Agregar</ion-label>
-              <ion-toggle formControlName="puedeAgregar" [(ngModel)]="rol.permisosPlantas.puedeAgregar"></ion-toggle>
+              <ion-toggle formControlName="puedeAgregar"></ion-toggle>
             </ion-item>
             <ion-item>
               <ion-label>Puede Modificar</ion-label>
-              <ion-toggle formControlName="puedeModificar" [(ngModel)]="rol.permisosPlantas.puedeModificar"></ion-toggle>
+              <ion-toggle formControlName="puedeModificar"></ion-toggle>
             </ion-item>
             <ion-item>
               <ion-label>Puede Eliminar</ion-label>
-              <ion-toggle formControlName="puedeEliminar" [(ngModel)]="rol.permisosPlantas.puedeEliminar"></ion-toggle>
+              <ion-toggle formControlName="puedeEliminar"></ion-toggle>
             </ion-item>
           </div>
         </ion-accordion>
       </ion-accordion-group>
 
-      <ion-button type="submit" shape="round" color="primary" expand="block" [disabled]="!rolForm.valid">
-        Agregar Rol
+      <ion-button expand="block" type="submit" [disabled]="!rolForm.valid">
+        Guardar Cambios
       </ion-button>
-    </form> 
+    </form>
   </ion-content>
 </div>

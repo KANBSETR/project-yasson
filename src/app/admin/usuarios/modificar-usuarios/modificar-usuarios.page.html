@@ -1,0 +1,38 @@
+<app-menu-admin></app-menu-admin>
+
+<!-- Página Modificar Usuario -->
+<div class="ion-page" id="main-content">
+  <ion-header>
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-back-button defaultHref="/admin/usuarios/"></ion-back-button>
+      </ion-buttons>
+      <ion-title>Modificar Usuario</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content>
+    <form [formGroup]="usuarioForm" (ngSubmit)="onFormSubmit(usuarioForm)">
+      <ion-item>
+        <ion-label position="floating">Nombres</ion-label>
+        <ion-input formControlName="nombres"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Apellidos</ion-label>
+        <ion-input formControlName="apellidos"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Correo</ion-label>
+        <ion-input formControlName="correo"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Contraseña</ion-label>
+        <ion-input formControlName="contrasena" type="password"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Rol</ion-label>
+        <ion-input formControlName="rol"></ion-input>
+      </ion-item>
+      <ion-button expand="block" type="submit" [disabled]="!usuarioForm.valid">Actualizar Usuario</ion-button>
+    </form>
+  </ion-content>
+</div>
