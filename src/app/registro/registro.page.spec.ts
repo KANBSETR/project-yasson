@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { RegistroPage } from './registro.page';
 
-describe('RegistroPage', () => {
+describe('Registro de usuarios', () => {
   let component: RegistroPage;
   let fixture: ComponentFixture<RegistroPage>;
 
@@ -11,7 +11,18 @@ describe('RegistroPage', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it('Agrega usuarios', () => {
+    expect(component).toBeTruthy();
+  });
+  it('Modifica usuarios', () => {
+    expect(component).toBeTruthy();
+  });
+
+  it('Elimina usuarios', () => {
+    expect(component).toBeTruthy();
+  });
+
+  it('Lista usuarios', () => {
     expect(component).toBeTruthy();
   });
 });

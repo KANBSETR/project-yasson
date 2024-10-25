@@ -18,8 +18,8 @@
         <ion-thumbnail slot="start">
           <img alt="{{p.nombrePlanta}}" [src]="p.imagen"/>
         </ion-thumbnail>
-          <h2>{{p.nombrePlanta}}</h2>
-          <div class="detalles-texto">
+        <div class="detalles-texto">
+            <h1>{{p.nombrePlanta}}</h1>
             <p>{{p.descripcion}}</p>
           </div>
         <ion-button [routerLink]="['editar-planta/',p.id]" shape="round" color="warning"><ion-icon name="create"></ion-icon></ion-button>

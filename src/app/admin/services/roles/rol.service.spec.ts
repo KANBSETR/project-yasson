@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { RolService } from './rol.service';
+import { FirestoreServiceRoles } from './rol.service';
 
-describe('RolService', () => {
-  let service: RolService;
+describe('FirestoreServiceRoles', () => {
+  let service: FirestoreServiceRoles;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(RolService);
+    service = TestBed.inject(FirestoreServiceRoles);
   });
 
   it('should be created', () => {

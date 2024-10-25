@@ -2,14 +2,13 @@
   "plantas": [
     {
       "id": "1",
-      "nombrePlanta": "Anturito",
+      "nombrePlanta": "Anturito 123",
       "nombreCientifico": "Anturio Rosado",
       "categoria": 0,
       "precio": 29.99,
       "stock": 435,
       "descripcion": "Es una planta de interior que se caracteriza por una linda flor, hojas verdes y alargadas, y por su gran característica purificadora de aire.",
       "imagen": "assets/productos/Antonella.png"
-
     },
     {
       "id": "2",
@@ -144,17 +143,6 @@
       "detalles": "Cuando le hayan salido 2-3 hojas verdaderas, aclarar para quedarse con una planta cada 5 cm."
     },
     {
-      "id": "14",
-      "nombrePlanta": "Rabano Nacional",
-      "nombreCientifico": "Rabano Nacional",
-      "categoria": 4,
-      "precio": 3.5,
-      "stock": 435,
-      "descripcion": "Variedad tradicional de raíz redonda, bastante gruesa, ligeramente aplastada, bermellón y blanco, cultivo fácil.",
-      "imagen": "assets/productos/Rabano Nacional.png",
-      "detalles": "8 gramos"
-    },
-    {
       "id": "15",
       "nombrePlanta": "Lechuga Bionda",
       "nombreCientifico": "Lechuga Bionda",
@@ -164,6 +152,16 @@
       "descripcion": "La lechuga hidropónica Lollo Bionda es perfecta para acompañar tus comidas e ideal para tu cuerpo.",
       "imagen": "assets/productos/Lechuga Bionda.png",
       "detalles": "Fuente de vitaminas y agua"
+    },
+    {
+      "id": 33,
+      "nombrePlanta": "planta ejemplo",
+      "nombreCientifico": "planta ejemplo",
+      "categoria": 0,
+      "precio": 123,
+      "stock": 12000,
+      "imagen": "https://e00-elmundo.uecdn.es/assets/multimedia/imagenes/2023/04/20/16820070716886.jpg",
+      "descripcion": "Una planta de ejemplo"
     }
   ],
   "categorias": [
@@ -192,7 +190,6 @@
       "nombre": "Huerto",
       "descripcion": "Plantas que se pueden tener en el huerto."
     }
-    
   ],
   "usuarios": [
     {
