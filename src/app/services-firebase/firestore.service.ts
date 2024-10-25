@@ -20,6 +20,4 @@ export class FirestoreService {
       console.log('data ->', data);
     });
   }
-
-
 }

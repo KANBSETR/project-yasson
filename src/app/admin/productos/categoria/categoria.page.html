@@ -1,26 +1,33 @@
-<app-menu-admin></app-menu-admin>
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Categorias</ion-title>
+  </ion-toolbar>
+</ion-header>
 
-<!--Página Principal-->
-<div class="ion-page" id="main-content">
-  <ion-header>
-    <ion-toolbar>
-      <ion-buttons slot="start">
-        <ion-menu-button></ion-menu-button>
-      </ion-buttons>
-      <ion-title>Categorias</ion-title>
-    </ion-toolbar>
-  </ion-header>
-  <ion-content>
-    <ion-button id="addPlantButton" expand="block" [routerLink]="['/admin/productos/categoria/agregar-categoria']">Agregar
-      Categoria</ion-button>
-    <ion-list>
-      <ion-item *ngFor="let c of categorias">
-        <ion-label>
-          <h2>{{c.nombre}}</h2>
-        </ion-label>
-        <ion-button [routerLink]="['editar-categoria/',c.id]" shape="round" color="warning"><ion-icon name="create"></ion-icon></ion-button>
-        <ion-button (click)="delete(c.id)" shape="round" color="danger"><ion-icon name="trash"></ion-icon></ion-button>
-      </ion-item>
-    </ion-list>
-  </ion-content>
-</div>
+<ion-content>
+  <ion-searchbar [(ngModel)]="searchTerm" (ionInput)="filterCategorias()" placeholder="Buscador"></ion-searchbar>
+  <ion-list>
+    <ion-item *ngFor="let c of filteredCategorias">
+      <ion-label>
+        <h2>{{c.nombre}}</h2>
+      </ion-label>
+      <ion-button [routerLink]="['editar-categoria/',c.id]" shape="round" color="warning" class="edit-button">
+        <ion-icon name="create"></ion-icon>
+      </ion-button>
+      <ion-button (click)="viewCategoria(c.id)" shape="round" color="primary">
+        <ion-icon name="eye"></ion-icon>
+      </ion-button>
+      <ion-button (click)="deleteCategoria(c.id)" shape="round" color="danger">
+        <ion-icon name="trash"></ion-icon>
+      </ion-button>
+    </ion-item>
+  </ion-list>
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button [routerLink]="['/admin/productos/categoria/agregar-categoria']">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>

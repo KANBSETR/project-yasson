@@ -12,24 +12,24 @@
     </ion-toolbar>
   </ion-header>
   <ion-content>
-    <ion-button id="addPlantButton" expand="block" [routerLink]="['/admin/productos/agregar-planta']">Agregar
-      planta</ion-button>
+    <ion-searchbar [(ngModel)]="searchTerm" (ionInput)="filterPlantas()" placeholder="Buscar"></ion-searchbar>
     <ion-list>
-      <ion-item *ngFor="let p of plantas">
+      <ion-item *ngFor="let p of filteredPlantas">
         <ion-thumbnail slot="start">
-          <img alt="{{p.nombrePlanta}}"
-            src="{{p.imagen}}"/>
+          <img alt="{{p.nombrePlanta}}" [src]="p.imagen"/>
         </ion-thumbnail>
-        <ion-label>
-          <h2>{{p.nombrePlanta}}</h2>
-          <div class="detalles-texto">
+        <div class="detalles-texto">
+            <h1>{{p.nombrePlanta}}</h1>
             <p>{{p.descripcion}}</p>
           </div>
-        </ion-label>
         <ion-button [routerLink]="['editar-planta/',p.id]" shape="round" color="warning"><ion-icon name="create"></ion-icon></ion-button>
-        <ion-button (click)="delete(p.id)" shape="round" color="danger"><ion-icon name="trash"></ion-icon></ion-button> 
-        
+        <ion-button (click)="deletePlanta(p.id)" shape="round" color="danger"><ion-icon name="trash"></ion-icon></ion-button> 
       </ion-item>
     </ion-list>
+    <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+      <ion-fab-button [routerLink]="['/admin/productos/agregar-planta']">
+        <ion-icon name="add"></ion-icon>
+      </ion-fab-button>
+    </ion-fab>
   </ion-content>
 </div>

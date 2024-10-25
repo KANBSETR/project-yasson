@@ -11,7 +11,7 @@ describe('UsuariosPage', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it('AAAAAAAAAAAAAAAAAAAAAAAA', () => {
     expect(component).toBeTruthy();
   });
 });

@@ -1,21 +1,19 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroupDirective, FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
-import { LoadingController, AlertController } from '@ionic/angular';
-import { ToastController, ModalController } from '@ionic/angular';
-import Swal from 'sweetalert2';
-import { IPlanta } from 'src/app/models/IPlantas';
+import { LoadingController, AlertController, ToastController } from '@ionic/angular';
 import { ActivatedRoute, Router } from '@angular/router';
-import { PlantaService } from '../../services/plantas/planta.service';
-import { CategoriaService } from '../../services/categorias/categoria.service';
+import { FirestoreServicePlantas } from '../../services/plantas/planta.service'; // Importar el servicio de Firestore
+import { FirestoreServiceCategoria } from '../../services/categorias/categoria.service'; // Importar el servicio de Firestore
+import { Location } from '@angular/common'; // Importa el servicio Location correctamente
+
 @Component({
   selector: 'app-agregar-planta',
   templateUrl: './agregar-planta.page.html',
   styleUrls: ['./agregar-planta.page.scss'],
 })
-
 export class AgregarPlantaPage implements OnInit {
   plantaForm!: FormGroup;
-  planta: IPlanta = {
+  planta: any = {
     id: Math.floor(Math.random() * 1000),
     nombrePlanta: '',
     nombreCientifico: '',
@@ -26,82 +24,125 @@ export class AgregarPlantaPage implements OnInit {
     descripcion: ''
   };
 
-  categorias: any = [];         
-  constructor(private formBuilder: FormBuilder,
+  categorias: any = [];
+
+  constructor(
+    private formBuilder: FormBuilder,
     public loadingController: LoadingController,
-    private restApi: PlantaService,
-    private restApiC: CategoriaService,
+    private restApiPlantas: FirestoreServicePlantas,
+    private restApiCategorias: FirestoreServiceCategoria,
     private router: Router,
-    ) { 
-    }
-    
+    public toastController: ToastController,
+    private location: Location // Inyecta el servicio Location
+  ) { }
+
   ngOnInit() {
-    this.getCategory();
-    // Especificamos que todos los campos son obligatorios
+    this.getCategorias();
     this.plantaForm = this.formBuilder.group({
-      "plant_name" : [null, Validators.required],
-      'plant_scientific_name' : [Validators, Validators.required],
-      'plant_category' : [null, Validators.required],
-      'plant_price' : [null, Validators.required],
-      'plant_stock' : [null, Validators.required],
-      'plant_img' : [null, Validators.required],
-      'plant_desc' : [null, Validators.required],
+      'nombrePlanta': [null, [Validators.required, Validators.maxLength(50), this.noSpecialCharsValidator]],
+      'nombreCientifico': [null, [Validators.required, Validators.maxLength(50), this.noSpecialCharsValidator]],
+      'categoria': [null, Validators.required],
+      'precio': [null, [Validators.required, Validators.min(0)]],
+      'stock': [null, [Validators.required, Validators.min(0)]],
+      'imagen': [null, Validators.required],
+      'descripcion': [null, [Validators.required, Validators.maxLength(200), this.noSpecialCharsValidator]]
     });
-  }
-  async onFormSubmit(form:NgForm) {  
-    // Creamos un Loading Controller, Ojo no lo muestra
-    const loading = await this.loadingController.create({
-      message: 'Loading...'
+
+    this.plantaForm.get('nombrePlanta')?.valueChanges.subscribe(value => {
+      this.checkFieldErrors('nombrePlanta');
     });
-    
-    // Ejecuta el método del servicio y los suscribe
-    await this.restApi.addPlanta(this.planta)
-      .subscribe({
-        next: (res) => {
-          console.log("Next AddProduct Page",res)
-          loading.dismiss(); //Elimina la espera
-          if (res== null){ // No viene respuesta del registro
-            console.log("Next No Agrego, Ress Null ");
-            return
-          }
-          // Si viene respuesta
-          console.log("Next Agrego SIIIIII Router saltaré ;",this.router);
-          this.router.navigate(['/admin/productos']);
-          //window.location.reload();
-        }
-        , complete: () => { }
-        , error: (err) => {
-          console.log("Error AddProduct Página",err);
-          loading.dismiss(); //Elimina la espera
-        }
-      });
-    console.log("Observe que todo lo del suscribe sale después de este mensaje")
+
+    this.plantaForm.get('nombreCientifico')?.valueChanges.subscribe(value => {
+      this.checkFieldErrors('nombreCientifico');
+    });
+
+    this.plantaForm.get('descripcion')?.valueChanges.subscribe(value => {
+      this.checkFieldErrors('descripcion');
+    });
   }
 
-  async getCategory() {
-    console.log("Entrando :getCategory");
-    // Crea un Wait (Esperar)
-    const loading = await this.loadingController.create({
-      message: 'Cargando Categorias...'
+  noSpecialCharsValidator(control: FormControl) {
+    const forbiddenChars = /[#$%&!"°|/()='?¿¡´+{}¨*;,><]/;
+    const hasForbiddenChars = forbiddenChars.test(control.value);
+    return hasForbiddenChars ? { 'forbiddenChars': { value: control.value } } : null;
+  }
+
+  async presentToast(message: string, color: string) {
+    const toast = await this.toastController.create({
+      message: message,
+      duration: 1000,
+      position: 'top',
+      color: color
     });
-    // Muestra el Wait
+    toast.present();
+  }
+
+  checkFieldErrors(field: string) {
+    const control = this.plantaForm.get(field);
+    if (control?.hasError('forbiddenChars')) {
+      this.presentToast(`El ${field} no debe contener caracteres especiales como #$%&!"°|/()='?¿¡´+{}¨*;,><.`, 'danger');
+    }
+  }
+
+  async onFormSubmit() {
+    if (this.plantaForm.invalid) {
+      this.checkFieldErrors('nombrePlanta');
+      this.checkFieldErrors('nombreCientifico');
+      this.checkFieldErrors('descripcion');
+      return;
+    }
+
+    const loading = await this.loadingController.create({
+      message: 'Guardando...'
+    });
     await loading.present();
-    console.log("Entrando :");
-    // Obtiene el Observable del servicio
-    await this.restApiC.getCategorias()
+
+    this.planta = this.plantaForm.value; // Actualiza el objeto planta con los valores del formulario
+
+    this.restApiPlantas.addPlanta(this.planta)
       .subscribe({
-        next: (res) => { 
-          console.log("Res:" + res);
-          this.categorias = res;
-          console.log("thisCategoria:",this.categorias);
+        next: async () => {
+          console.log("Next addPlanta Page");
           loading.dismiss();
-          
+          console.log("Next agrego, Data Not Null, actualizando lista de plantas");
+
+          // Navegar a la página de plantas
+          this.router.navigateByUrl('/admin/productos');
+
+          // Mostrar mensaje de confirmación
+          this.presentToast('Planta agregada correctamente.', 'success');
+        },
+        error: async (error_msg: any) => {
+          console.log("Error addPlanta Page", error_msg);
+          loading.dismiss();
+          // Mostrar mensaje de error
+          this.presentToast('Error al agregar la planta.', 'danger');
+
+          // Redirigir a la página de plantas incluso si hay un error
+          this.router.navigateByUrl('/admin/productos'); // Navegar a la página de plantas
         }
-        , complete: () => { }
-        , error: (err) => {
-          console.log("Err:" + err);
+      });
+    console.log("Fin de la ejecución del método onFormSubmit");
+  }
+
+  async getCategorias() {
+    console.log("Prueba: getCategorias");
+    const loading = await this.loadingController.create({
+      message: 'Cargando...'
+    });
+    await loading.present();
+    this.restApiCategorias.getCategorias()
+      .subscribe({
+        next: (data: any) => {
+          this.categorias = data;
+          console.log("Categorias", this.categorias);
+          loading.dismiss();
+        },
+        complete: () => { },
+        error: (error_msg: any) => {
+          console.log("Error getCategorias Page", error_msg);
           loading.dismiss();
         }
-      })
+      });
   }
 }

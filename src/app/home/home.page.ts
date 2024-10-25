@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FirestoreService } from '../services-firebase/firestore.service';
+
 @Component({
   selector: 'app-home',
   templateUrl: './home.page.html',
@@ -7,14 +7,9 @@ import { FirestoreService } from '../services-firebase/firestore.service';
 })
 export class HomePage implements OnInit {
 
-  constructor(private firestore: FirestoreService
-  ) { }
+  constructor() { }
 
   ngOnInit() {
-  }
-
-  getUsuarios(){
-    this.firestore.getCollection();
   }
 
 }

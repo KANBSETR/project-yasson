@@ -1,147 +1,42 @@
-/* General Styles */
-ion-content {
-  --background: #ffffff; /* Fondo claro y limpio */
-}
-
-ion-toolbar {
-  --background: #2E7D32; /* Verde oscuro profesional */
-  color: white;
-  font-family: 'Montserrat', sans-serif;
-  font-size: 1.2em;
-}
-
-ion-title {
-  text-align: center;
+.category-title {
   font-weight: bold;
-}
-ion-list{
-  background-color: #ffffff;
-}
-/* Item Styles */
-ion-item {
-  --padding-start: 15px;
-  --inner-padding-end: 15px;
-  --min-height: 90px;
-  --background: #FFFFFF; /* Fondo blanco limpio */
-  --border-radius: 12px;
-  --box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra más sutil */
-  margin: 20px 0;
-  
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  font-size: 1.2em;
+  color: #4CAF50; /* Cambiar el color según tu esquema de colores */
 }
 
-ion-item:hover {
-  transform: scale(1.05);
-  --box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Sombra más pronunciada en hover */
+.product-item {
+  margin: 10px 0;
+  border: 1px solid #E0E0E0;
+  border-radius: 8px;
+  background: #F9F9F9; /* Fondo suave para las tarjetas de producto */
 }
 
-ion-thumbnail img {
-  border-radius: 12px;
-  object-fit: cover;
-  width: 100px;
-  height: 100px;
-}
-
-/* Label Styles */
-ion-label h2 {
+.product-name {
   font-size: 1.4em;
+  color: #333;
+  margin: 0;
+}
+
+.scientific-name {
+  font-style: italic;
+  color: #757575;
+}
+
+.details-item {
+  background: #FFFFFF; /* Fondo blanco para detalles expandidos */
+  border-top: 1px solid #E0E0E0;
+  margin-top: 10px;
+}
+
+.product-description {
+  margin: 5px 0;
+}
+
+.product-price {
   font-weight: bold;
-  color: #388E3C; /* Verde más suave y elegante */
-  font-family: 'Poppins', sans-serif;
+  color: #FF5722; /* Color vibrante para el precio */
 }
 
-ion-label p {
-  
-  font-size: 1em;
-  margin-top: 8px;
-  font-family: 'Roboto', sans-serif;
-}
-
-/* Note Styles */
-ion-note {
-  color: #D84315; /* Naranja más apagado */
-  font-weight: bold;
-  font-size: 1.1em;
-}
-
-/* Button Styles */
-ion-button {
-  --border-radius: 20px;
-  --background: #4CAF50; /* Verde estándar */
-  color: white;
-  --box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-  font-family: 'Poppins', sans-serif;
-  transition: background 0.3s ease, box-shadow 0.3s ease;
-}
-
-ion-button:hover {
-  --background: #388E3C; /* Verde más oscuro en hover */
-}
-
-/* Submenu Icon */
-ion-icon {
-  font-size: 1.2em;
-  color: #2E7D32; /* Verde oscuro */
-}
-
-/* Detalles Texto */
-.detalles-texto p {
-  font-size: 1em;
-  color: #616161; /* Gris neutro */
-}
-
-.detalles-texto ul {
-  font-size: 0.9em;
-  color: #616161; /* Gris neutro */
-}
-
-/* Animations */
-ion-item {
-  animation: fadeIn 0.5s ease-in-out;
-}
-/* Estilo para el ion-segment */
-ion-segment {
-  --background: #ffffff; /* Fondo blanco */
-  --color: #6D4C41; /* Color café oscuro para el texto */
-  --color-checked: #ffffff; /* Color del texto cuando está seleccionado */
-  --background-checked: #6D4C41; /* Fondo café oscuro cuando está seleccionado */
-}
-
-/* Estilo para los segmentos individuales */
-ion-segment-button {
-  --color: #ffffff; /* Color del texto dentro del botón */
-  text-align: center;
-  --background: #6D4C41; /* Fondo café oscuro */
-  --color-checked: #ffffff; /* Color del texto cuando está seleccionado */
-  --background-checked: #6D4C41; /* Fondo café oscuro cuando está seleccionado */
-  margin-top: 5px;
-  margin-bottom: 5px;
-  margin-right: 5px;
-  padding: 2px 4px; /* Aumentar el padding para mayor visibilidad del texto */
-  font-size: 1em; /* Tamaño del texto ajustado para mayor legibilidad */
-  border-radius: 60px; /* Bordes redondeados para los botones */
-  display: flex;
-  justify-content: center; /* Centrar horizontalmente el contenido */
-  align-items: center; /* Centrar verticalmente el contenido */
-  min-width: 120px; /* Ancho mínimo para asegurar visibilidad del texto */
-}
-
-/* Para eliminar el efecto de cambio de color al pasar el cursor */
-ion-segment-button:hover,
-ion-segment-button:active {
-  --background: #6D4C41; /* Fondo café oscuro para el hover y click */
-  --color: #ffffff; /* Color del texto en hover y click */
-}
-
-
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+.product-details {
+  margin: 5px 0;
 }

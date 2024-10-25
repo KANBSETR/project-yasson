@@ -1,0 +1,53 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Detalles del Usuario</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="close()">
+        <ion-icon name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-list>
+    <ion-item>
+      <ion-label>Usuario</ion-label>
+      <ion-text>{{ usuario.usuario }}</ion-text>
+    </ion-item>
+    <ion-item>
+      <ion-label>Correo</ion-label>
+      <ion-text>{{ usuario.correo }}</ion-text>
+    </ion-item>
+    <ion-item>
+      <ion-label>Rol</ion-label>
+      <ion-text>{{ usuario.rol }}</ion-text>
+    </ion-item>
+  </ion-list>
+
+  <ion-accordion-group>
+    <!-- Sección de Datos Opcionales -->
+    <ion-accordion value="datosOpcionales">
+      <ion-item slot="header" class="accordion-header">
+        <ion-label>Datos Opcionales</ion-label>
+      </ion-item>
+      <div slot="content">
+        <ion-item>
+          <ion-label>Nombres</ion-label>
+          <ion-text>{{ usuario.nombres }}</ion-text>
+        </ion-item>
+        <ion-item>
+          <ion-label>Apellidos</ion-label>
+          <ion-text>{{ usuario.apellidos }}</ion-text>
+        </ion-item>
+        <ion-item>
+          <ion-label>Número de Celular</ion-label>
+          <ion-text>{{ usuario.numeroDeCelular }}</ion-text>
+        </ion-item>
+        <ion-item>
+          <ion-label>Edad</ion-label>
+          <ion-text>{{ usuario.edad }}</ion-text>
+        </ion-item>
+      </div>
+    </ion-accordion>
+  </ion-accordion-group>
+</ion-content>

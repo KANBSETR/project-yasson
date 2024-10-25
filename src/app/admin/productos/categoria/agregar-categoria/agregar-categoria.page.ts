@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroupDirective, FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
-import { LoadingController, AlertController } from '@ionic/angular';
+import { LoadingController, AlertController, ToastController } from '@ionic/angular';
 import { ActivatedRoute, Router } from '@angular/router';
-import { CategoriaService } from 'src/app/admin/services/categorias/categoria.service';
-import { ICategoria } from 'src/app/models/ICategorias';
-import Swal from 'sweetalert2';
+import { FirestoreServiceCategoria } from '../../../services/categorias/categoria.service';
+import { Location } from '@angular/common'; // Importa el servicio Location correctamente
+
 @Component({
   selector: 'app-agregar-categoria',
   templateUrl: './agregar-categoria.page.html',
@@ -12,71 +12,120 @@ import Swal from 'sweetalert2';
 })
 export class AgregarCategoriaPage implements OnInit {
   categoriaForm!: FormGroup;
-  categoria: ICategoria = {
-    id: Math.floor(Math.random() * 1000),
+  categoria: any = {
     nombre: '',
     descripcion: ''
   };
 
   categorias: any = [];
-  constructor(private formBuilder: FormBuilder,
+
+  constructor(
+    private formBuilder: FormBuilder,
     public loadingController: LoadingController,
-    private restApi: CategoriaService,
+    private restApi: FirestoreServiceCategoria,
     private router: Router,
-  ) {
-  }
+    public toastController: ToastController,
+    private location: Location // Inyecta el servicio Location
+  ) { }
+
   ngOnInit() {
-    // Especificamos que todos los campos son obligatorios
+    this.getCategorias();
     this.categoriaForm = this.formBuilder.group({
-      "cate_name": [null, Validators.required],
-      'cate_desc': [null, Validators.required],
-    });
-  }
-  async onFormSubmit(form: NgForm) {
-    // Creamos un Loading Controller, Ojo no lo muestra
-    const loading = await this.loadingController.create({
-      message: 'Loading...'
+      'nombre': [null, [Validators.required, Validators.maxLength(15), this.noSpecialCharsValidator]],
+      'descripcion': [null, [Validators.required, Validators.maxLength(50), this.noSpecialCharsValidator]]
     });
 
-    // Ejecuta el método del servicio y los suscribe
-    await this.restApi.addCategoria(this.categoria)
+    this.categoriaForm.get('nombre')?.valueChanges.subscribe(value => {
+      this.checkFieldErrors('nombre');
+    });
+
+    this.categoriaForm.get('descripcion')?.valueChanges.subscribe(value => {
+      this.checkFieldErrors('descripcion');
+    });
+  }
+
+  noSpecialCharsValidator(control: FormControl) {
+    const forbiddenChars = /[#$%&!"°|/()='?¿¡´+{}¨*;,><]/;
+    const hasForbiddenChars = forbiddenChars.test(control.value);
+    return hasForbiddenChars ? { 'forbiddenChars': { value: control.value } } : null;
+  }
+
+  async presentToast(message: string, color: string) {
+    const toast = await this.toastController.create({
+      message: message,
+      duration: 1000,
+      position: 'top',
+      color: color
+    });
+    toast.present();
+  }
+
+  checkFieldErrors(field: string) {
+    const control = this.categoriaForm.get(field);
+    if (control?.hasError('forbiddenChars')) {
+      this.presentToast(`El ${field} no debe contener caracteres especiales como #$%&!"°|/()='?¿¡´+{}¨*;,><.`, 'danger');
+    }
+  }
+
+  async onFormSubmit() {
+    if (this.categoriaForm.invalid) {
+      this.checkFieldErrors('nombre');
+      this.checkFieldErrors('descripcion');
+      return;
+    }
+
+    const loading = await this.loadingController.create({
+      message: 'Guardando...'
+    });
+    await loading.present();
+
+    this.categoria = this.categoriaForm.value; // Actualiza el objeto categoria con los valores del formulario
+
+    this.restApi.addCategoria(this.categoria)
       .subscribe({
-        next: (res) => {
-          console.log("Next AddProduct Page", res)
-          loading.dismiss(); //Elimina la espera
-          if (res == null) { // No viene respuesta del registro
-            console.log("Next No Agrego, Ress Null ");
-            return
-          }
-          // Si viene respuesta
-          console.log("Next Agrego SIIIIII Router saltaré ;", this.router);
-          this.router.navigate(['/admin/productos/categoria']);
-          //window.location.reload();
-        }
-        , complete: () => { }
-        , error: (err) => {
-          console.log("Error AddProduct Página", err);
-          loading.dismiss(); //Elimina la espera
+        next: async () => {
+          console.log("Next addCategoria Page");
+          loading.dismiss();
+          console.log("Next agrego, Data Not Null, actualizando lista de categorias");
+          await this.getCategorias(); // Actualizar la lista de categorias
+
+          // Navegar a la página de categorias
+          this.router.navigateByUrl('/admin/productos/categoria');
+
+          // Mostrar mensaje de confirmación
+          this.presentToast('Categoría agregada correctamente.', 'success');
+        },
+        error: async (error_msg: any) => {
+          console.log("Error addCategoria Page", error_msg);
+          loading.dismiss();
+          // Mostrar mensaje de error
+          this.presentToast('Error al agregar la categoría.', 'danger');
+
+          // Redirigir a la página de categorias incluso si hay un error
+          this.router.navigateByUrl('/admin/productos/categoria'); // Navegar a la página de categorias
         }
       });
-    console.log("Observe que todo lo del suscribe sale después de este mensaje")
+    console.log("Fin de la ejecución del método onFormSubmit");
+  }
+
+  async getCategorias() {
+    console.log("Prueba: getCategorias");
+    const loading = await this.loadingController.create({
+      message: 'Cargando...'
+    });
+    await loading.present();
+    this.restApi.getCategorias()
+      .subscribe({
+        next: (data: any) => {
+          this.categorias = data;
+          console.log("Categorias", this.categorias);
+          loading.dismiss();
+        },
+        complete: () => { },
+        error: (error_msg: any) => {
+          console.log("Error getCategorias Page", error_msg);
+          loading.dismiss();
+        }
+      });
   }
 }
-
-
-
-
-
-
-
-
-// async presentAlert() {
-//   Swal.fire({
-//     title: 'Categoria agregada correctamente',
-//     icon: 'success',
-//     timer: 2000,
-//     position: 'top',
-//     showConfirmButton: false,
-//     toast: true
-//   });
-// }

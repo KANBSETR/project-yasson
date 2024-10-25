@@ -17,6 +17,9 @@
           <p>{{u.rol}}</p>
         </div>
       </ion-label>
+      <ion-button (click)="viewUsuario(u.id)" shape="round" color="primary">
+        <ion-icon name="eye"></ion-icon>
+      </ion-button>
       <ion-button [routerLink]="['/admin/usuarios/modificar-usuario', u.id]" shape="round" color="warning">
         <ion-icon name="create"></ion-icon>
       </ion-button>

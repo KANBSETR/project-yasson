@@ -12,19 +12,19 @@
     </ion-toolbar>
   </ion-header>
   <ion-content class="ion-padding">
-    <form [formGroup]="categoriaForm" (ngSubmit)="onFormSubmit(categoriaForm.value)">
+    <form [formGroup]="categoriaForm" (ngSubmit)="onFormSubmit()">
       <ion-item>
         <ion-label position="floating">Nombre de categoria</ion-label>
-        <ion-input type="text" [(ngModel)]="categoria.nombre" formControlName="cate_name"></ion-input>
+        <ion-input type="text" [(ngModel)]="categoria.nombre" formControlName="nombre" maxlength="15"></ion-input>
       </ion-item>
       <ion-item>
         <ion-label position="floating">Descripción</ion-label>
-        <ion-input type="text" [(ngModel)]="categoria.descripcion" formControlName="cate_desc"></ion-input>
+        <ion-input type="text" [(ngModel)]="categoria.descripcion" formControlName="descripcion" maxlength="50"></ion-input>
       </ion-item>
-        <ion-button type="submit" shape="round" color="primary" expand="block"
-        [disabled]="!categoriaForm.valid">
+      <ion-button type="submit" shape="round" color="primary" expand="block" [disabled]="!categoriaForm.valid">
         <ion-icon name="add" slot="start"></ion-icon>
-          Agregar Categoria</ion-button>
+        Agregar Categoria
+      </ion-button>
     </form>
   </ion-content>
 </div>
