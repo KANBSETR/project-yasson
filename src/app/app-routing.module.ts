@@ -26,7 +26,31 @@ const routes: Routes = [
   {
     path: 'registro',
     loadChildren: () => import('./registro/registro.module').then( m => m.RegistroPageModule)
+  },  {
+    path: 'home-usuario',
+    loadChildren: () => import('./usuario/home-usuario/home-usuario.module').then( m => m.HomeUsuarioPageModule)
   },
+  {
+    path: 'reportes',
+    loadChildren: () => import('./usuario/reportes/reportes.module').then( m => m.ReportesPageModule)
+  },
+  {
+    path: 'visualizar',
+    loadChildren: () => import('./usuario/visualizar/visualizar.module').then( m => m.VisualizarPageModule)
+  },
+  {
+    path: 'arduino',
+    loadChildren: () => import('./usuario/arduino/arduino.module').then( m => m.ArduinoPageModule)
+  },
+  {
+    path: 'estado-planta',
+    loadChildren: () => import('./usuario/estado-planta/estado-planta.module').then( m => m.EstadoPlantaPageModule)
+  },
+  {
+    path: 'planta-usuario',
+    loadChildren: () => import('./usuario/planta-usuario/planta-usuario.module').then( m => m.PlantaUsuarioPageModule)
+  },
+
 ];
 
 @NgModule({
