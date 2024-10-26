@@ -182,4 +182,6 @@ export class ProductosPage implements OnInit, OnDestroy {
       planta.nombrePlanta.toLowerCase().includes(searchTermLower)
     );
   }
+
+  
 }
