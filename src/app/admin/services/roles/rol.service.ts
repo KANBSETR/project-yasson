@@ -63,7 +63,7 @@ export class FirestoreServiceRoles {
     // Obtiene todos los documentos de la colección roles
     return this.firestore.collection('roles').valueChanges()
       .pipe(
-        tap(_ => console.log('roles listadoososoosososososo')),
+        tap(_ => console.log('roles listados')),
         catchError(this.handleError<any[]>('getRoles', [])) //Devuelve array vacio si hay error
       );
   }
