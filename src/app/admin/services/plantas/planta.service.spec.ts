@@ -1,16 +1,16 @@
 import { TestBed } from '@angular/core/testing';
 
-import { PlantaService } from './planta.service';
+import { FirestoreServicePlantas } from './planta.service';
 
 describe('PlantaService', () => {
-  let service: PlantaService;
+  let service: FirestoreServicePlantas;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(PlantaService);
+    service = TestBed.inject(FirestoreServicePlantas);
   });
 
-  it('should be created', () => {
+  it('Deberia estar creado', () => {
     expect(service).toBeTruthy();
   });
 });

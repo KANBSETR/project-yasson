@@ -1,16 +1,16 @@
 import { TestBed } from '@angular/core/testing';
 
-import { CategoriaService } from './categoria.service';
+import { FirestoreServiceCategoria } from './categoria.service';
 
 describe('CategoriaService', () => {
-  let service: CategoriaService;
+  let service: FirestoreServiceCategoria;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(CategoriaService);
+    service = TestBed.inject(FirestoreServiceCategoria);
   });
 
-  it('should be created', () => {
+  it('Deberia estar creado', () => {
     expect(service).toBeTruthy();
   });
 });

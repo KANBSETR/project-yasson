@@ -18,7 +18,7 @@ describe('MenuAdminComponent', () => {
     fixture.detectChanges();
   }));
 
-  it('should create', () => {
+  it('Deberia estar creado', () => {
     expect(component).toBeTruthy();
   });
 });

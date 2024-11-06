@@ -10,7 +10,7 @@ describe('FirestoreServiceUsuarios', () => {
     service = TestBed.inject(FirestoreServiceUsuarios);
   });
 
-  it('should be created', () => {
+  it('Deberia estar creado', () => {
     expect(service).toBeTruthy();
   });
 });
