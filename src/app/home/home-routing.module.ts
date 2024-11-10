@@ -13,10 +13,6 @@ const routes: Routes = [
     loadChildren: () => import('./productos/productos.module').then( m => m.ProductosPageModule)
   },
   {
-    path: 'carrito',
-    loadChildren: () => import('./carrito/carrito.module').then( m => m.CarritoPageModule)
-  },
-  {
     path: 'favoritos',
     loadChildren: () => import('./favoritos/favoritos.module').then( m => m.FavoritosPageModule)
   }
