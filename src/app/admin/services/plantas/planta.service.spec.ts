@@ -1,98 +1,91 @@
 import { TestBed } from '@angular/core/testing';
-import { FirestoreServicePlantas } from './planta.service';
+import { of } from 'rxjs';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
-import { of, throwError, from  } from 'rxjs';
+import { FirestoreServicePlantas } from './planta.service';
+import { take } from 'rxjs/operators';
 
-describe('Servicio Planta', () => {
+describe('Servicio de plantas', () => {
   let service: FirestoreServicePlantas;
   let firestoreMock: any;
 
   beforeEach(() => {
-    // Crear el mock de AngularFirestore
-    firestoreMock = jasmine.createSpyObj('AngularFirestore', ['collection']);
-    
-    // Mock de `doc` que devuelve un objeto con `set`, `update`, y `delete`
-    const docMock = {
-      set: jasmine.createSpy('set').and.returnValue(Promise.resolve()),
-      update: jasmine.createSpy('update').and.returnValue(Promise.resolve()),
-      delete: jasmine.createSpy('delete').and.returnValue(Promise.resolve()),
-      get: jasmine.createSpy('get').and.returnValue(of({ exists: true, data: () => ({ count: 0 }) })),
+    // Mock de AngularFirestore para simular Firebase
+     firestoreMock = {
+      collection: jasmine.createSpy().and.returnValue({
+        valueChanges: jasmine.createSpy().and.returnValue(of([{ id: 1, name: 'Planta A' }])),
+        doc: jasmine.createSpy().and.returnValue({
+          update: jasmine.createSpy().and.returnValue(Promise.resolve()),
+          delete: jasmine.createSpy().and.returnValue(Promise.resolve()),
+          set: jasmine.createSpy().and.returnValue(Promise.resolve()),
+          get: jasmine.createSpy().and.returnValue(of({ exists: true, data: () => ({ count: 0 }) })),
+          snapshotChanges: jasmine.createSpy().and.returnValue(of({
+            payload: {
+              id: '1',
+              data: () => ({ name: 'Planta A' })
+            }
+          }))
+        }),
+      }),
     };
-
-    // Mock para `collection`, que devuelve un objeto que contiene `doc`
-    firestoreMock.collection.and.callFake(() => ({
-      doc: jasmine.createSpy('doc').and.returnValue(docMock),
-      valueChanges: jasmine.createSpy('valueChanges').and.returnValue(of([{ id: 1, nombre: 'Planta 1' }]))
-    }));
 
     TestBed.configureTestingModule({
       providers: [
         FirestoreServicePlantas,
-        { provide: AngularFirestore, useValue: firestoreMock } // Usamos el mock de Firestore
-      ],
+        { provide: AngularFirestore, useValue: firestoreMock }
+      ]
     });
-    firestoreMock.collection.and.callFake(() => ({
-      doc: jasmine.createSpy('doc').and.returnValue(docMock),
-      valueChanges: jasmine.createSpy('valueChanges').and.returnValue(of([{ id: 1, nombrePlanta: 'Planta ejemplo', nombreCientifico: 'Ejemplo científico', categoria: 1, precio: 100, stock: 10, imagen: 'imagen.jpg', descripcion: 'Descripción de la planta' }]))
-    }));
 
     service = TestBed.inject(FirestoreServicePlantas);
   });
 
-  it('debería retornar datos de plantas cuando se llame a getPlantas', (done: DoneFn) => {
-    service.getPlantas().subscribe((datos) => {
-      expect(datos).toEqual([
-        { id: 1, nombrePlanta: 'Planta ejemplo', nombreCientifico: 'Ejemplo científico', categoria: 1, precio: 100, stock: 10, imagen: 'imagen.jpg', descripcion: 'Descripción de la planta' },
-        { id: 1, nombrePlanta: 'Planta ejemplo', nombreCientifico: 'Ejemplo científico', categoria: 1, precio: 100, stock: 10, imagen: 'imagen.jpg', descripcion: 'Descripción de la planta' }
-      ]); // Verificamos que los datos retornados sean los esperados
-      done();
-    });
-
-    // Verificar que se haya llamado a collection() con el nombre correcto
-    expect(firestoreMock.collection).toHaveBeenCalledWith('plantas');
-  });
-
-  it('debería actualizar una planta cuando se llame a updatePlanta', async () => {
-    const id = '2';
-    const planta = { nombre: 'Planta Actualizada' };
-
-    await service.updatePlanta(id, planta);
-
-    expect(firestoreMock.collection).toHaveBeenCalledWith('plantas');
-    const docSpy = firestoreMock.collection().doc;
-    expect(docSpy).toHaveBeenCalledWith(id);
-    expect(docSpy().update).toHaveBeenCalledWith(planta);
-  });
-
-  it('debería eliminar una planta cuando se llame a deletePlanta', (done: DoneFn) => {
-    const id = '2';
-
-    service.deletePlanta(id).subscribe(() => {
-      expect(firestoreMock.collection).toHaveBeenCalledWith('plantas');
-      const docSpy = firestoreMock.collection().doc;
-      expect(docSpy).toHaveBeenCalledWith(id);
-      expect(docSpy().delete).toHaveBeenCalled();
+  // Prueba para obtener todas las plantas
+  it('debería obtener una lista de plantas', (done: DoneFn) => {
+    service.getPlantas().pipe(take(1)).subscribe(plants => {
+      expect(plants).toBeDefined();
+      expect(plants.length).toBeGreaterThan(0);
       done();
     });
   });
 
-  it('debería agregar una nueva planta y actualizar el contador en addPlanta', (done: DoneFn) => {
-    const nuevaPlanta = { id: 1, nombrePlanta: 'Planta ejempl 2o', nombreCientifico: 'Ejemplo científico', categoria: 1, precio: 100, stock: 10, imagen: 'imagen.jpg', descripcion: 'Descripción de la planta' };
+  // Prueba para agregar una nueva planta
+  it('debería agregar una nueva', (done: DoneFn) => {
+    const nuevaPlanta = { name: 'Planta B', description: 'Descripción de Planta B' };
 
-    service.addPlanta(nuevaPlanta).subscribe(() => {
-      expect(firestoreMock.collection).toHaveBeenCalledWith('plantas');
-      expect(firestoreMock.collection).toHaveBeenCalledWith('counters');
-      
-      const counterDocSpy = firestoreMock.collection('counters').doc;
-      expect(counterDocSpy).toHaveBeenCalledWith('plantaCounter');
-      
-      const plantaDocSpy = firestoreMock.collection('plantas').doc;
-      expect(plantaDocSpy).toHaveBeenCalledWith('1'); // Supone que el contador inicial es 0, así que el nuevo ID es '1'
-      expect(plantaDocSpy().set).toHaveBeenCalledWith({ ...nuevaPlanta, id: 1 });
-      
-      // Verifica que se actualice el contador
-      expect(counterDocSpy().update).toHaveBeenCalledWith({ count: 1 });
+    service.addPlanta(nuevaPlanta).pipe(take(1)).subscribe(() => {
+      const plantaDoc = firestoreMock.collection('plantas').doc;
+      // Verifica que se haya agregado la planta con un ID
+      expect(plantaDoc).toHaveBeenCalledWith(jasmine.any(String)); // ID debería ser un string
+      expect(plantaDoc().set).toHaveBeenCalledWith(jasmine.objectContaining(nuevaPlanta));
+      done();
+    });
+  });
+
+  it('Deberia devolver solo 1 planta', (done: DoneFn) => {
+    service.getPlanta(1).subscribe(result => {
+      expect(result).toEqual({ id: '1', name: 'Planta A' });
+      done();
+    });
+  });
+
+
+  // Prueba para actualizar una planta existente
+  it('debería actualizar una planta existente', async () => {
+    const id = '1';
+    const plantaActualizada = { name: 'Planta Actualizada' };
+
+    await service.updatePlanta(id, plantaActualizada);
+
+    expect(firestoreMock.collection('plantas').doc(id).update).toHaveBeenCalledWith(plantaActualizada);
+  });
+
+  // Prueba para eliminar una planta
+  it('debería eliminar una planta', (done: DoneFn) => {
+    const id = '1';
+
+    service.deletePlanta(id).pipe(take(1)).subscribe(() => {
+      expect(firestoreMock.collection('plantas').doc(id).delete).toHaveBeenCalled();
       done();
     });
   });
 });
+

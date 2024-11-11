@@ -36,6 +36,7 @@ export class FirestoreServicePlantas {
         const newCounter = currentCounter + 1;
         planta.id = newCounter; // Asigna el id del contador a la planta
         // Crea un nuevo documento en la colección 'plantas' con el nuevo ID
+        console.log('Planta agregada');
         return from(this.firestore.collection('plantas').doc(newCounter.toString()).set(planta)).pipe(
           // Actualiza el documento del contador con el nuevo valor del contador
           tap(() => counterDoc.update({ count: newCounter })),
@@ -60,7 +61,6 @@ export class FirestoreServicePlantas {
   getPlanta(id: any): Observable<any> {
     // Convierte el ID a una cadena
     const idStr = String(id);
-
     // Obtiene el documento con el ID especificado de la colección plantas
     return this.firestore.collection('plantas').doc(idStr).snapshotChanges()
       .pipe(
