@@ -13,24 +13,17 @@
       <ion-card-title>Login</ion-card-title>
     </ion-card-header>
     <ion-card-content>
-      <form [formGroup]="formularioLogin">
-        <ion-item>
-          <ion-label position="floating">Nombre</ion-label>
-          <ion-input formControlName="Nombre"></ion-input>
-        </ion-item>
-        <ion-item>
-          <ion-label position="floating">Contraseña</ion-label>
-          <ion-input formControlName="password" type="password"></ion-input>
-        </ion-item>
-        <ion-button expand="block" (click)="ingresar()" class="ion-margin-top">
-          Ingresar
-        </ion-button>
-        <ion-button expand="block" [routerLink]="['/registro']" class="ion-margin-top">
-          Registro
-        </ion-button>
 
-        
+      <form [formGroup]="form" (ngSubmit)="login()" (keypress.enter)="login()">
+        <app-custom-input autocomplete="email" icon="mail-outline" [control]="form.controls.email" type="email" label="Correo"></app-custom-input>
+        <app-custom-input autocomplete="password" icon="lock-closed-outline" [control]="form.controls.password" type="password" label="Contraseña"></app-custom-input>
+
+        <p routerLink="/rcontra">¿Olvidaste tu contraseña?</p>
+        <ion-button expand="block" type="submit" [disabled]="form.invalid">Iniciar sesión</ion-button>
+        <ion-button expand="block" fill="clear" routerLink="/registro">Registrarse</ion-button>
       </form>
+      
+
     </ion-card-content>
   </ion-card>
 </ion-content>

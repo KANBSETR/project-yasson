@@ -11,7 +11,7 @@ import {
   templateUrl: './registro.page.html',
   styleUrls: ['./registro.page.scss'],
 })
-export class RegistroPage implements OnInit {
+export class RegistroPage {
 
   formularioRegistro: FormGroup;
   
@@ -23,8 +23,6 @@ export class RegistroPage implements OnInit {
     });
   }
 
-  ngOnInit() {
-  }
   passwordsMatch(group: FormGroup): { [key: string]: boolean } | null {
     const password = group.get('password')?.value;
     const confirmPassword = group.get('confirmacionPassword')?.value;

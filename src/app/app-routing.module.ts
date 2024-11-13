@@ -43,6 +43,11 @@ const routes: Routes = [
     path: 'planta-usuario',
     loadChildren: () => import('./usuario/planta-usuario/planta-usuario.module').then( m => m.PlantaUsuarioPageModule)
   },
+  {
+    path: 'rcontra',
+    loadChildren: () => import('./auth/rcontra/rcontra.module').then( m => m.RcontraPageModule)
+  },
+
 
 ];
 
