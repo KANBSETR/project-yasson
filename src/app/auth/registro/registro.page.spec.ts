@@ -3,7 +3,7 @@ import {RegistroPage} from './registro.page';;  // Asegúrate de importar tu com
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { of } from 'rxjs';
 
-describe('Home2Page', () => {
+describe('Registro', () => {
   let component: RegistroPage;
   let fixture: ComponentFixture<RegistroPage>;
 

@@ -39,7 +39,10 @@ export class FirestoreService {
   // Actualizar perfil
   updateName(displayName: string){
     const user = getAuth().currentUser;
-    if(!user) return;
-    return updateProfile(user, {displayName});
+    if (user) {
+      return updateProfile(user, { displayName });
+    } else {
+      return Promise.reject('No user is currently signed in.');
+    }
   }
 }
