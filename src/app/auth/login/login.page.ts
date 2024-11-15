@@ -86,6 +86,9 @@ export class LoginPage implements OnInit {
 
       this.firebaseSvc.login(this.form.value as IUsuario).then(res => {
         console.log(res);
+
+        // Redirigir al usuario a la página de inicio
+        window.location.href = '/home';
       }).catch(err => {
         console.log(err);
         
