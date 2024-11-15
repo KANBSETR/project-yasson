@@ -23,6 +23,7 @@ export class ProductosPage implements OnInit {
   loadProducts() {
     this.http.get<any[]>('http://localhost:3000/plantas').subscribe((data) => {
       this.products = data;
+      console.log('Productos cargados:', this.products);
     });
   }
 

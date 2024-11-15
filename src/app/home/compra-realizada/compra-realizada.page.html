@@ -1,0 +1,28 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Compra Realizada</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div *ngIf="orderId && status && amount; else errorTemplate">
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>¡Compra Realizada con Éxito!</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <p><strong>Orden ID:</strong> {{ orderId }}</p>
+        <p><strong>Estado:</strong> {{ status }}</p>
+        <p><strong>Monto pagado:</strong> ${{ amount }}</p>
+      </ion-card-content>
+    </ion-card>
+  </div>
+
+  <ng-template #errorTemplate>
+    <ion-card>
+      <ion-card-content>
+        <p>No se pudo obtener la información de la orden.</p>
+      </ion-card-content>
+    </ion-card>
+  </ng-template>
+</ion-content>
