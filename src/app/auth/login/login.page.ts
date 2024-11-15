@@ -87,8 +87,13 @@ export class LoginPage implements OnInit {
       this.firebaseSvc.login(this.form.value as IUsuario).then(res => {
         console.log(res);
 
-        // Redirigir al usuario a la página de inicio
-        window.location.href = '/home';
+        // Redirigir al usuario a la página de inicio si el correo no termina en @admin.cl
+        if(this.form.value?.email?.endsWith('@admin.cl')){
+          window.location.href = '/admin';
+        }else{
+          window.location.href = '/home';
+        }
+        
       }).catch(err => {
         console.log(err);
         
