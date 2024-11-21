@@ -24,7 +24,7 @@
   <!-- Lista de productos filtrados por categoría activa -->
   <ion-list>
     <ng-container *ngFor="let product of products">
-      <ng-container *ngIf="product.categoria === activeCategoryId">
+      <ng-container>
         <ion-item [ngClass]="{ 'expanded': expandedProductId === product.id }" class="product-item">
           <ion-thumbnail slot="start">
             <img [src]="product.imagen" alt="{{ product.nombrePlanta }}">

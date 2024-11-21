@@ -15,7 +15,16 @@ const routes: Routes = [
   {
     path: 'favoritos',
     loadChildren: () => import('./favoritos/favoritos.module').then( m => m.FavoritosPageModule)
-  }
+  },
+  {
+    path: 'carrito',
+    loadChildren: () => import('./carrito/carrito.module').then( m => m.CarritoPageModule)
+  },
+  {
+    path: 'compraRealizada',
+    loadChildren: () => import('./compra-realizada/compra-realizada.module').then( m => m.CompraRealizadaPageModule)
+  },
+
 
 ];
 

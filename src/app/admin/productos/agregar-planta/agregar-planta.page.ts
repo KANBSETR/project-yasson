@@ -2,10 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroupDirective, FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
 import { LoadingController, AlertController, ToastController } from '@ionic/angular';
 import { ActivatedRoute, Router } from '@angular/router';
-import { FirestoreServicePlantas } from '../../services/plantas/planta.service'; // Importar el servicio de Firestore
-import { FirestoreServiceCategoria } from '../../services/categorias/categoria.service'; // Importar el servicio de Firestore
-import { Location } from '@angular/common'; // Importa el servicio Location correctamente
-
+import { FirestoreServicePlantas } from '../../services/plantas/planta.service';
+import { FirestoreServiceCategoria } from '../../services/categorias/categoria.service';
+import { Location } from '@angular/common'; 
+import { UtilsService } from '../../../auth/services/utils.service';
 @Component({
   selector: 'app-agregar-planta',
   templateUrl: './agregar-planta.page.html',
@@ -33,7 +33,9 @@ export class AgregarPlantaPage implements OnInit {
     private restApiCategorias: FirestoreServiceCategoria,
     private router: Router,
     public toastController: ToastController,
-    private location: Location // Inyecta el servicio Location
+    private location: Location,
+    private utilsService: UtilsService
+
   ) { }
 
   ngOnInit() {
@@ -145,4 +147,15 @@ export class AgregarPlantaPage implements OnInit {
         }
       });
   }
+
+
+  async tomarImagen(){
+    const dataUrl = (await this.utilsService.tomarFoto('Imagen de la planta')).dataUrl;
+    this.plantaForm.controls['imagen'].setValue(dataUrl);
+    
+  }
+
+
+
+
 }

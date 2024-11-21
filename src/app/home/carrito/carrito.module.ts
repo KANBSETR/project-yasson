@@ -4,9 +4,9 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { RcontraPageRoutingModule } from './rcontra-routing.module';
+import { CarritoPageRoutingModule } from './carrito-routing.module';
 
-import { RcontraPage } from './rcontra.page';
+import { CarritoPage } from './carrito.page';
 import { SharedModule } from 'src/app/shared/shared.module';
 
 @NgModule({
@@ -14,9 +14,9 @@ import { SharedModule } from 'src/app/shared/shared.module';
     CommonModule,
     FormsModule,
     IonicModule,
-    RcontraPageRoutingModule,
+    CarritoPageRoutingModule,
     SharedModule
   ],
-  declarations: [RcontraPage]
+  declarations: [CarritoPage]
 })
-export class RcontraPageModule {}
+export class CarritoPageModule {}

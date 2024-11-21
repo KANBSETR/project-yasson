@@ -2,8 +2,9 @@ import { inject, Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/compat/firestore';
 import { Observable } from 'rxjs';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
-import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
+import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, updateProfile, sendPasswordResetEmail } from 'firebase/auth';
 import { IUsuario } from '../models/IUsuarios';
+import { send } from 'ionicons/icons';
 
 @Injectable({
   providedIn: 'root'
@@ -44,5 +45,10 @@ export class FirestoreService {
     } else {
       return Promise.reject('No user is currently signed in.');
     }
+  }
+
+  //Recuperar contraseña
+  recuperarContra(email:string){
+    return sendPasswordResetEmail(getAuth(), email);
   }
 }
